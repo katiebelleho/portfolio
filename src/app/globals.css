@@ -11,6 +11,7 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
 }
 
 html {
@@ -26,5 +27,90 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Homepage custom-cursor design system */
+.home-page,
+.home-page * {
+  cursor: none;
+}
+
+@media (hover: none) {
+  .home-page,
+  .home-page * {
+    cursor: auto;
+  }
+  .custom-cursor {
+    display: none;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 9999px;
+  background: #0a2978;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    height 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    margin 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.15s ease;
+}
+
+.custom-cursor.is-hovering {
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+}
+
+.custom-cursor-label {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.custom-cursor.is-hovering .custom-cursor-label {
+  opacity: 1;
+}
+
+@keyframes underline-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes home-bounce {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none;
+  }
+  .home-page,
+  .home-page * {
+    cursor: auto;
   }
 }

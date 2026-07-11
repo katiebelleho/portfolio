@@ -1,18 +1,24 @@
-import Hero from "@/components/hero";
-import ProjectRow from "@/components/project-row";
+import CustomCursor from "@/components/custom-cursor";
+import HomeFooter from "@/components/home-footer";
+import HomeHero from "@/components/home-hero";
+import ProjectSection from "@/components/project-section";
+import SquiggleDivider from "@/components/squiggle-divider";
 import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <section id="work" className="px-6 py-24 sm:px-10 sm:py-32">
-        <div className="mx-auto flex max-w-6xl flex-col gap-24 sm:gap-32">
-          {projects.map((project) => (
-            <ProjectRow key={project.slug} project={project} />
-          ))}
-        </div>
-      </section>
-    </>
+    <div className="home-page bg-[#fbfaf8]">
+      <CustomCursor />
+      <HomeHero />
+      <div id="work" className="mx-auto max-w-[1240px] px-6 pt-16 pb-[140px] sm:px-14">
+        {projects.map((project, index) => (
+          <div key={project.slug}>
+            <ProjectSection project={project} index={index} />
+            {index < projects.length - 1 && <SquiggleDivider />}
+          </div>
+        ))}
+      </div>
+      <HomeFooter />
+    </div>
   );
 }
