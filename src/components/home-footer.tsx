@@ -12,7 +12,7 @@ export default function HomeFooter() {
           <Link
             href={site.aboutUrl}
             data-cursor-hover
-            className="border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
+            className="text-[15px] font-semibold text-white"
           >
             About
           </Link>
@@ -22,7 +22,7 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="Connect with me"
-            className="font-display border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
+            className="font-display text-xl font-semibold text-white"
           >
             Linkedin
           </a>
@@ -32,7 +32,7 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="My past experiences"
-            className="font-display border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
+            className="font-display text-xl font-semibold text-white"
           >
             Resume
           </a>

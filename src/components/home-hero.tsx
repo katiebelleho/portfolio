@@ -23,7 +23,7 @@ export default function HomeHero() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="Connect with me"
-            className="font-display border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
+            className="font-display text-xl font-semibold text-[#161616]"
           >
             Linkedin
           </a>
@@ -33,7 +33,7 @@ export default function HomeHero() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="My past experiences"
-            className="font-display border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
+            className="font-display text-xl font-semibold text-[#161616]"
           >
             Resume
           </a>
