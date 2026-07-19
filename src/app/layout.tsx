@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Space_Mono } from "next/font/google";
+import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["600"],
 });
 
 const spaceMono = Space_Mono({
@@ -38,7 +32,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${poppins.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-neutral-900">
         {children}
