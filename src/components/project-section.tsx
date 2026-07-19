@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DiagonalArrow from "@/components/diagonal-arrow";
 import LazyVideo from "@/components/lazy-video";
 import type { Project } from "@/lib/projects";
 
@@ -58,16 +59,11 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
           href={`/projects/${project.slug}`}
           data-cursor-hover
           data-cursor-label="Read about this one"
-          className="group mt-[18px] inline-flex items-center gap-1 text-sm font-semibold text-[#161616]"
+          className="group mt-[18px] inline-flex items-center gap-1 text-sm text-[#161616]"
         >
           Read more
           <span className="sr-only"> about {project.title}</span>
-          <span
-            aria-hidden="true"
-            className="inline-block transition-transform duration-150 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-          >
-            ↗
-          </span>
+          <DiagonalArrow />
         </Link>
       </div>
     </div>

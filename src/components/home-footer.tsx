@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DiagonalArrow from "@/components/diagonal-arrow";
 import { site } from "@/lib/site";
 
 export default function HomeFooter() {
@@ -12,9 +13,10 @@ export default function HomeFooter() {
           <Link
             href={site.aboutUrl}
             data-cursor-hover
-            className="text-[15px] font-semibold text-white"
+            className="group inline-flex items-center gap-1 text-[15px] text-white"
           >
             About
+            <DiagonalArrow />
           </Link>
           <a
             href={site.linkedinUrl}
@@ -22,9 +24,10 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="Connect with me"
-            className="font-display text-xl font-semibold text-white"
+            className="group font-display inline-flex items-center gap-1 text-xl text-white"
           >
             Linkedin
+            <DiagonalArrow />
           </a>
           <a
             href={site.resumeUrl}
@@ -32,9 +35,10 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             data-cursor-hover
             data-cursor-label="My past experiences"
-            className="font-display text-xl font-semibold text-white"
+            className="group font-display inline-flex items-center gap-1 text-xl text-white"
           >
             Resume
+            <DiagonalArrow />
           </a>
         </div>
       </div>
