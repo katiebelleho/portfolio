@@ -4,33 +4,44 @@ import { useEffect, useRef } from "react";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLSpanElement>(null);
+  const tagRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    const label = labelRef.current;
-    if (!cursor || !label) return;
+    const tag = tagRef.current;
+    if (!cursor || !tag) return;
 
     if (window.matchMedia("(hover: none)").matches) return;
 
     const getHoverTarget = (target: EventTarget | null): Element | null =>
       target instanceof Element ? target.closest("[data-cursor-hover]") : null;
 
+    const offsetX = 16;
+    const offsetY = 24;
+    const edgeMargin = 16;
+
     const handleMove = (event: MouseEvent) => {
-      cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+      const { clientX: x, clientY: y } = event;
+      cursor.style.transform = `translate(${x}px, ${y}px)`;
       cursor.style.opacity = "1";
+
+      const tagWidth = tag.offsetWidth;
+      const overflowsRight = x + offsetX + tagWidth > window.innerWidth - edgeMargin;
+      const tagX = overflowsRight ? x - offsetX - tagWidth : x + offsetX;
+      tag.style.transform = `translate(${tagX}px, ${y + offsetY}px)`;
     };
     const handleLeaveWindow = () => {
       cursor.style.opacity = "0";
+      tag.classList.remove("is-hovering");
     };
     const handleOver = (event: MouseEvent) => {
       const target = getHoverTarget(event.target);
       if (!target) return;
-      label.textContent = target.getAttribute("data-cursor-label") || "VIEW";
-      cursor.classList.add("is-hovering");
+      tag.textContent = target.getAttribute("data-cursor-label") || "View";
+      tag.classList.add("is-hovering");
     };
     const handleOut = (event: MouseEvent) => {
-      if (getHoverTarget(event.target)) cursor.classList.remove("is-hovering");
+      if (getHoverTarget(event.target)) tag.classList.remove("is-hovering");
     };
 
     document.addEventListener("mousemove", handleMove);
@@ -47,10 +58,9 @@ export default function CustomCursor() {
   }, []);
 
   return (
-    <div ref={cursorRef} className="custom-cursor" aria-hidden="true">
-      <span ref={labelRef} className="custom-cursor-label">
-        VIEW
-      </span>
-    </div>
+    <>
+      <div ref={cursorRef} className="custom-cursor" aria-hidden="true" />
+      <div ref={tagRef} className="custom-cursor-tag" aria-hidden="true" />
+    </>
   );
 }

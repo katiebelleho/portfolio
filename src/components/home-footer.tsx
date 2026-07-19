@@ -21,6 +21,7 @@ export default function HomeFooter() {
             target="_blank"
             rel="noreferrer noopener"
             data-cursor-hover
+            data-cursor-label="Connect with me"
             className="border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
           >
             Linkedin
@@ -30,6 +31,7 @@ export default function HomeFooter() {
             target="_blank"
             rel="noreferrer noopener"
             data-cursor-hover
+            data-cursor-label="My past experiences"
             className="border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
           >
             Resume

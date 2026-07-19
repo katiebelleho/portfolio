@@ -22,6 +22,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
           <div
             key={i}
             data-cursor-hover
+            data-cursor-label="Read about this one"
             className="relative aspect-square w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
           >
             {item.type === "video" ? (
@@ -61,6 +62,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         <Link
           href={`/projects/${project.slug}`}
           data-cursor-hover
+          data-cursor-label="Read about this one"
           className="group mt-[22px] inline-flex items-center gap-1 border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
         >
           Learn more

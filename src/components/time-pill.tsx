@@ -42,7 +42,7 @@ export default function TimePill() {
     <Link
       href={site.aboutUrl}
       data-cursor-hover
-      data-cursor-label="About me"
+      data-cursor-label="What I do all day"
       className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-4 py-2"
     >
       <span className="h-2 w-2 rounded-full bg-[#0A2978]" aria-hidden="true" />

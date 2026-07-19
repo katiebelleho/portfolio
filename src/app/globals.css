@@ -41,7 +41,8 @@ body {
   .home-page * {
     cursor: auto;
   }
-  .custom-cursor {
+  .custom-cursor,
+  .custom-cursor-tag {
     display: none;
   }
 }
@@ -57,40 +58,36 @@ body {
   border-radius: 9999px;
   background: #0a2978;
   pointer-events: none;
-  z-index: 999;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    width 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-    height 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-    margin 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.15s ease;
-}
-
-.custom-cursor.is-hovering {
-  width: 56px;
-  height: 56px;
-  margin-left: -28px;
-  margin-top: -28px;
-}
-
-.custom-cursor-label {
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  z-index: 1000;
   opacity: 0;
   transition: opacity 0.15s ease;
 }
 
-.custom-cursor.is-hovering .custom-cursor-label {
+.custom-cursor-tag {
+  position: fixed;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  background: #0a2978;
+  color: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.custom-cursor-tag.is-hovering {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .custom-cursor {
+  .custom-cursor,
+  .custom-cursor-tag {
     display: none;
   }
   .home-page,
