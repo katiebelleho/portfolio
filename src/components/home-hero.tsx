@@ -12,7 +12,7 @@ export default function HomeHero() {
       <div className="flex items-start justify-between gap-6">
         <h1
           data-cursor-hover
-          className="w-fit font-display text-[clamp(2.5rem,8vw,72px)] font-bold leading-[0.98] tracking-[-0.03em] text-[#141414]"
+          className="w-fit font-display text-[clamp(2.5rem,8vw,72px)] font-semibold leading-[0.98] tracking-[-0.03em] text-[#141414]"
         >
           {site.name}
         </h1>
@@ -42,7 +42,7 @@ export default function HomeHero() {
 
       <div className="mt-6 flex items-start justify-between gap-10">
         <div className="max-w-[600px]">
-          <p className="text-base leading-[1.8] text-[#68666b] sm:text-lg">
+          <p className="text-base leading-[1.8] text-[#68666b]">
             Product Designer with 6+ years of experience helping
             mission-driven companies scale with{" "}
             <span className="font-semibold text-[#0A2978]">

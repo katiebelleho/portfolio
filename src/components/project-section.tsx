@@ -56,7 +56,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         <h3 className="mt-3.5 font-display text-2xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
           {project.title}
         </h3>
-        <p className="mt-4 text-sm leading-[1.7] text-[#6b6960]">
+        <p className="mt-4 text-base leading-[1.7] text-[#6b6960]">
           {project.summary}
         </p>
         <Link

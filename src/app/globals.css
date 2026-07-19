@@ -11,7 +11,8 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-poppins);
+  --font-cursor: var(--font-space-mono);
 }
 
 html {
@@ -70,9 +71,9 @@ body {
   white-space: nowrap;
   background: #0a2978;
   color: #fff;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-cursor), ui-monospace, monospace;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   padding: 10px 18px;
   border-radius: 10px;
   pointer-events: none;
