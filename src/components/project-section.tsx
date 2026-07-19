@@ -21,8 +21,6 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         {project.media.map((item, i) => (
           <div
             key={i}
-            data-cursor-hover
-            data-cursor-label="Read about this one"
             className="relative aspect-square w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
           >
             {item.type === "video" ? (
@@ -44,7 +42,12 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         ))}
       </div>
 
-      <div className="min-w-0">
+      <Link
+        href={`/projects/${project.slug}`}
+        data-cursor-hover
+        data-cursor-label="Read about this one"
+        className="block min-w-0"
+      >
         <div className="flex items-baseline gap-2.5">
           <span className="font-mono text-[11px] font-bold text-[#0A2978]">
             {number}
@@ -59,21 +62,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         <p className="mt-4 text-base leading-[1.7] text-[#6b6960]">
           {project.summary}
         </p>
-        <Link
-          href={`/projects/${project.slug}`}
-          data-cursor-hover
-          data-cursor-label="Read about this one"
-          className="group mt-[22px] inline-flex items-center gap-1 border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
-        >
-          Learn more
-          <span
-            aria-hidden="true"
-            className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
-          >
-            →
-          </span>
-        </Link>
-      </div>
+      </Link>
     </div>
   );
 }

@@ -49,7 +49,7 @@ export default function TimePill() {
       {parts ? (
         <>
           <span className="font-mono text-sm text-[#161616]">{parts.time}</span>
-          <span className="text-sm text-[#6b6960]">
+          <span className="font-mono text-sm text-[#6b6960]">
             {getStatusForHour(parts.hour)}
           </span>
         </>
