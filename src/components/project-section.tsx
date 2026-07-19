@@ -56,7 +56,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
             {project.eyebrow}
           </span>
         </div>
-        <h3 className="mt-3.5 font-display text-2xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
+        <h3 className="mt-3.5 font-display text-xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
           {project.title}
         </h3>
         <p className="mt-4 text-base leading-[1.7] text-[#6b6960]">
