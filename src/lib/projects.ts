@@ -70,7 +70,7 @@ export const projects: Project[] = [
   },
   {
     slug: "trade-in-condition-grading",
-    eyebrow: "Patagonia / Jul 2023",
+    eyebrow: "Trove / Jul 2023",
     title:
       "Redesigned the online trade-in experience to reduce the amount of unsellable items we receive from customers",
     summary:
