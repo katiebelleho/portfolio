@@ -89,22 +89,6 @@ body {
   opacity: 1;
 }
 
-@keyframes underline-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes home-bounce {
-  0%,
-  100% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .custom-cursor {
     display: none;

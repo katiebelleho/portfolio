@@ -10,90 +10,68 @@ type ProjectSectionProps = {
 
 export default function ProjectSection({ project, index }: ProjectSectionProps) {
   const number = String(index + 1).padStart(2, "0");
-  const mirrored = index % 2 === 1;
-
-  const media = (
-    <div
-      className={`grid w-full max-w-[664px] gap-4 sm:gap-6 ${
-        project.media.length === 2 ? "grid-cols-2" : "grid-cols-1"
-      }`}
-    >
-      {project.media.map((item, i) => (
-        <div
-          key={i}
-          data-cursor-hover
-          className="relative aspect-square w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
-        >
-          {item.type === "video" ? (
-            <LazyVideo
-              src={item.src}
-              poster={item.poster}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <Image
-              src={item.src}
-              alt={item.alt ?? ""}
-              fill
-              className="object-cover"
-            />
-          )}
-        </div>
-      ))}
-    </div>
-  );
-
-  const copy = (
-    <div className="min-w-0">
-      <div className="flex items-baseline gap-2.5">
-        <span className="font-mono text-[11px] font-bold text-[#0A2978]">
-          {number}
-        </span>
-        <span className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
-          {project.eyebrow}
-        </span>
-      </div>
-      <h3 className="mt-3.5 font-display text-2xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
-        {project.title}
-      </h3>
-      <p className="mt-4 text-sm leading-[1.7] text-[#6b6960]">
-        {project.summary}
-      </p>
-      <Link
-        href={`/projects/${project.slug}`}
-        data-cursor-hover
-        className="group mt-[22px] inline-flex items-center gap-1 border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
-      >
-        Learn more
-        <span
-          aria-hidden="true"
-          className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
-        >
-          →
-        </span>
-      </Link>
-    </div>
-  );
 
   return (
-    <div
-      className={`grid grid-cols-1 items-center gap-8 md:gap-12 ${
-        mirrored ? "md:grid-cols-[1fr_664px]" : "md:grid-cols-[664px_1fr]"
-      }`}
-    >
-      {mirrored ? (
-        <>
-          <div className="order-2 md:order-1">{copy}</div>
-          <div className="order-1 md:order-2 md:flex md:justify-end">
-            {media}
+    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[664px_1fr] md:gap-12">
+      <div
+        className={`grid w-full max-w-[664px] gap-4 sm:gap-6 ${
+          project.media.length === 2 ? "grid-cols-2" : "grid-cols-1"
+        }`}
+      >
+        {project.media.map((item, i) => (
+          <div
+            key={i}
+            data-cursor-hover
+            className="relative aspect-square w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
+          >
+            {item.type === "video" ? (
+              <LazyVideo
+                src={item.src}
+                poster={item.poster}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <Image
+                src={item.src}
+                alt={item.alt ?? ""}
+                fill
+                sizes="(min-width: 768px) 320px, 45vw"
+                className="object-cover"
+              />
+            )}
           </div>
-        </>
-      ) : (
-        <>
-          {media}
-          {copy}
-        </>
-      )}
+        ))}
+      </div>
+
+      <div className="min-w-0">
+        <div className="flex items-baseline gap-2.5">
+          <span className="font-mono text-[11px] font-bold text-[#0A2978]">
+            {number}
+          </span>
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
+            {project.eyebrow}
+          </span>
+        </div>
+        <h3 className="mt-3.5 font-display text-2xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
+          {project.title}
+        </h3>
+        <p className="mt-4 text-sm leading-[1.7] text-[#6b6960]">
+          {project.summary}
+        </p>
+        <Link
+          href={`/projects/${project.slug}`}
+          data-cursor-hover
+          className="group mt-[22px] inline-flex items-center gap-1 border-b border-transparent pb-0.5 text-sm font-semibold text-[#161616] transition-colors duration-150 hover:border-[#161616]"
+        >
+          Learn more
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
+          >
+            →
+          </span>
+        </Link>
+      </div>
     </div>
   );
 }

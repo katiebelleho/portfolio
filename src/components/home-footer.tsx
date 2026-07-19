@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
 
 export default function HomeFooter() {
@@ -8,13 +9,13 @@ export default function HomeFooter() {
           {site.name}
         </div>
         <div className="flex flex-col items-start gap-3.5 sm:items-end">
-          <a
-            href="#top"
+          <Link
+            href={site.aboutUrl}
             data-cursor-hover
             className="border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
           >
             About
-          </a>
+          </Link>
           <a
             href={site.linkedinUrl}
             target="_blank"
@@ -22,7 +23,7 @@ export default function HomeFooter() {
             data-cursor-hover
             className="border-b border-transparent pb-0.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:border-white"
           >
-            Connect
+            Linkedin
           </a>
           <a
             href={site.resumeUrl}

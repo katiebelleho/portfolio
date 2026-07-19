@@ -1,8 +1,8 @@
 import CustomCursor from "@/components/custom-cursor";
+import Divider from "@/components/divider";
 import HomeFooter from "@/components/home-footer";
 import HomeHero from "@/components/home-hero";
 import ProjectSection from "@/components/project-section";
-import SquiggleDivider from "@/components/squiggle-divider";
 import { projects } from "@/lib/projects";
 
 export default function Home() {
@@ -10,11 +10,15 @@ export default function Home() {
     <div className="home-page bg-[#fbfaf8]">
       <CustomCursor />
       <HomeHero />
-      <div id="work" className="mx-auto max-w-[1240px] px-6 pt-16 pb-[140px] sm:px-14">
+      <div className="mx-auto max-w-[1240px] px-6 pt-16 pb-[140px] sm:px-14">
         {projects.map((project, index) => (
           <div key={project.slug}>
             <ProjectSection project={project} index={index} />
-            {index < projects.length - 1 && <SquiggleDivider />}
+            {index < projects.length - 1 && (
+              <div className="py-16 sm:py-20">
+                <Divider />
+              </div>
+            )}
           </div>
         ))}
       </div>

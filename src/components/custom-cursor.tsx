@@ -4,14 +4,16 @@ import { useEffect, useRef } from "react";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    if (!cursor) return;
+    const label = labelRef.current;
+    if (!cursor || !label) return;
 
     if (window.matchMedia("(hover: none)").matches) return;
 
-    const isHoverTarget = (target: EventTarget | null) =>
+    const getHoverTarget = (target: EventTarget | null): Element | null =>
       target instanceof Element ? target.closest("[data-cursor-hover]") : null;
 
     const handleMove = (event: MouseEvent) => {
@@ -22,10 +24,13 @@ export default function CustomCursor() {
       cursor.style.opacity = "0";
     };
     const handleOver = (event: MouseEvent) => {
-      if (isHoverTarget(event.target)) cursor.classList.add("is-hovering");
+      const target = getHoverTarget(event.target);
+      if (!target) return;
+      label.textContent = target.getAttribute("data-cursor-label") || "VIEW";
+      cursor.classList.add("is-hovering");
     };
     const handleOut = (event: MouseEvent) => {
-      if (isHoverTarget(event.target)) cursor.classList.remove("is-hovering");
+      if (getHoverTarget(event.target)) cursor.classList.remove("is-hovering");
     };
 
     document.addEventListener("mousemove", handleMove);
@@ -43,7 +48,9 @@ export default function CustomCursor() {
 
   return (
     <div ref={cursorRef} className="custom-cursor" aria-hidden="true">
-      <span className="custom-cursor-label">VIEW</span>
+      <span ref={labelRef} className="custom-cursor-label">
+        VIEW
+      </span>
     </div>
   );
 }
