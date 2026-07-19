@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s — Katie Ho",
   },
   description:
-    "Portfolio of Katie Ho, a Senior Product Designer with 6+ years of experience helping mission-driven companies scale with effective design solutions.",
+    "Portfolio of Katie Ho, a Senior Product Designer with 6+ years helping mission-driven companies ship products that move metrics and scale.",
 };
 
 export default function RootLayout({

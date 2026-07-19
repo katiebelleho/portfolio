@@ -46,12 +46,9 @@ export default function HomeHero() {
         data-cursor-hover
         className="mt-10 max-w-[850px] font-display text-4xl leading-[1.25] text-[#141414] sm:text-[42px] sm:leading-[1.25]"
       >
-        I&rsquo;m {site.name}, a Product Designer with 6+ years of
-        experience helping mission-driven companies scale with{" "}
-        <span className="text-[#0A2978]">
-          effective design solutions that prioritize results
-        </span>
-        .
+        I&rsquo;m {site.name}, a Product Designer with 6+ years helping
+        mission-driven companies ship products that{" "}
+        <span className="text-[#0A2978]">move metrics and scale.</span>
       </h1>
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
