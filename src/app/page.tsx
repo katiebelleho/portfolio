@@ -10,7 +10,7 @@ export default function Home() {
     <div className="home-page bg-[#fbfaf8]">
       <CustomCursor />
       <HomeHero />
-      <div className="mx-auto max-w-[1200px] px-6 pt-16 pb-[140px] sm:px-14">
+      <div className="mx-auto max-w-[1200px] px-6 pt-16 pb-[140px]">
         {projects.map((project, index) => (
           <div key={project.slug}>
             <ProjectSection project={project} index={index} />
