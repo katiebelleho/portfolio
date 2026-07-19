@@ -28,7 +28,7 @@ export const projects: Project[] = [
     eyebrow: "Back Market / Mar 2026",
     title: "Scaled user acquisition through telecom partnerships",
     summary:
-      "Our US growth stalled after replicating the French model of a single exclusive telecom partner. I partnered with my PM to pivot our US strategy into a flexible multiple prepaid partnerships model, then contributed on the branded partnership design system, and shipped the first MVP with 3 partners. The new redirect funnel resulted in a 1.3x higher conversion than average traffic.",
+      "I designed a flexible telecom partnership strategy in the US with bidirectional redirect flows that adapt to each partnership's business model, driving 1.3x higher conversion than average traffic.",
     media: [
       {
         type: "video",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     title:
       "Transformed an e-commerce app as a checkout tool for Back Market's first physical store",
     summary:
-      "Back Market was opening a 3-month popup in NYC - our first foray into physical retail. We had two sprints, no budget for a custom POS system, and a finance setup that ruled out traditional retail checkout. I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
+      "I defined the checkout UX for Back Market's 3-month NYC popup under tight constraints. I collaborated with Marketing to align it with the overall store experience, and validated it in real conditions by working retail shifts.",
     media: [
       {
         type: "image",
@@ -70,11 +70,11 @@ export const projects: Project[] = [
   },
   {
     slug: "trade-in-condition-grading",
-    eyebrow: "Trove / Jul 2023",
+    eyebrow: "Patagonia / Jul 2023",
     title:
       "Redesigned the online trade-in experience to reduce the amount of unsellable items we receive from customers",
     summary:
-      "Rejection rate for our digital trade in program is high - we are not able to accept 1 out of every 4 items that people sent to us through the program. I redesigned the trade-in flow to achieve a 98% item eligibility rate.",
+      "As Patagonia's trade-in program grew, we were getting a lot of ineligible items. I redesigned the trade-in flow to achieve a 98% item eligibility rate.",
     media: [
       {
         type: "video",

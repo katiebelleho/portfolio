@@ -42,12 +42,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         ))}
       </div>
 
-      <Link
-        href={`/projects/${project.slug}`}
-        data-cursor-hover
-        data-cursor-label="Read about this one"
-        className="block min-w-0"
-      >
+      <div className="min-w-0">
         <div className="flex items-baseline gap-2.5">
           <span className="font-mono text-[11px] font-bold text-[#0A2978]">
             {number}
@@ -56,13 +51,25 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
             {project.eyebrow}
           </span>
         </div>
-        <h3 className="mt-3.5 font-display text-xl font-semibold leading-[1.3] tracking-[-0.01em] text-[#161616]">
-          {project.title}
-        </h3>
-        <p className="mt-4 text-base leading-[1.7] text-[#6b6960]">
+        <p className="mt-3.5 text-xl leading-[1.5] text-[#161616]">
           {project.summary}
         </p>
-      </Link>
+        <Link
+          href={`/projects/${project.slug}`}
+          data-cursor-hover
+          data-cursor-label="Read about this one"
+          className="group mt-[18px] inline-flex items-center gap-1 text-sm font-semibold text-[#161616]"
+        >
+          Read more
+          <span className="sr-only"> about {project.title}</span>
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
+          >
+            →
+          </span>
+        </Link>
+      </div>
     </div>
   );
 }
