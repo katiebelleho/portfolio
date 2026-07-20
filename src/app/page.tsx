@@ -7,7 +7,7 @@ import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
-    <div className="home-page bg-[#fbfaf8]">
+    <div className="home-page bg-white">
       <CustomCursor />
       <HomeHero />
       <div className="mx-auto max-w-[1200px] px-6 pt-16 pb-[140px]">
