@@ -8,6 +8,21 @@ export type ProjectMedia = {
   matte?: boolean;
 };
 
+export type CaseStudyMediaPlacement = "hero" | "side";
+
+export type CaseStudyMedia = {
+  /** Label shown inside the placeholder until real media is supplied. */
+  label: string;
+  placement: CaseStudyMediaPlacement;
+};
+
+export type CaseStudySection = {
+  level: 2 | 3;
+  heading: string;
+  body: string;
+  media?: CaseStudyMedia;
+};
+
 export type Project = {
   slug: string;
   eyebrow: string;
@@ -16,10 +31,10 @@ export type Project = {
   media: ProjectMedia[];
   role: string;
   timeline: string;
-  problem: string;
-  approach: string;
-  solution: string;
-  outcome: string;
+  /** Opening paragraph on the case study page, shown below the title/meta. */
+  intro: string;
+  introMedia?: CaseStudyMedia;
+  caseStudy: CaseStudySection[];
 };
 
 export const projects: Project[] = [
@@ -42,10 +57,38 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Mar 2026",
-    problem: "Case study content coming soon.",
-    approach: "Case study content coming soon.",
-    solution: "Case study content coming soon.",
-    outcome: "Case study content coming soon.",
+    intro:
+      "Our US growth stalled after replicating the French model of a single exclusive telecom partner. I worked with my PM to pivot our US strategy into a flexible multiple prepaid partnerships model. The new redirect funnel resulted in a 1.3x higher conversion than average traffic.",
+    introMedia: { label: "Hero image", placement: "hero" },
+    caseStudy: [
+      {
+        level: 2,
+        heading: "My role",
+        body: "I led the design strategy and execution for this project. I worked closely with my PM to develop the new product model, secured stakeholder alignment, contributed on the branded partnership design system, and shipped the first MVP with 3 partners.",
+      },
+      {
+        level: 2,
+        heading: "Reshaping the strategy",
+        body: "Before any design work began, I worked with my PM to build the case for pivoting away from the French playbook. I created high-fidelity prototypes and a strategic narrative to align stakeholders on why a multi-partner model required a fundamentally different design approach. This involved multiple rounds of stakeholder reviews and a presentation to the c-suite to get buy-in.",
+      },
+      {
+        level: 3,
+        heading: "Scalable redirect flow template",
+        body: "Each telecom partner has distinct branding, user expectations, and technical integration constraints. The design needed to balance between fragmenting our core experience with custom one-off work per partner vs creating a generic template that felt untrustworthy to users arriving from a branded partner environment.",
+        media: { label: "Video prototype", placement: "side" },
+      },
+      {
+        level: 3,
+        heading: "Partner brand system",
+        body: "I worked with the Design System team to establish guidelines for integrating partner visual elements into our design system and codebase cleanly.",
+        media: { label: "Video prototype", placement: "side" },
+      },
+      {
+        level: 2,
+        heading: "Impact + what's next",
+        body: "We launched the initial redirect flow with three partners - Visible, Noble Mobile, and Google Fi. The redirect funnel has a 1.3x higher conversion than average traffic. I am currently iterating on the display of partner telco offers on the Product Page as well as adding more touch points in the user journey to increase awareness of these offers.",
+      },
+    ],
   },
   {
     slug: "retail-pop-up-checkout",
@@ -63,10 +106,8 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "May 2025",
-    problem: "Case study content coming soon.",
-    approach: "Case study content coming soon.",
-    solution: "Case study content coming soon.",
-    outcome: "Case study content coming soon.",
+    intro: "Case study content coming soon.",
+    caseStudy: [],
   },
   {
     slug: "trade-in-condition-grading",
@@ -88,10 +129,8 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Jul 2023",
-    problem: "Case study content coming soon.",
-    approach: "Case study content coming soon.",
-    solution: "Case study content coming soon.",
-    outcome: "Case study content coming soon.",
+    intro: "Case study content coming soon.",
+    caseStudy: [],
   },
 ];
 

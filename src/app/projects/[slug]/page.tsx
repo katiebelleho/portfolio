@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import MediaStack from "@/components/media-stack";
+import CustomCursor from "@/components/custom-cursor";
+import DetailHeader from "@/components/detail-header";
+import HomeFooter from "@/components/home-footer";
+import MediaPlaceholder from "@/components/media-placeholder";
 import Reveal from "@/components/reveal";
-import SiteHeader from "@/components/site-header";
-import SiteFooter from "@/components/site-footer";
 import { getProject, projects } from "@/lib/projects";
 
 type ProjectPageProps = {
@@ -31,13 +32,6 @@ export async function generateMetadata({
   };
 }
 
-const sections = [
-  { key: "problem", label: "The Problem" },
-  { key: "approach", label: "My Approach" },
-  { key: "solution", label: "The Solution" },
-  { key: "outcome", label: "Outcome & Impact" },
-] as const;
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -47,74 +41,100 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <>
-      <SiteHeader />
-      <main className="flex-1">
-        <article>
-          <header className="px-6 pt-32 pb-16 sm:px-10 sm:pt-40 sm:pb-20">
-            <div className="mx-auto max-w-4xl">
-              <p className="text-sm font-semibold uppercase tracking-wide text-accent">
-                {project.eyebrow}
-              </p>
-              <h1 className="mt-4 text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
-                {project.title}
-              </h1>
-              <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-neutral-200 pt-8">
-                <div>
-                  <dt className="text-sm text-neutral-500">Role</dt>
-                  <dd className="mt-1 font-medium text-neutral-900">
-                    {project.role}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-neutral-500">Timeline</dt>
-                  <dd className="mt-1 font-medium text-neutral-900">
-                    {project.timeline}
-                  </dd>
-                </div>
-              </dl>
+    <div className="home-page bg-white">
+      <CustomCursor />
+      <DetailHeader />
+      <article className="mx-auto max-w-[1200px] px-6 pb-[140px]">
+        <header className="pt-8 sm:pt-10">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
+            {project.eyebrow}
+          </p>
+          <h1 className="mt-4 max-w-[850px] font-display text-[40px] leading-[1.25] text-[#141414]">
+            {project.title}
+          </h1>
+          <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3 border-t border-neutral-200 pt-8">
+            <div>
+              <dt className="text-sm text-[#68666b]">Role</dt>
+              <dd className="mt-1 text-lg text-[#161616]">{project.role}</dd>
             </div>
-          </header>
-
-          <div className="px-6 sm:px-10">
-            <div className="mx-auto max-w-4xl">
-              <Reveal>
-                <MediaStack media={project.media} />
-              </Reveal>
+            <div>
+              <dt className="text-sm text-[#68666b]">Timeline</dt>
+              <dd className="mt-1 text-lg text-[#161616]">
+                {project.timeline}
+              </dd>
             </div>
-          </div>
+          </dl>
+        </header>
 
-          <div className="px-6 py-20 sm:px-10 sm:py-28">
-            <div className="mx-auto flex max-w-4xl flex-col gap-16">
-              {sections.map((section) => (
-                <Reveal key={section.key}>
-                  <section>
-                    <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
-                      {section.label}
-                    </h2>
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-600">
-                      {project[section.key]}
-                    </p>
-                  </section>
+        <Reveal>
+          <p className="mt-10 max-w-[760px] text-lg leading-[1.6] text-[#161616]">
+            {project.intro}
+          </p>
+        </Reveal>
+
+        {project.introMedia && (
+          <Reveal>
+            <MediaPlaceholder
+              label={project.introMedia.label}
+              className="mt-10 aspect-video w-full"
+            />
+          </Reveal>
+        )}
+
+        {project.caseStudy.length > 0 && (
+          <div className="mt-16 flex flex-col gap-16 sm:mt-20">
+            {project.caseStudy.map((section, index) => {
+              const HeadingTag = section.level === 2 ? "h2" : "h3";
+              const headingClass =
+                section.level === 2
+                  ? "font-display text-2xl font-semibold text-[#161616] sm:text-[28px]"
+                  : "font-display text-xl font-semibold text-[#161616]";
+
+              return (
+                <Reveal key={index}>
+                  {section.media?.placement === "side" ? (
+                    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+                      <div>
+                        <HeadingTag className={headingClass}>
+                          {section.heading}
+                        </HeadingTag>
+                        <p className="mt-4 text-lg leading-[1.6] text-[#161616]">
+                          {section.body}
+                        </p>
+                      </div>
+                      <MediaPlaceholder
+                        label={section.media.label}
+                        className="aspect-square w-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="max-w-[760px]">
+                      <HeadingTag className={headingClass}>
+                        {section.heading}
+                      </HeadingTag>
+                      <p className="mt-4 text-lg leading-[1.6] text-[#161616]">
+                        {section.body}
+                      </p>
+                    </div>
+                  )}
                 </Reveal>
-              ))}
-            </div>
+              );
+            })}
           </div>
+        )}
 
-          <div className="px-6 pb-24 sm:px-10">
-            <div className="mx-auto max-w-4xl">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-base font-semibold text-neutral-900 transition-colors hover:text-accent"
-              >
-                <span aria-hidden="true">←</span>
-                Back to all work
-              </Link>
-            </div>
-          </div>
-        </article>
-      </main>
-      <SiteFooter />
-    </>
+        <div className="mt-20">
+          <Link
+            href="/"
+            data-cursor-hover
+            className="inline-flex items-center gap-2 text-sm text-[#161616]"
+          >
+            <span aria-hidden="true">←</span>
+            Back to all work
+          </Link>
+        </div>
+      </article>
+      <HomeFooter />
+    </div>
   );
 }
