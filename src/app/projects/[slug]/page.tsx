@@ -76,7 +76,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               const headingClass =
                 section.level === 2
                   ? "font-display text-2xl text-[#161616] sm:text-[28px]"
-                  : "font-display text-xl font-semibold text-[#161616]";
+                  : "font-display text-xl text-[#161616]";
 
               return (
                 <Reveal key={index}>
