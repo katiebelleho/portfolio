@@ -52,7 +52,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
             {project.eyebrow}
           </span>
         </div>
-        <p className="mt-3.5 text-lg leading-[1.5] text-[#161616]">
+        <p className="mt-3.5 text-base leading-[1.5] text-[#161616]">
           {project.summary}
         </p>
         <Link

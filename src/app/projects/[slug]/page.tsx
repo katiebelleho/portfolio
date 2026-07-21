@@ -55,11 +55,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3 border-t border-neutral-200 pt-8">
             <div>
               <dt className="text-sm text-[#68666b]">Role</dt>
-              <dd className="mt-1 text-lg text-[#161616]">{project.role}</dd>
+              <dd className="mt-1 text-base text-[#161616]">{project.role}</dd>
             </div>
             <div>
               <dt className="text-sm text-[#68666b]">Timeline</dt>
-              <dd className="mt-1 text-lg text-[#161616]">
+              <dd className="mt-1 text-base text-[#161616]">
                 {project.timeline}
               </dd>
             </div>
@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </header>
 
         <Reveal>
-          <p className="mt-10 max-w-[760px] text-lg leading-[1.6] text-[#161616]">
+          <p className="mt-10 max-w-[760px] text-base leading-[1.6] text-[#161616]">
             {project.intro}
           </p>
         </Reveal>
@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         <HeadingTag className={headingClass}>
                           {section.heading}
                         </HeadingTag>
-                        <p className="mt-4 text-lg leading-[1.6] text-[#161616]">
+                        <p className="mt-4 text-base leading-[1.6] text-[#161616]">
                           {section.body}
                         </p>
                       </div>
@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       <HeadingTag className={headingClass}>
                         {section.heading}
                       </HeadingTag>
-                      <p className="mt-4 text-lg leading-[1.6] text-[#161616]">
+                      <p className="mt-4 text-base leading-[1.6] text-[#161616]">
                         {section.body}
                       </p>
                     </div>

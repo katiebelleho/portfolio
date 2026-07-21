@@ -24,7 +24,7 @@ export default function HomeHero() {
       </h1>
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
-        <span className="text-lg text-[#161616]">{site.location}</span>
+        <span className="text-base text-[#161616]">{site.location}</span>
         <TimePill />
       </div>
 
