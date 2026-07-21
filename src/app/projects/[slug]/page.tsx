@@ -52,18 +52,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <h1 className="mt-4 max-w-[850px] font-display text-[40px] leading-[1.25] text-[#141414]">
             {project.title}
           </h1>
-          <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3 border-t border-neutral-200 pt-8">
-            <div>
-              <dt className="text-sm text-[#68666b]">Role</dt>
-              <dd className="mt-1 text-base text-[#161616]">{project.role}</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-[#68666b]">Timeline</dt>
-              <dd className="mt-1 text-base text-[#161616]">
-                {project.timeline}
-              </dd>
-            </div>
-          </dl>
         </header>
 
         <Reveal>
@@ -87,7 +75,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               const HeadingTag = section.level === 2 ? "h2" : "h3";
               const headingClass =
                 section.level === 2
-                  ? "font-display text-2xl font-semibold text-[#161616] sm:text-[28px]"
+                  ? "font-display text-2xl text-[#161616] sm:text-[28px]"
                   : "font-display text-xl font-semibold text-[#161616]";
 
               return (
