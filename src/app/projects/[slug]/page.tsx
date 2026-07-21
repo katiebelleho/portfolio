@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import CaseStudySectionBlock from "@/components/case-study-section";
 import CustomCursor from "@/components/custom-cursor";
 import DetailHeader from "@/components/detail-header";
 import HomeFooter from "@/components/home-footer";
@@ -71,43 +72,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {project.caseStudy.length > 0 && (
           <div className="mt-16 flex flex-col gap-16 sm:mt-20">
-            {project.caseStudy.map((section, index) => {
-              const HeadingTag = section.level === 2 ? "h2" : "h3";
-              const headingClass =
-                section.level === 2
-                  ? "font-display text-2xl text-[#161616] sm:text-[28px]"
-                  : "font-display text-xl text-[#161616]";
-
-              return (
-                <Reveal key={index}>
-                  {section.media?.placement === "side" ? (
-                    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-                      <div>
-                        <HeadingTag className={headingClass}>
-                          {section.heading}
-                        </HeadingTag>
-                        <p className="mt-4 text-base leading-[1.6] text-[#161616]">
-                          {section.body}
-                        </p>
-                      </div>
-                      <MediaPlaceholder
-                        label={section.media.label}
-                        className="aspect-square w-full"
-                      />
-                    </div>
-                  ) : (
-                    <div className="max-w-[760px]">
-                      <HeadingTag className={headingClass}>
-                        {section.heading}
-                      </HeadingTag>
-                      <p className="mt-4 text-base leading-[1.6] text-[#161616]">
-                        {section.body}
-                      </p>
-                    </div>
-                  )}
-                </Reveal>
-              );
-            })}
+            {project.caseStudy.map((section, index) => (
+              <Reveal key={index}>
+                <CaseStudySectionBlock section={section} />
+              </Reveal>
+            ))}
           </div>
         )}
 
