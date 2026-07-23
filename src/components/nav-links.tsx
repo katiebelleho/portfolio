@@ -2,7 +2,8 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 export default function NavLinks({ className }: { className?: string }) {
-  const linkClass = "text-lg font-semibold whitespace-nowrap text-[#0A2978]";
+  const linkClass =
+    "text-base font-semibold uppercase whitespace-nowrap text-[#0A2978]";
 
   return (
     <nav className={className}>
