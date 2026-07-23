@@ -1,10 +1,8 @@
 import Link from "next/link";
-import DiagonalArrow from "@/components/diagonal-arrow";
 import { site } from "@/lib/site";
 
 export default function NavLinks({ className }: { className?: string }) {
-  const linkClass =
-    "group font-display inline-flex items-center gap-1 text-sm whitespace-nowrap text-[#161616] sm:text-base";
+  const linkClass = "text-lg font-semibold whitespace-nowrap text-[#0A2978]";
 
   return (
     <nav className={className}>
@@ -17,7 +15,6 @@ export default function NavLinks({ className }: { className?: string }) {
         className={linkClass}
       >
         Linkedin
-        <DiagonalArrow />
       </a>
       <a
         href={site.resumeUrl}
@@ -28,11 +25,9 @@ export default function NavLinks({ className }: { className?: string }) {
         className={linkClass}
       >
         Resume
-        <DiagonalArrow />
       </a>
       <Link href={site.aboutUrl} data-cursor-hover className={linkClass}>
         About
-        <DiagonalArrow />
       </Link>
     </nav>
   );
