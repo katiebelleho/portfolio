@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 export default function HomeFooter() {
   return (
     <footer className="bg-[#0A2978] px-6 py-10 sm:py-12">
-      <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row">
+      <div className="mx-auto flex max-w-[1300px] flex-col items-start justify-between gap-8 sm:flex-row">
         <div className="font-display text-[28px] font-semibold tracking-[-0.01em] text-white sm:text-[32px]">
           {site.name}
         </div>

@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <div className="home-page bg-white">
       <CustomCursor />
       <DetailHeader />
-      <article className="mx-auto max-w-[1200px] px-6 pb-[140px]">
+      <article className="mx-auto max-w-[1300px] px-6 pb-[140px]">
         <header className="pt-8 sm:pt-10">
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
             {project.eyebrow}

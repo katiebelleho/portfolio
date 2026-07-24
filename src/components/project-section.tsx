@@ -12,16 +12,16 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[664px_1fr] md:gap-12">
+    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[824px_1fr] md:gap-12">
       <div
-        className={`grid w-full max-w-[664px] gap-4 sm:gap-6 ${
+        className={`grid w-full max-w-[824px] gap-4 sm:gap-6 ${
           project.media.length === 2 ? "grid-cols-2" : "grid-cols-1"
         }`}
       >
         {project.media.map((item, i) => (
           <div
             key={i}
-            className="relative aspect-[4/3] w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
+            className="relative aspect-[4/3] w-full max-w-[400px] overflow-hidden bg-neutral-100"
           >
             {item.type === "video" ? (
               <LazyVideo
@@ -34,7 +34,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
                 src={item.src}
                 alt={item.alt ?? ""}
                 fill
-                sizes="(min-width: 768px) 320px, 45vw"
+                sizes="(min-width: 768px) 400px, 45vw"
                 className="object-cover"
               />
             )}

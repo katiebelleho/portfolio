@@ -7,7 +7,7 @@ export default function HomeHero() {
   return (
     <section
       id="top"
-      className="mx-auto max-w-[1200px] px-6 pt-10 pb-14 sm:pt-12 sm:pb-16"
+      className="mx-auto max-w-[1300px] px-6 pt-10 pb-14 sm:pt-12 sm:pb-16"
     >
       <div className="flex items-start justify-between gap-6">
         <PhotoBadge />
