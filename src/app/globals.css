@@ -11,6 +11,9 @@
   --font-sans: var(--font-inter);
   --font-display: Helvetica, Arial, sans-serif;
   --font-mono: var(--font-space-mono);
+  /* The site's only stacked->side-by-side layout switch (project media/copy
+     columns) uses `md:`, so this is effectively "the mobile breakpoint". */
+  --breakpoint-md: 1140px;
 }
 
 html {
