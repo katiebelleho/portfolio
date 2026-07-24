@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export default function NavLinks({ className }: { className?: string }) {
   const linkClass =
-    "text-base font-semibold uppercase whitespace-nowrap text-[#0A2978]";
+    "text-base font-semibold uppercase whitespace-nowrap text-[#161616]";
 
   return (
     <nav className={className}>
