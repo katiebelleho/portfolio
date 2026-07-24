@@ -18,7 +18,7 @@ export default function CaseStudySectionBlock({
             <div key={index}>
               <MediaPlaceholder
                 label={column.mediaLabel}
-                className="aspect-square w-full"
+                className="aspect-[4/3] w-full"
               />
               <h3 className={`mt-4 ${h3Class}`}>{column.heading}</h3>
               <p className="mt-2 text-base leading-[1.6] text-[#161616]">
@@ -56,7 +56,7 @@ export default function CaseStudySectionBlock({
         <div>{content}</div>
         <MediaPlaceholder
           label={section.media.label}
-          className="aspect-square w-full"
+          className="aspect-[4/3] w-full"
         />
       </div>
     );

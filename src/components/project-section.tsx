@@ -21,7 +21,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         {project.media.map((item, i) => (
           <div
             key={i}
-            className="relative aspect-square w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
+            className="relative aspect-[4/3] w-full max-w-[320px] overflow-hidden rounded-[10px] bg-neutral-100"
           >
             {item.type === "video" ? (
               <LazyVideo
