@@ -27,12 +27,6 @@ export default function HomeHero() {
         <span className="text-base text-[#161616]">{site.location}</span>
         <TimePill />
       </div>
-
-      <div className="mt-14 sm:mt-16">
-        <span className="text-lg text-[#141414]">
-          <span className="italic">Selected</span> work
-        </span>
-      </div>
     </section>
   );
 }
