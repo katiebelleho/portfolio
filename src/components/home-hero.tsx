@@ -28,11 +28,10 @@ export default function HomeHero() {
         <TimePill />
       </div>
 
-      <div className="mt-14 flex items-center gap-4 sm:mt-16">
-        <span className="shrink-0 text-lg text-[#141414]">
+      <div className="mt-14 sm:mt-16">
+        <span className="text-lg text-[#141414]">
           <span className="italic">Selected</span> work
         </span>
-        <span className="h-px w-full bg-neutral-200" aria-hidden="true" />
       </div>
     </section>
   );
