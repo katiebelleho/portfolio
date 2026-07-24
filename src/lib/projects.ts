@@ -62,12 +62,12 @@ export const projects: Project[] = [
     media: [
       {
         type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1783189882/telco_redirect_block_sfupca.mp4",
+        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1784934031/visible_infoblock_c4wtfc.mp4",
         matte: true,
       },
       {
         type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1783192949/telco_LP_eidbxj.mp4",
+        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1784934273/telco_lp_mocked_vfdutv.mp4",
       },
     ],
     role: "Senior Product Designer",
