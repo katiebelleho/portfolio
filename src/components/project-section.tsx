@@ -57,7 +57,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
         <Link
           href={`/projects/${project.slug}`}
           data-cursor-hover
-          data-cursor-label="Read about this one"
+          data-cursor-label="View"
           className="mt-[18px] inline-block text-base font-semibold uppercase text-[#161616]"
         >
           Read more

@@ -8,9 +8,9 @@ export default function DetailHeader() {
       <Link
         href="/"
         data-cursor-hover
-        className="font-display text-xl font-semibold text-[#141414]"
+        className="font-display text-lg text-[#141414]"
       >
-        {site.name}
+        {site.name}, Product Designer
       </Link>
       <NavLinks className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-8" />
     </header>
