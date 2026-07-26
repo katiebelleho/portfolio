@@ -15,7 +15,7 @@ export default function Home() {
           <div key={project.slug}>
             <ProjectSection project={project} index={index} />
             {index < projects.length - 1 && (
-              <div className="py-10">
+              <div className="py-16 sm:py-20">
                 <Divider />
               </div>
             )}
