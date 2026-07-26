@@ -1,14 +1,67 @@
 import MediaPlaceholder from "@/components/media-placeholder";
-import type { CaseStudySection } from "@/lib/projects";
+import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
 
 const h2Class = "font-display text-2xl text-[#161616] sm:text-[28px]";
 const h3Class = "font-display text-xl text-[#161616]";
+
+function renderWithEmphasis(text: string) {
+  return text.split(/(\*[^*]+\*)/g).map((part, index) => {
+    if (part.startsWith("*") && part.endsWith("*")) {
+      return <em key={index}>{part.slice(1, -1)}</em>;
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
+
+function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
+  return (
+    <>
+      {blocks.map((block, index) => {
+        if (block.type === "paragraph") {
+          return (
+            <p
+              key={index}
+              className="mt-4 max-w-[760px] text-base leading-[1.6] text-[#161616] first:mt-4"
+            >
+              {renderWithEmphasis(block.text)}
+            </p>
+          );
+        }
+
+        if (block.type === "list") {
+          return (
+            <ol
+              key={index}
+              className="mt-4 max-w-[760px] list-decimal space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]"
+            >
+              {block.items.map((item, itemIndex) => (
+                <li key={itemIndex}>{item}</li>
+              ))}
+            </ol>
+          );
+        }
+
+        return (
+          <MediaPlaceholder
+            key={index}
+            label={block.label}
+            className="mt-8 aspect-video w-full"
+          />
+        );
+      })}
+    </>
+  );
+}
 
 export default function CaseStudySectionBlock({
   section,
 }: {
   section: CaseStudySection;
 }) {
+  if (section.kind === "media") {
+    return <MediaPlaceholder label={section.label} className="aspect-video w-full" />;
+  }
+
   if (section.kind === "columns") {
     return (
       <div>
@@ -37,16 +90,7 @@ export default function CaseStudySectionBlock({
   const content = (
     <>
       <HeadingTag className={headingClass}>{section.heading}</HeadingTag>
-      <p className="mt-4 text-base leading-[1.6] text-[#161616]">
-        {section.body}
-      </p>
-      {section.list && (
-        <ol className="mt-4 list-decimal space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
-          {section.list.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ol>
-      )}
+      <ContentBlocks blocks={section.blocks} />
     </>
   );
 
@@ -62,5 +106,5 @@ export default function CaseStudySectionBlock({
     );
   }
 
-  return <div className="max-w-[760px]">{content}</div>;
+  return <div>{content}</div>;
 }

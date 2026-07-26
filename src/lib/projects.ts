@@ -22,20 +22,28 @@ export type CaseStudyColumn = {
   mediaLabel: string;
 };
 
+export type CaseStudyContentBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] }
+  | { type: "media"; label: string };
+
 export type CaseStudySection =
   | {
       kind: "text";
       level: 2 | 3;
       heading: string;
-      body: string;
-      /** Rendered as an ordered list directly below the body paragraph. */
-      list?: string[];
+      blocks: CaseStudyContentBlock[];
       media?: CaseStudyMedia;
     }
   | {
       kind: "columns";
       heading: string;
       columns: CaseStudyColumn[];
+    }
+  | {
+      /** Standalone full-width banner between sections. */
+      kind: "media";
+      label: string;
     };
 
 export type Project = {
@@ -56,7 +64,7 @@ export const projects: Project[] = [
   {
     slug: "telecom-partnerships",
     eyebrow: "Back Market / Mar 2026",
-    title: "Scaled user acquisition through telecom partnerships",
+    title: "Scaling US acquisition through telecom partnerships",
     summary:
       "I designed a flexible telecom partnership strategy in the US with bidirectional redirect flows that adapt to each partnership's business model, driving 1.3x higher conversion than average traffic.",
     media: [
@@ -73,40 +81,78 @@ export const projects: Project[] = [
     role: "Senior Product Designer",
     timeline: "Mar 2026",
     intro:
-      "Our US growth stalled after replicating the French model of a single exclusive telecom partner. I worked with my PM to pivot our US strategy into a flexible multiple prepaid partnerships model. The new redirect funnel resulted in a 1.3x higher conversion than average traffic.",
-    introMedia: { label: "Hero image", placement: "hero" },
+      "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts 1.3x higher than average traffic.",
     caseStudy: [
       {
         kind: "text",
         level: 2,
         heading: "My role",
-        body: "I led the design strategy and execution for this project. I worked closely with my PM to develop the new product model, secured stakeholder alignment, contributed on the branded partnership design system, and shipped the first MVP with 3 partners.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Design lead from strategy through launch. I co-built the case for the pivot, partnered with UXR and a Content Designer on research that shaped the content, designed the partner offer template and full redirect flow, and shipped the MVP live with three partners.",
+          },
+        ],
+      },
+      { kind: "media", label: "Hero banner" },
+      {
+        kind: "text",
+        level: 2,
+        heading: "The ambitious bet",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "When I joined the team mid-2025, growth through telecom partnership was plateauing. Our Visible by Verizon partnership converted at 3.4% — well above average traffic — but couldn't scale to our 3-year acquisition goal. My PM and I pitched a bigger vision: a mobile-plan marketplace positioning Back Market as a prepaid/BYOD advocate. I designed the early concepts, which included a plan comparison quiz, educational landing pages, and a multi-partner browse experience. But the vision couldn't move forward. Marketing couldn't commit to the content and SEO investment, and the c-suite wasn't convinced on the big pivot without proof.",
+          },
+        ],
+        media: { label: "Marketplace concept mock", placement: "side" },
       },
       {
         kind: "text",
         level: 2,
-        heading: "Reshaping the strategy",
-        body: "Before any design work began, I worked with my PM to build the case for pivoting away from the French playbook. I created high-fidelity prototypes and a strategic narrative to align stakeholders on why a multi-partner model required a fundamentally different design approach. This involved multiple rounds of stakeholder reviews and a presentation to the c-suite to get buy-in.",
-      },
-      {
-        kind: "text",
-        level: 3,
-        heading: "Scalable redirect flow template",
-        body: "Each telecom partner has distinct branding, user expectations, and technical integration constraints. The design needed to balance between fragmenting our core experience with custom one-off work per partner vs creating a generic template that felt untrustworthy to users arriving from a branded partner environment.",
-        media: { label: "Video prototype", placement: "side" },
-      },
-      {
-        kind: "text",
-        level: 3,
-        heading: "Partner brand system",
-        body: "I worked with the Design System team to establish guidelines for integrating partner visual elements into our design system and codebase cleanly.",
-        media: { label: "Video prototype", placement: "side" },
+        heading: "The re-scope",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Instead of stalling out, we reworked what was already working. Visible worked because it was *simple*: referral traffic → discount code → done. We didn't need the whole marketplace to capture the value, we just needed to make that proven loop work for many partners. So I distilled the marketplace's multi-partner thinking into a less ambitious but shippable redirect strategy.",
+          },
+        ],
       },
       {
         kind: "text",
         level: 2,
-        heading: "Impact + what's next",
-        body: "We launched the initial redirect flow with three partners - Visible, Noble Mobile, and Google Fi. The redirect funnel has a 1.3x higher conversion than average traffic. I am currently iterating on the display of partner telco offers on the Product Page as well as adding more touch points in the user journey to increase awareness of these offers.",
+        heading: "The design",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Each partner redirects users into our funnel differently — some pass a discount code, some expect us to verify eligibility first, some need the relationship to flow in reverse, sending users back out to their site to redeem a plan after buying a phone with us. I designed a single flexible template that could absorb all of these flows without turning into a pile of one-off pages.",
+          },
+          {
+            type: "paragraph",
+            text: "The core of it is an info block that reconfigures itself based on the partner's business model: it can prompt for a code, confirm eligibility, or hand off to the partner, all within the same visual pattern so the experience still feels like one product.",
+          },
+          { type: "media", label: "Video of the infoblock flexible mechanism" },
+          {
+            type: "paragraph",
+            text: "I mapped the full bidirectional flow end to end — from the moment a user lands from a partner's marketing, through offer redemption, to the handoff back out when a partner needed it — so engineering could scope the build against one coherent system instead of three separate integrations.",
+          },
+          {
+            type: "paragraph",
+            text: "I also built the template to be brand-flexible, so each partner's colors and logo could be layered in without touching the underlying logic, which made onboarding new partners a config change rather than a design project.",
+          },
+          { type: "media", label: "Big banner of the full flow" },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "Impact & what's next",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We launched with Visible, Google Fi, and Noble Mobile at 1.3x conversion over average traffic, and added our fourth partner, US Mobile, to the mix. I've since designed and shipped new entry points that surface these partner promos to our existing shoppers, opening a second path into the telco offers.",
+          },
+        ],
       },
     ],
   },
@@ -133,13 +179,23 @@ export const projects: Project[] = [
         kind: "text",
         level: 2,
         heading: "My role",
-        body: "I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
+          },
+        ],
       },
       {
         kind: "text",
         level: 2,
         heading: "The insight",
-        body: "The team initially assumed we needed a customer-facing self-checkout app - something shoppers could use on their own, Apple Store-style. I pushed back. Our brand awareness is 2% in New York and most people are not familiar with refurbished electronics. This was going to be a high-touch, guided sale — not a browse-and-tap transaction. I guided the team to build a tool that would support the sales rep through that journey, optimizing for three key moments: finding inventory fast, building customer confidence in the product, and closing checkout without friction.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The team initially assumed we needed a customer-facing self-checkout app - something shoppers could use on their own, Apple Store-style. I pushed back. Our brand awareness is 2% in New York and most people are not familiar with refurbished electronics. This was going to be a high-touch, guided sale — not a browse-and-tap transaction. I guided the team to build a tool that would support the sales rep through that journey, optimizing for three key moments: finding inventory fast, building customer confidence in the product, and closing checkout without friction.",
+          },
+        ],
       },
       {
         kind: "columns",
@@ -166,10 +222,18 @@ export const projects: Project[] = [
         kind: "text",
         level: 2,
         heading: "Validation",
-        body: "I worked shifts as a sales rep in the popup and used my own design in real transactions. This surfaced things no user testing would have caught:",
-        list: [
-          "A \"browse mode\" feature I'd designed for tablets next to devices went entirely unused because the shelves were too small to fit tablets.",
-          "Rep-customer interaction patterns also varied more than we'd anticipated. Some reps handed the tablet to customers for checkout, others kept it themselves, which flagged a design gap we hadn't fully accounted for.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I worked shifts as a sales rep in the popup and used my own design in real transactions. This surfaced things no user testing would have caught:",
+          },
+          {
+            type: "list",
+            items: [
+              'A "browse mode" feature I\'d designed for tablets next to devices went entirely unused because the shelves were too small to fit tablets.',
+              "Rep-customer interaction patterns also varied more than we'd anticipated. Some reps handed the tablet to customers for checkout, others kept it themselves, which flagged a design gap we hadn't fully accounted for.",
+            ],
+          },
         ],
         media: { label: "Photo from the popup", placement: "side" },
       },
@@ -177,7 +241,12 @@ export const projects: Project[] = [
         kind: "text",
         level: 2,
         heading: "Impact",
-        body: "The tool processed 500+ transactions across a 3-month run without breaking. We built the foundation for an omnichannel experience and insights from the popup directly informed how we talk about refurbishment on the web.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The tool processed 500+ transactions across a 3-month run without breaking. We built the foundation for an omnichannel experience and insights from the popup directly informed how we talk about refurbishment on the web.",
+          },
+        ],
       },
     ],
   },
