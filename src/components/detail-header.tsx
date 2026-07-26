@@ -8,7 +8,7 @@ export default function DetailHeader() {
       <Link
         href="/"
         data-cursor-hover
-        className="font-display text-lg text-[#141414]"
+        className="font-display text-xl font-semibold text-[#141414]"
       >
         {site.name}, Product Designer
       </Link>
