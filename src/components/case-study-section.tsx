@@ -87,7 +87,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <div
               key={index}
-              className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[1fr_400px] md:items-center md:gap-12"
+              className="mt-8 grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12"
             >
               <div className="[&>p:first-child]:mt-0">
                 <ContentBlocks blocks={block.text} />
