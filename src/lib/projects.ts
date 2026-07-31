@@ -14,6 +14,10 @@ export type CaseStudyMedia = {
   /** Label shown inside the placeholder until real media is supplied. */
   label: string;
   placement: CaseStudyMediaPlacement;
+  type?: "image" | "video";
+  src?: string;
+  poster?: string;
+  alt?: string;
 };
 
 export type CaseStudyColumn = {
@@ -25,7 +29,20 @@ export type CaseStudyColumn = {
 export type CaseStudyContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "media"; label: string };
+  | {
+      type: "media";
+      label: string;
+      mediaType?: "image" | "video";
+      src?: string;
+      poster?: string;
+      alt?: string;
+    }
+  | {
+      /** A short text column paired with a fixed-size media box beside it. */
+      type: "row";
+      text: CaseStudyContentBlock[];
+      media: CaseStudyMedia;
+    };
 
 export type CaseStudySection =
   | {
@@ -44,6 +61,10 @@ export type CaseStudySection =
       /** Standalone full-width banner between sections. */
       kind: "media";
       label: string;
+      mediaType?: "image" | "video";
+      src?: string;
+      poster?: string;
+      alt?: string;
     };
 
 export type Project = {
@@ -105,7 +126,12 @@ export const projects: Project[] = [
             text: "When I joined the team mid-2025, growth through telecom partnership was plateauing. Our Visible by Verizon partnership converted at 3.4% — well above average traffic — but couldn't scale to our 3-year acquisition goal. My PM and I pitched a bigger vision: a mobile-plan marketplace positioning Back Market as a prepaid/BYOD advocate. I designed the early concepts, which included a plan comparison quiz, educational landing pages, and a multi-partner browse experience. But the vision couldn't move forward. Marketing couldn't commit to the content and SEO investment, and the c-suite wasn't convinced on the big pivot without proof.",
           },
         ],
-        media: { label: "Marketplace concept mock", placement: "side" },
+        media: {
+          label: "Marketplace concept mock",
+          placement: "side",
+          type: "image",
+          src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785098910/telco_marketplace_concepts_ztnxpw.png",
+        },
       },
       {
         kind: "text",
@@ -128,10 +154,20 @@ export const projects: Project[] = [
             text: "Each partner redirects users into our funnel differently — some pass a discount code, some expect us to verify eligibility first, some need the relationship to flow in reverse, sending users back out to their site to redeem a plan after buying a phone with us. I designed a single flexible template that could absorb all of these flows without turning into a pile of one-off pages.",
           },
           {
-            type: "paragraph",
-            text: "The core of it is an info block that reconfigures itself based on the partner's business model: it can prompt for a code, confirm eligibility, or hand off to the partner, all within the same visual pattern so the experience still feels like one product.",
+            type: "row",
+            text: [
+              {
+                type: "paragraph",
+                text: "The core of it is an info block that reconfigures itself based on the partner's business model: it can prompt for a code, confirm eligibility, or hand off to the partner, all within the same visual pattern so the experience still feels like one product.",
+              },
+            ],
+            media: {
+              label: "Video of the infoblock flexible mechanism",
+              placement: "side",
+              type: "video",
+              src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
+            },
           },
-          { type: "media", label: "Video of the infoblock flexible mechanism" },
           {
             type: "paragraph",
             text: "I mapped the full bidirectional flow end to end — from the moment a user lands from a partner's marketing, through offer redemption, to the handoff back out when a partner needed it — so engineering could scope the build against one coherent system instead of three separate integrations.",
@@ -140,7 +176,12 @@ export const projects: Project[] = [
             type: "paragraph",
             text: "I also built the template to be brand-flexible, so each partner's colors and logo could be layered in without touching the underlying logic, which made onboarding new partners a config change rather than a design project.",
           },
-          { type: "media", label: "Big banner of the full flow" },
+          {
+            type: "media",
+            label: "Big banner of the full flow",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785522410/telco_redirect_e2e_flow_l62u9o.png",
+          },
         ],
       },
       {
