@@ -63,7 +63,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <p
               key={index}
-              className="mt-4 max-w-[760px] text-base leading-[1.6] text-[#161616] first:mt-4"
+              className="mt-4 max-w-[700px] text-base leading-[1.6] text-[#161616] first:mt-4"
             >
               {renderWithEmphasis(block.text)}
             </p>
@@ -74,7 +74,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <ol
               key={index}
-              className="mt-4 max-w-[760px] list-decimal space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]"
+              className="mt-4 max-w-[700px] list-decimal space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]"
             >
               {block.items.map((item, itemIndex) => (
                 <li key={itemIndex}>{item}</li>

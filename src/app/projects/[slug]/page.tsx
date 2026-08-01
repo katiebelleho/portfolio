@@ -70,10 +70,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <CustomCursor />
       <DetailHeader />
       <article className="mx-auto max-w-[1300px] px-6 pb-[140px]">
-        <div className="grid grid-cols-1 gap-10 pt-8 sm:pt-10 md:grid-cols-[200px_1fr] md:gap-16">
+        <div className="flex flex-col gap-10 pt-8 sm:pt-10 md:flex-row md:justify-center md:gap-16">
           <CaseStudyToc items={tocItems} />
 
-          <div className="max-w-[760px]">
+          <div className="max-w-[700px]">
+            <Link
+              href="/"
+              data-cursor-hover
+              className="mb-8 inline-flex items-center gap-2 text-sm text-[#161616] md:hidden"
+            >
+              <span aria-hidden="true">←</span>
+              Back to all work
+            </Link>
+
             <div id="at-a-glance" className="scroll-mt-24">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
                 {project.eyebrow}
@@ -116,17 +125,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 })}
               </div>
             )}
-
-            <div className="mt-20">
-              <Link
-                href="/"
-                data-cursor-hover
-                className="inline-flex items-center gap-2 text-sm text-[#161616]"
-              >
-                <span aria-hidden="true">←</span>
-                Back to all work
-              </Link>
-            </div>
           </div>
         </div>
       </article>

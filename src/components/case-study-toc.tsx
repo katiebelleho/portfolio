@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export type TocItem = {
@@ -33,27 +34,41 @@ export default function CaseStudyToc({ items }: { items: TocItem[] }) {
     return () => observer.disconnect();
   }, [items]);
 
-  if (items.length <= 1) return null;
-
   return (
-    <nav className="hidden md:block" aria-label="Case study sections">
-      <ul className="sticky top-12 flex flex-col gap-3 border-l border-neutral-200">
-        {items.map((item) => (
-          <li key={item.id} className="-ml-px">
-            <a
-              href={`#${item.id}`}
-              data-cursor-hover
-              className={`block border-l-2 py-0.5 pl-4 text-sm transition-colors ${
-                activeId === item.id
-                  ? "border-[#0A2978] font-semibold text-[#161616]"
-                  : "border-transparent text-[#9a98a0] hover:text-[#161616]"
-              }`}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <nav
+      className="hidden shrink-0 md:block md:w-[200px]"
+      aria-label="Case study navigation"
+    >
+      <div className="sticky top-12 flex flex-col gap-8">
+        <Link
+          href="/"
+          data-cursor-hover
+          className="inline-flex items-center gap-2 text-sm text-[#161616]"
+        >
+          <span aria-hidden="true">←</span>
+          Back to all work
+        </Link>
+
+        {items.length > 1 && (
+          <ul className="flex flex-col gap-3 border-l border-neutral-200">
+            {items.map((item) => (
+              <li key={item.id} className="-ml-px">
+                <a
+                  href={`#${item.id}`}
+                  data-cursor-hover
+                  className={`block border-l-2 py-0.5 pl-4 text-sm transition-colors ${
+                    activeId === item.id
+                      ? "border-[#0A2978] font-semibold text-[#161616]"
+                      : "border-transparent text-[#9a98a0] hover:text-[#161616]"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </nav>
   );
 }
