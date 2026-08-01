@@ -7,7 +7,7 @@ export default function MediaPlaceholder({
 }) {
   return (
     <div
-      className={`flex items-center justify-center border border-dashed border-neutral-300 bg-neutral-50 text-center text-sm text-[#9a98a0] ${className ?? ""}`}
+      className={`flex items-center justify-center rounded-[6px] border border-dashed border-neutral-300 bg-neutral-50 text-center text-sm text-[#9a98a0] ${className ?? ""}`}
     >
       {label}
     </div>

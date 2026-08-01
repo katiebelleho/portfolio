@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import CaseStudySectionBlock, { renderWithEmphasis } from "@/components/case-study-section";
+import CaseStudySectionBlock, {
+  MediaSlot,
+  renderWithEmphasis,
+} from "@/components/case-study-section";
 import CaseStudyToc, { type TocItem } from "@/components/case-study-toc";
 import CustomCursor from "@/components/custom-cursor";
 import HomeFooter from "@/components/home-footer";
-import MediaPlaceholder from "@/components/media-placeholder";
 import Reveal from "@/components/reveal";
 import { getProject, projects } from "@/lib/projects";
 import type { CaseStudySection } from "@/lib/projects";
@@ -97,10 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {project.introMedia && (
                 <Reveal>
-                  <MediaPlaceholder
-                    label={project.introMedia.label}
-                    className="mt-10 aspect-video w-full"
-                  />
+                  <MediaSlot media={project.introMedia} className="mt-10 aspect-video w-full" />
                 </Reveal>
               )}
 

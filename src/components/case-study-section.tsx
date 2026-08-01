@@ -1,4 +1,3 @@
-import Image from "next/image";
 import LazyVideo from "@/components/lazy-video";
 import MediaPlaceholder from "@/components/media-placeholder";
 import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
@@ -17,7 +16,13 @@ type MediaSlotSource = {
   caption?: string;
 };
 
-function MediaSlot({
+// Real media keeps its native aspect ratio, so any aspect-* utility (only
+// meant to size the placeholder box) is stripped before it's applied here.
+function stripAspect(className?: string) {
+  return (className ?? "").replace(/\baspect-\S+/g, "").trim();
+}
+
+export function MediaSlot({
   media,
   className,
 }: {
@@ -26,24 +31,20 @@ function MediaSlot({
 }) {
   const mediaEl = !media.src ? (
     <MediaPlaceholder label={media.label} className={className} />
+  ) : media.type === "video" ? (
+    <LazyVideo
+      src={media.src}
+      poster={media.poster}
+      className={`w-full rounded-[6px] ${stripAspect(className)}`}
+    />
   ) : (
-    <div className={`relative overflow-hidden bg-neutral-100 ${className ?? ""}`}>
-      {media.type === "video" ? (
-        <LazyVideo
-          src={media.src}
-          poster={media.poster}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        <Image
-          src={media.src}
-          alt={media.alt ?? media.label}
-          fill
-          sizes="(min-width: 1140px) 50vw, 100vw"
-          className="object-cover"
-        />
-      )}
-    </div>
+    // eslint-disable-next-line @next/next/no-img-element -- native aspect ratio, unknown intrinsic size
+    <img
+      src={media.src}
+      alt={media.alt ?? media.label}
+      loading="lazy"
+      className={`w-full rounded-[6px] ${stripAspect(className)}`}
+    />
   );
 
   if (!media.caption) return mediaEl;
