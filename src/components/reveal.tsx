@@ -7,9 +7,10 @@ type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  id?: string;
 };
 
-export default function Reveal({ children, className, delay = 0 }: RevealProps) {
+export default function Reveal({ children, className, delay = 0, id }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -34,6 +35,7 @@ export default function Reveal({ children, className, delay = 0 }: RevealProps) 
   return (
     <div
       ref={ref}
+      id={id}
       className={`transition-all duration-700 ease-out will-change-transform ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       } ${className ?? ""}`}

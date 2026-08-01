@@ -85,14 +85,14 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
 
         if (block.type === "row") {
           return (
-            <div
-              key={index}
-              className="mt-8 grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12"
-            >
+            <div key={index} className="mt-8">
               <div className="[&>p:first-child]:mt-0">
                 <ContentBlocks blocks={block.text} />
               </div>
-              <MediaSlot media={block.media} className="aspect-[4/3] w-full" />
+              <MediaSlot
+                media={block.media}
+                className="mt-8 aspect-[4/3] w-full"
+              />
             </div>
           );
         }
@@ -167,11 +167,14 @@ export default function CaseStudySectionBlock({
     </>
   );
 
-  if (section.media?.placement === "side") {
+  if (section.media) {
     return (
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-        <div>{content}</div>
-        <MediaSlot media={section.media} className="aspect-[4/3] w-full" />
+      <div>
+        {content}
+        <MediaSlot
+          media={section.media}
+          className="mt-8 aspect-[4/3] w-full"
+        />
       </div>
     );
   }
