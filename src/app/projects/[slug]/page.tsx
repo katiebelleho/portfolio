@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]">
                 {project.eyebrow}
               </p>
-              <h1 className="mt-4 font-display text-[40px] leading-[1.25] text-[#141414]">
+              <h1 className="mt-4 font-display text-[32px] leading-[1.25] text-[#141414]">
                 {project.title}
               </h1>
 
