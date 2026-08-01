@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import CaseStudySectionBlock from "@/components/case-study-section";
 import CaseStudyToc, { type TocItem } from "@/components/case-study-toc";
 import CustomCursor from "@/components/custom-cursor";
-import DetailHeader from "@/components/detail-header";
 import HomeFooter from "@/components/home-footer";
 import MediaPlaceholder from "@/components/media-placeholder";
 import Reveal from "@/components/reveal";
@@ -68,9 +67,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <div className="home-page bg-white">
       <CustomCursor />
-      <DetailHeader />
       <article className="mx-auto max-w-[1300px] px-6 pb-[140px]">
-        <div className="flex flex-col gap-10 pt-8 sm:pt-10 md:flex-row md:justify-center md:gap-16">
+        <div className="flex flex-col gap-10 pt-10 sm:pt-12 md:flex-row md:justify-center md:gap-16">
           <CaseStudyToc items={tocItems} />
 
           <div className="max-w-[700px]">
