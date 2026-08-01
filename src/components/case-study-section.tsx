@@ -5,6 +5,8 @@ import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
 
 const h2Class = "font-display text-2xl text-[#161616] sm:text-[28px]";
 const h3Class = "font-display text-xl text-[#161616]";
+const statLabelClass =
+  "text-xs font-semibold uppercase tracking-[0.04em] text-[#0A2978]";
 
 type MediaSlotSource = {
   label: string;
@@ -12,6 +14,7 @@ type MediaSlotSource = {
   src?: string;
   poster?: string;
   alt?: string;
+  caption?: string;
 };
 
 function MediaSlot({
@@ -21,11 +24,9 @@ function MediaSlot({
   media: MediaSlotSource;
   className?: string;
 }) {
-  if (!media.src) {
-    return <MediaPlaceholder label={media.label} className={className} />;
-  }
-
-  return (
+  const mediaEl = !media.src ? (
+    <MediaPlaceholder label={media.label} className={className} />
+  ) : (
     <div className={`relative overflow-hidden bg-neutral-100 ${className ?? ""}`}>
       {media.type === "video" ? (
         <LazyVideo
@@ -44,10 +45,24 @@ function MediaSlot({
       )}
     </div>
   );
+
+  if (!media.caption) return mediaEl;
+
+  return (
+    <figure className="m-0">
+      {mediaEl}
+      <figcaption className="mt-3 text-center text-sm italic text-[#9a98a0]">
+        {media.caption}
+      </figcaption>
+    </figure>
+  );
 }
 
-function renderWithEmphasis(text: string) {
-  return text.split(/(\*[^*]+\*)/g).map((part, index) => {
+export function renderWithEmphasis(text: string) {
+  return text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
     if (part.startsWith("*") && part.endsWith("*")) {
       return <em key={index}>{part.slice(1, -1)}</em>;
     }
@@ -83,6 +98,17 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           );
         }
 
+        if (block.type === "callout") {
+          return (
+            <div
+              key={index}
+              className="mt-4 max-w-[700px] rounded-md bg-neutral-50 px-5 py-4 text-base font-medium text-[#161616]"
+            >
+              {renderWithEmphasis(block.text)}
+            </div>
+          );
+        }
+
         if (block.type === "row") {
           return (
             <div key={index} className="mt-8">
@@ -106,6 +132,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
               src: block.src,
               poster: block.poster,
               alt: block.alt,
+              caption: block.caption,
             }}
             className="mt-8 aspect-video w-full"
           />
@@ -129,9 +156,34 @@ export default function CaseStudySectionBlock({
           src: section.src,
           poster: section.poster,
           alt: section.alt,
+          caption: section.caption,
         }}
         className="aspect-video w-full"
       />
+    );
+  }
+
+  if (section.kind === "stats") {
+    return (
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-rows-2">
+        {section.items.map((item, index) => (
+          <div
+            key={index}
+            className={`rounded-md bg-neutral-50 p-5 ${index === 0 ? "sm:row-span-2" : ""}`}
+          >
+            <p className={statLabelClass}>{item.label}</p>
+            {item.list ? (
+              <ul className="mt-3 list-disc space-y-1.5 pl-4 text-sm leading-[1.5] text-[#161616]">
+                {item.list.map((entry, entryIndex) => (
+                  <li key={entryIndex}>{entry}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm leading-[1.5] text-[#161616]">{item.body}</p>
+            )}
+          </div>
+        ))}
+      </div>
     );
   }
 

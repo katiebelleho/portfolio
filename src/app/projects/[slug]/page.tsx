@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import CaseStudySectionBlock from "@/components/case-study-section";
+import CaseStudySectionBlock, { renderWithEmphasis } from "@/components/case-study-section";
 import CaseStudyToc, { type TocItem } from "@/components/case-study-toc";
 import CustomCursor from "@/components/custom-cursor";
 import HomeFooter from "@/components/home-footer";
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               <Reveal>
                 <p className="mt-10 text-base leading-[1.6] text-[#161616]">
-                  {project.intro}
+                  {renderWithEmphasis(project.intro)}
                 </p>
               </Reveal>
 

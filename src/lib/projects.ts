@@ -18,6 +18,7 @@ export type CaseStudyMedia = {
   src?: string;
   poster?: string;
   alt?: string;
+  caption?: string;
 };
 
 export type CaseStudyColumn = {
@@ -26,9 +27,16 @@ export type CaseStudyColumn = {
   mediaLabel: string;
 };
 
+export type CaseStudyStatItem = {
+  label: string;
+  list?: string[];
+  body?: string;
+};
+
 export type CaseStudyContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
+  | { type: "callout"; text: string }
   | {
       type: "media";
       label: string;
@@ -36,6 +44,7 @@ export type CaseStudyContentBlock =
       src?: string;
       poster?: string;
       alt?: string;
+      caption?: string;
     }
   | {
       /** A short text column paired with a fixed-size media box beside it. */
@@ -65,6 +74,12 @@ export type CaseStudySection =
       src?: string;
       poster?: string;
       alt?: string;
+      caption?: string;
+    }
+  | {
+      /** "At a glance" style stat grid: first item tall on the left, the rest stacked on the right. */
+      kind: "stats";
+      items: CaseStudyStatItem[];
     };
 
 export type Project = {
@@ -85,7 +100,7 @@ export const projects: Project[] = [
   {
     slug: "telecom-partnerships",
     eyebrow: "Back Market / Mar 2026",
-    title: "Scaling US acquisition through telecom partnerships",
+    title: "Scaled US acquisition through telecom partnerships",
     summary:
       "I designed a flexible telecom partnership strategy in the US with bidirectional redirect flows that adapt to each partnership's business model, driving 1.3x higher conversion than average traffic.",
     media: [
@@ -102,20 +117,30 @@ export const projects: Project[] = [
     role: "Senior Product Designer",
     timeline: "Mar 2026",
     intro:
-      "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts 1.3x higher than average traffic.",
+      "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts **1.3x higher** than average traffic.",
+    introMedia: { label: "Hero banner", placement: "hero" },
     caseStudy: [
       {
-        kind: "text",
-        level: 2,
-        heading: "My role",
-        blocks: [
+        kind: "stats",
+        items: [
           {
-            type: "paragraph",
-            text: "Design lead from strategy through launch. I co-built the case for the pivot, partnered with UXR and a Content Designer on research that shaped the content, designed the partner offer template and full redirect flow, and shipped the MVP live with three partners.",
+            label: "My role",
+            list: [
+              "co-built the case for the strategic pivot",
+              "partnered with UXR and a Content Designer on research that shaped the content",
+              "designed the partner offer template and full redirect flow, and shipped the MVP live with three partners",
+            ],
+          },
+          {
+            label: "Timeline",
+            body: "Back Market / 1 quarter to launch MVP, year-long initiative to reshape the US telco strategy",
+          },
+          {
+            label: "Impact",
+            body: "1.3x higher conversion than average traffic. Redirect template launched with 6 brand partners.",
           },
         ],
       },
-      { kind: "media", label: "Hero banner" },
       {
         kind: "text",
         level: 2,
@@ -123,15 +148,24 @@ export const projects: Project[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "When I joined the team mid-2025, growth through telecom partnership was plateauing. Our Visible by Verizon partnership converted at 3.4% — well above average traffic — but couldn't scale to our 3-year acquisition goal. My PM and I pitched a bigger vision: a mobile-plan marketplace positioning Back Market as a prepaid/BYOD advocate. I designed the early concepts, which included a plan comparison quiz, educational landing pages, and a multi-partner browse experience. But the vision couldn't move forward. Marketing couldn't commit to the content and SEO investment, and the c-suite wasn't convinced on the big pivot without proof.",
+            text: "When I joined the team mid-2025, growth through telecom partnership was plateauing. Our Visible by Verizon partnership converted at 3.4% — well above average traffic — but couldn't scale to our 3-year acquisition goal.",
+          },
+          {
+            type: "paragraph",
+            text: "My PM and I pitched a bigger vision: a mobile-plan marketplace positioning Back Market as a prepaid/BYOD advocate. I designed the early concepts, which included a plan comparison quiz, educational landing pages, and a multi-partner browse experience.",
+          },
+          {
+            type: "media",
+            label: "Marketplace vision concept designs",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785098910/telco_marketplace_concepts_ztnxpw.png",
+            caption: "Marketplace vision concept designs",
+          },
+          {
+            type: "paragraph",
+            text: "**But the vision couldn't move forward.** Marketing couldn't commit to the content and SEO investment, and the c-suite wasn't convinced on the big pivot without proof.",
           },
         ],
-        media: {
-          label: "Marketplace concept mock",
-          placement: "side",
-          type: "image",
-          src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785098910/telco_marketplace_concepts_ztnxpw.png",
-        },
       },
       {
         kind: "text",
@@ -140,7 +174,16 @@ export const projects: Project[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "Instead of stalling out, we reworked what was already working. Visible worked because it was *simple*: referral traffic → discount code → done. We didn't need the whole marketplace to capture the value, we just needed to make that proven loop work for many partners. So I distilled the marketplace's multi-partner thinking into a less ambitious but shippable redirect strategy.",
+            text: "Instead of stalling out, we reworked what was already working.",
+          },
+          {
+            type: "paragraph",
+            text: "Visible worked because it was a simple flow:",
+          },
+          { type: "callout", text: "Referral traffic → discount code → done." },
+          {
+            type: "paragraph",
+            text: "We didn't need the whole marketplace to capture the value, we just needed to make that proven loop work for many partners. So I distilled the marketplace's multi-partner thinking into a less ambitious but shippable redirect strategy.",
           },
         ],
       },
@@ -151,36 +194,33 @@ export const projects: Project[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "Each partner redirects users into our funnel differently — some pass a discount code, some expect us to verify eligibility first, some need the relationship to flow in reverse, sending users back out to their site to redeem a plan after buying a phone with us. I designed a single flexible template that could absorb all of these flows without turning into a pile of one-off pages.",
-          },
-          {
-            type: "row",
-            text: [
-              {
-                type: "paragraph",
-                text: "The core of it is an info block that reconfigures itself based on the partner's business model: it can prompt for a code, confirm eligibility, or hand off to the partner, all within the same visual pattern so the experience still feels like one product.",
-              },
-            ],
-            media: {
-              label: "Video of the infoblock flexible mechanism",
-              placement: "side",
-              type: "video",
-              src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
-            },
+            text: "A user lands on Back Market fresh from a partner site who might've never heard of us before. I wanted to make sure the design addresses what they need at that decision moment. Through a survey with our UXR team, the insights showed that most users arrive in a plan comparison mindset and need three things to convert: device compatibility, clear promo terms, and payment options. I solved compatibility structurally by only redirecting to unlocked device models, so the block could focus on communicating the offer and activation.",
           },
           {
             type: "paragraph",
-            text: "I mapped the full bidirectional flow end to end — from the moment a user lands from a partner's marketing, through offer redemption, to the handoff back out when a partner needed it — so engineering could scope the build against one coherent system instead of three separate integrations.",
-          },
-          {
-            type: "paragraph",
-            text: "I also built the template to be brand-flexible, so each partner's colors and logo could be layered in without touching the underlying logic, which made onboarding new partners a config change rather than a design project.",
+            text: "I designed the full flow including the PDP offer block, a light cart touchpoint, and the confirmation screen and email that deliver the promo code post-purchase.",
           },
           {
             type: "media",
-            label: "Big banner of the full flow",
+            label: "End to end redirect flow",
             mediaType: "image",
             src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785522410/telco_redirect_e2e_flow_l62u9o.png",
+            caption: "End to end redirect flow",
+          },
+          {
+            type: "paragraph",
+            text: "A big challenge of this MVP design was to make sure it's flexible enough to onboard multiple partners with varying offer strategy and different branding. We had 3 partners lined up at the time, and expecting more to come.",
+          },
+          {
+            type: "paragraph",
+            text: "I partnered with the Design System team and my devs to make partner branding configurable in our design system and codebase. The block has a uniformed structure - header, offer summary, activation steps — while logo, color, copy, and offer details flex per partner via brand tokens. Consistent enough to stay unified and onboard a new partner without a redesign; branded enough to feel native on arrival.",
+          },
+          {
+            type: "media",
+            label: "Flexible template easily scalable to new partners",
+            mediaType: "video",
+            src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
+            caption: "Flexible template easily scalable to new partners",
           },
         ],
       },
