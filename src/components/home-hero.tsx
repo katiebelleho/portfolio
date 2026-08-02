@@ -20,7 +20,7 @@ export default function HomeHero() {
         <span className="text-[#0A2978]">move metrics and scale.</span>
       </h1>
 
-      <div className="mt-8 flex flex-wrap items-center gap-3">
+      <div className="mt-8 hidden flex-wrap items-center gap-3">
         <span className="text-base text-[#161616]">{site.location}</span>
         <TimePill />
       </div>

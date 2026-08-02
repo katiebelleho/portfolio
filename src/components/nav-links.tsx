@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { site } from "@/lib/site";
 
 export default function NavLinks({ className }: { className?: string }) {
@@ -27,9 +26,6 @@ export default function NavLinks({ className }: { className?: string }) {
       >
         Resume
       </a>
-      <Link href={site.aboutUrl} data-cursor-hover className={linkClass}>
-        About
-      </Link>
     </nav>
   );
 }
