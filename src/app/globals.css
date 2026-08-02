@@ -87,6 +87,15 @@ body {
   opacity: 1;
 }
 
+.custom-cursor.is-inverted {
+  background: #fff;
+}
+
+.custom-cursor-tag.is-inverted {
+  background: #fff;
+  color: #0a2978;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .custom-cursor,
   .custom-cursor-tag {

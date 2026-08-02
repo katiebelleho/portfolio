@@ -25,6 +25,11 @@ export default function CustomCursor() {
       cursor.style.transform = `translate(${x}px, ${y}px)`;
       cursor.style.opacity = "1";
 
+      const isOverFooter =
+        event.target instanceof Element && event.target.closest("footer") !== null;
+      cursor.classList.toggle("is-inverted", isOverFooter);
+      tag.classList.toggle("is-inverted", isOverFooter);
+
       const tagWidth = tag.offsetWidth;
       const overflowsRight = x + offsetX + tagWidth > window.innerWidth - edgeMargin;
       const tagX = overflowsRight ? x - offsetX - tagWidth : x + offsetX;
