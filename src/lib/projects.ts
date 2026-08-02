@@ -35,7 +35,7 @@ export type CaseStudyStatItem = {
 
 export type CaseStudyContentBlock =
   | { type: "paragraph"; text: string }
-  | { type: "list"; items: string[] }
+  | { type: "list"; items: string[]; style?: "numbered" | "bulleted" }
   | { type: "callout"; text: string }
   | {
       type: "media";
@@ -94,8 +94,8 @@ export type Project = {
   media: ProjectMedia[];
   role: string;
   timeline: string;
-  /** Opening paragraph on the case study page, shown below the title/meta. */
-  intro: string;
+  /** Opening paragraph(s) on the case study page, shown below the title/meta. */
+  intro: string[];
   introMedia?: CaseStudyMedia;
   caseStudy: CaseStudySection[];
 };
@@ -120,8 +120,9 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Mar 2026",
-    intro:
+    intro: [
       "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts **1.3x higher** than average traffic.",
+    ],
     introMedia: { label: "Hero banner", placement: "hero" },
     caseStudy: [
       {
@@ -257,8 +258,9 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "May 2025",
-    intro:
+    intro: [
       "Back Market was opening a 3-month popup in NYC - our first foray into physical retail. We had two sprints, no budget for a custom POS system, and a finance setup that ruled out traditional retail checkout. I transformed our customer-facing app to be usable for the sales rep while keeping as little changes as possible to minimize dev effort.",
+    ],
     caseStudy: [
       {
         kind: "stats",
@@ -397,7 +399,7 @@ export const projects: Project[] = [
     title:
       "Redesigned the online trade-in experience to reduce the amount of unsellable items we receive from customers",
     summary:
-      "As Patagonia's trade-in program grew, we were getting a lot of ineligible items. I redesigned the trade-in flow to achieve a 98% item eligibility rate.",
+      "As Trove's trade-in program grew, we were getting a lot of ineligible items. I redesigned the trade-in flow to achieve a 72% decrease in item rejection rate due to eligibility.",
     media: [
       {
         type: "video",
@@ -411,8 +413,187 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Jul 2023",
-    intro: "Case study content coming soon.",
-    caseStudy: [],
+    intro: [
+      "I was a designer at Trove, a company that provides white-label technology to power the secondhand program for brands such as Patagonia, REI, lululemon and Arc'teryx. We support the buyback, reprocessing, and resale of used items.",
+      "At the start of this project, we were rejecting over 20% of the trade-in items sent to us. This was poor user experience because users get upset for not getting any credit after sending their trade-in items. It was also bad for our business because we incur labor costs for processing these unsellable items.",
+    ],
+    caseStudy: [
+      {
+        kind: "stats",
+        items: [
+          {
+            label: "My role",
+            body: "Sole designer, worked with PM to prioritize problems to solve, ran user test to validate approach, shipped final designs.",
+          },
+          {
+            label: "Timeline",
+            body: "Trove Recommerce / 2 months",
+          },
+          {
+            label: "Impact",
+            body: "72% decrease in item rejection rate due to eligibility",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "Problem",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I joined the project after the product requirements were already defined - the main goal of the redesign was to increase conversion and reduce customer service inquiry rate. However, I noticed that the item rejection rate was alarmingly high, we were rejecting over 20% of trade-in items that were mailed to us.",
+          },
+          {
+            type: "paragraph",
+            text: "While conversion could always be improved, the more salient problem at hand was the item rejection rate. I worked with my product manager to realign the project goals to focus on reducing item rejection rate.",
+          },
+          {
+            type: "paragraph",
+            text: "So why was the rejection rate so high?",
+          },
+          {
+            type: "paragraph",
+            text: "We found that the 21% rejection rate broke down to:",
+          },
+          {
+            type: "list",
+            style: "bulleted",
+            items: [
+              "16% rejected due to item condition",
+              "5% rejected due to item in a category that we don't accept for resale",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "The hypothesis was that the current trade-in flow didn't give enough guidance to the user on whether their item would be eligible for credit.",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "New trade in flow",
+        tocLabel: "New flow",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We added more steps in the trade-in initiation flow to make sure people have a good understanding of what items are accepted vs not.",
+          },
+          {
+            type: "paragraph",
+            text: "Our hypothesis was that users wouldn't mind putting in a little more effort in giving us more information about their items, and by doing so it would actually increase affirmation that their items would be accepted.",
+          },
+          {
+            type: "media",
+            label: "Online trade-in flow, before vs after",
+            caption: "online trade-in flow, before vs after",
+          },
+          {
+            type: "row",
+            heading: "Prioritizing style number lookup",
+            text: [
+              {
+                type: "paragraph",
+                text: "In the new flow, the user will start their trade-in initiation by entering the style number because this is the most effective way for the user to find the exact catalog match of their item.",
+              },
+              {
+                type: "paragraph",
+                text: "Matching to an exact catalog record would:",
+              },
+              {
+                type: "list",
+                items: [
+                  "confirm that the item is eligible for trade in",
+                  "provide the user with the most accurate payout estimate",
+                ],
+              },
+            ],
+            media: { label: "Style number entry screen", placement: "side" },
+          },
+          {
+            type: "row",
+            heading: "Moving eligibility confirmation to earlier in the flow",
+            text: [
+              {
+                type: "paragraph",
+                text: "Previously the eligibility criteria was hidden in the last step of the process right before the user finalizes the trade-in. Given the high rejection rate, its safe to assume that people weren't actually reading through the criteria at the end of the flow.",
+              },
+              {
+                type: "paragraph",
+                text: "I gave this information more emphasis by moving it earlier in the flow and into its own screen. This would allow the user to confirm that their item is eligible for trade-in credit before spending time filling out the entire form.",
+              },
+            ],
+            media: { label: "Confirm eligibility screen", placement: "side" },
+          },
+          {
+            type: "row",
+            heading: "Asking for condition self assessment",
+            text: [
+              {
+                type: "paragraph",
+                text: "In the new flow, we will ask the supplier to identify any flaws on their item from a list of flaw types.",
+              },
+              {
+                type: "paragraph",
+                text: "This information allows us to give the customer a more accurate payout estimate based on the condition of the item, as well as serving as a second net to catch for ineligibility due to excessive wear.",
+              },
+            ],
+            media: { label: "Condition self-assessment screens", placement: "side" },
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "Validation",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "**I was the most unsure about this part of the new design.**",
+          },
+          {
+            type: "paragraph",
+            text: "I worried whether suppliers would feel confident enough to condition grade their own items, and if not, would the cost of a decrease in trade-in conversion be worth it. Therefore, I focused the first round of user testing on validating this feature.",
+          },
+          {
+            type: "paragraph",
+            text: "**User test findings**",
+          },
+          {
+            type: "list",
+            style: "bulleted",
+            items: [
+              "Some participants didn't expect the condition grading step and thought the first set of eligibility questions were enough",
+              "They didn't necessarily mind the effort of filling out the information, but rather they didn't feel confident that they can properly assess their item's condition",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "I reduced the cognitive load in this step by limiting the flaw selections to the 3 most common flaw type and worked with our photos team to retake images that showed the severity levels in a similar fabric.",
+          },
+          {
+            type: "media",
+            label: "Condition grading flow screens",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "Impact",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "After the redesign launched, we saw a significant decrease from 5% to 1.4% of item rejection rate due to category ineligibility.",
+          },
+          {
+            type: "paragraph",
+            text: "However, we saw no change in the item rejection rate due to condition. When we looked into the site data, we saw that most people were skipping through the condition grading page - they were selecting that their item has no visible flaws but we ended up rejecting these items. We had plans on our future roadmap to optimize the condition grading step of the flow.",
+          },
+        ],
+      },
+    ],
   },
 ];
 

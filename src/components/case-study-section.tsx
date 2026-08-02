@@ -91,15 +91,18 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
         }
 
         if (block.type === "list") {
+          const ListTag = block.style === "bulleted" ? "ul" : "ol";
           return (
-            <ol
+            <ListTag
               key={index}
-              className="mt-4 max-w-[700px] list-decimal space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]"
+              className={`mt-4 max-w-[700px] space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978] ${
+                block.style === "bulleted" ? "list-disc" : "list-decimal"
+              }`}
             >
               {block.items.map((item, itemIndex) => (
                 <li key={itemIndex}>{item}</li>
               ))}
-            </ol>
+            </ListTag>
           );
         }
 
@@ -118,7 +121,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <div
               key={index}
-              className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-[1fr_200px] sm:items-start sm:gap-8"
+              className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:items-start sm:gap-8"
             >
               <div className="[&>*:first-child]:mt-0">
                 {block.heading && <h3 className={h3Class}>{block.heading}</h3>}

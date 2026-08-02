@@ -95,9 +95,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </h1>
 
               <Reveal>
-                <p className="mt-10 text-base leading-[1.6] text-[#161616]">
-                  {renderWithEmphasis(project.intro)}
-                </p>
+                <div>
+                  {project.intro.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className={`text-base leading-[1.6] text-[#161616] ${index === 0 ? "mt-10" : "mt-4"}`}
+                    >
+                      {renderWithEmphasis(paragraph)}
+                    </p>
+                  ))}
+                </div>
               </Reveal>
 
               {project.introMedia && (
