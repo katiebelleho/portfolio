@@ -116,14 +116,15 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
 
         if (block.type === "row") {
           return (
-            <div key={index} className="mt-8">
-              <div className="[&>p:first-child]:mt-0">
+            <div
+              key={index}
+              className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-[1fr_200px] sm:items-start sm:gap-8"
+            >
+              <div className="[&>*:first-child]:mt-0">
+                {block.heading && <h3 className={h3Class}>{block.heading}</h3>}
                 <ContentBlocks blocks={block.text} />
               </div>
-              <MediaSlot
-                media={block.media}
-                className="mt-8 aspect-[4/3] w-full"
-              />
+              <MediaSlot media={block.media} className="aspect-[3/4] w-full" />
             </div>
           );
         }

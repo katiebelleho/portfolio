@@ -63,7 +63,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     { id: "at-a-glance", label: "At a glance" },
     ...restSections
       .filter(hasHeading)
-      .map((section) => ({ id: slugify(section.heading), label: section.heading })),
+      .map((section) => ({
+        id: slugify(section.heading),
+        label: section.tocLabel ?? section.heading,
+      })),
   ];
 
   return (

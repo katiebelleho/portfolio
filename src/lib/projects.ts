@@ -47,8 +47,9 @@ export type CaseStudyContentBlock =
       caption?: string;
     }
   | {
-      /** A short text column paired with a fixed-size media box beside it. */
+      /** A text column paired side by side with a media box. */
       type: "row";
+      heading?: string;
       text: CaseStudyContentBlock[];
       media: CaseStudyMedia;
     };
@@ -58,12 +59,15 @@ export type CaseStudySection =
       kind: "text";
       level: 2 | 3;
       heading: string;
+      /** Shorter label for the sticky table of contents, when the heading is too long. */
+      tocLabel?: string;
       blocks: CaseStudyContentBlock[];
       media?: CaseStudyMedia;
     }
   | {
       kind: "columns";
       heading: string;
+      tocLabel?: string;
       columns: CaseStudyColumn[];
     }
   | {
@@ -257,45 +261,88 @@ export const projects: Project[] = [
       "Back Market was opening a 3-month popup in NYC - our first foray into physical retail. We had two sprints, no budget for a custom POS system, and a finance setup that ruled out traditional retail checkout. I transformed our customer-facing app to be usable for the sales rep while keeping as little changes as possible to minimize dev effort.",
     caseStudy: [
       {
-        kind: "text",
-        level: 2,
-        heading: "My role",
-        blocks: [
+        kind: "stats",
+        items: [
           {
-            type: "paragraph",
-            text: "I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
+            label: "My role",
+            body: "I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
+          },
+          {
+            label: "Timeline",
+            body: "Back Market / 2 sprints",
+          },
+          {
+            label: "Impact",
+            body: "Processed 500+ transactions to support full duration of popup",
           },
         ],
       },
       {
         kind: "text",
         level: 2,
-        heading: "The insight",
+        heading: "The approach",
         blocks: [
           {
             type: "paragraph",
-            text: "The team initially assumed we needed a customer-facing self-checkout app - something shoppers could use on their own, Apple Store-style. I pushed back. Our brand awareness is 2% in New York and most people are not familiar with refurbished electronics. This was going to be a high-touch, guided sale — not a browse-and-tap transaction. I guided the team to build a tool that would support the sales rep through that journey, optimizing for three key moments: finding inventory fast, building customer confidence in the product, and closing checkout without friction.",
+            text: "The team initially assumed we needed a customer-facing self-checkout app - something shoppers could use on their own, Apple Store-style. Basically just our existing shopping app but in a bigger screen and less inventory.",
+          },
+          {
+            type: "paragraph",
+            text: "**I pushed back.** Our brand awareness is 2% in New York and most people are not familiar with refurbished electronics. This was going to be a high-touch, guided sale — not a browse-and-tap transaction.",
+          },
+          {
+            type: "paragraph",
+            text: "I guided the team to build a tool that would support the sales rep through that journey, optimizing for three key moments: finding inventory fast, building customer confidence in the product, and closing checkout without friction.",
+          },
+          {
+            type: "media",
+            label: "Online vs in-store redesign diagram",
+            caption: "Some caption",
           },
         ],
       },
       {
-        kind: "columns",
+        kind: "text",
+        level: 2,
         heading: "Key changes from consumer shopping app to in-store checkout tool",
-        columns: [
+        tocLabel: "Key changes",
+        blocks: [
           {
+            type: "paragraph",
+            text: "I guided the team to build a tool that would support the sales rep through that journey, optimizing for three key moments: finding inventory fast, building customer confidence in the product, and closing checkout without friction.",
+          },
+          {
+            type: "row",
             heading: "Instant inventory lookup",
-            body: 'Our popup showcased devices that weren\'t all available to purchase. Sales reps needed to answer "do you have the iPhone 13 in blue?" in seconds. I added search and quick filters to solve this - a simple change with outsized impact on rep confidence in the floor.',
-            mediaLabel: "Product screenshot",
+            text: [
+              {
+                type: "paragraph",
+                text: 'Our popup showcased devices that weren\'t all available to purchase. Sales reps needed to answer "do you have the iPhone 13 in blue?" in seconds. I added search and quick filters to solve this - a simple change with outsized impact on rep confidence in the floor.',
+              },
+            ],
+            media: { label: "Instant inventory lookup screenshot", placement: "side" },
           },
           {
+            type: "row",
             heading: "Simplified product pages",
-            body: "In-store, customers are holding the device. They don't need a wall of specs. I stripped product pages to image, model, and price - with warranty, condition, and spec details tucked into expandable sections reps could surface on demand. We validated this was the right call post-launch, because those sections were rarely opened.",
-            mediaLabel: "Product screenshot",
+            text: [
+              {
+                type: "paragraph",
+                text: "In-store, customers are holding the device. They don't need a wall of specs. I stripped product pages to image, model, and price - with warranty, condition, and spec details tucked into expandable sections reps could surface on demand. We validated this was the right call post-launch, because those sections were rarely opened.",
+              },
+            ],
+            media: { label: "Simplified product pages screenshot", placement: "side" },
           },
           {
+            type: "row",
             heading: "Streamlined checkout",
-            body: "I got checkout to ~2 minutes by enabling auto account creation, removing shipping address requirements, and adding scan-to-pay via QR code. 71% of customers ended up using the scan-to-pay option. This was still much slower than the standard tap-to-pay, but workable given our constraints.",
-            mediaLabel: "Product screenshot",
+            text: [
+              {
+                type: "paragraph",
+                text: "I got checkout to ~2 minutes by enabling auto account creation, removing shipping address requirements, and adding scan-to-pay via QR code. 71% of customers ended up using the scan-to-pay option. This was still much slower than the standard tap-to-pay, but workable given our constraints.",
+              },
+            ],
+            media: { label: "Streamlined checkout screenshot", placement: "side" },
           },
         ],
       },
@@ -306,17 +353,30 @@ export const projects: Project[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "I worked shifts as a sales rep in the popup and used my own design in real transactions. This surfaced things no user testing would have caught:",
+            text: "I worked shifts as a sales rep in the popup and used my own design in real transactions.",
           },
           {
-            type: "list",
-            items: [
-              'A "browse mode" feature I\'d designed for tablets next to devices went entirely unused because the shelves were too small to fit tablets.',
-              "Rep-customer interaction patterns also varied more than we'd anticipated. Some reps handed the tablet to customers for checkout, others kept it themselves, which flagged a design gap we hadn't fully accounted for.",
+            type: "row",
+            text: [
+              {
+                type: "paragraph",
+                text: "This surfaced things no user testing would have caught:",
+              },
+              {
+                type: "list",
+                items: [
+                  'A "browse mode" feature I\'d designed for tablets next to devices went entirely unused because the shelves were too small to fit tablets.',
+                  "Rep-customer interaction patterns also varied more than we'd anticipated. Some reps handed the tablet to customers for checkout, others kept it themselves, which flagged a design gap we hadn't fully accounted for.",
+                ],
+              },
             ],
+            media: {
+              label: "Photo from the popup",
+              placement: "side",
+              caption: "Me working at the popup",
+            },
           },
         ],
-        media: { label: "Photo from the popup", placement: "side" },
       },
       {
         kind: "text",
