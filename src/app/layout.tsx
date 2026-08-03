@@ -16,11 +16,14 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://katieho.com"),
   title: {
-    default: "Katie Ho — Senior Product Designer",
+    default: "Katie Ho, Product Designer",
     template: "%s — Katie Ho",
   },
   description:
     "Portfolio of Katie Ho, a Senior Product Designer with 6+ years helping mission-driven companies ship products that move metrics and scale.",
+  icons: {
+    icon: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785779270/favicon_yl9z0m.svg",
+  },
 };
 
 export default function RootLayout({
