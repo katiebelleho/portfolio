@@ -12,9 +12,9 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[824px_1fr] md:gap-12">
+    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[816px_1fr] md:gap-12">
       <div
-        className={`grid w-full max-w-[824px] gap-4 sm:gap-6 ${
+        className={`grid w-full max-w-[816px] gap-2 sm:gap-4 ${
           project.media.length === 2 ? "grid-cols-2" : "grid-cols-1"
         }`}
       >
