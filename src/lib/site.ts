@@ -9,7 +9,7 @@ export const site = {
     "https://res.cloudinary.com/pg5fl7pt/image/upload/v1784467405/IMG_0608_rwx3mt.jpg",
   linkedinUrl: "https://www.linkedin.com/in/katiebho",
   resumeUrl:
-    "https://docs.google.com/document/d/1ogKQaxoy8FCu2eHG9EM-c3NK-AkNj_6aN6e9tjmSqjs/edit?usp=sharing",
+    "https://drive.google.com/file/d/1rC9nMOeMKSoH0L3YtqBG9tYw64HU9M4J/view?usp=sharing",
   aboutUrl: "/about",
   email: "",
 };
