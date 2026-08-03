@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   {project.intro.map((paragraph, index) => (
                     <p
                       key={index}
-                      className={`text-base leading-[1.6] text-[#161616] ${index === 0 ? "mt-10" : "mt-4"}`}
+                      className="mt-4 text-base leading-[1.6] text-[#161616]"
                     >
                       {renderWithEmphasis(paragraph)}
                     </p>
@@ -114,7 +114,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
 
               {firstSection && (
-                <Reveal className="mt-16 sm:mt-20">
+                <Reveal className="mt-4">
                   <CaseStudySectionBlock section={firstSection} />
                 </Reveal>
               )}
