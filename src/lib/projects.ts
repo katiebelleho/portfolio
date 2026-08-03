@@ -252,8 +252,12 @@ export const projects: Project[] = [
     media: [
       {
         type: "image",
-        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1783190111/retail_store_hero_gqtpi5.png",
+        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785776917/working_in_store_fdqgdy.png",
         alt: "Back Market pop-up store checkout experience",
+      },
+      {
+        type: "video",
+        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785776580/quick_lookup_zimbmq.mp4",
       },
     ],
     role: "Senior Product Designer",
