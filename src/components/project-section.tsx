@@ -18,28 +18,37 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
           project.media.length === 2 ? "grid-cols-2" : "grid-cols-1"
         }`}
       >
-        {project.media.map((item, i) => (
-          <div
-            key={i}
-            className="relative aspect-[4/3] w-full max-w-[400px] overflow-hidden bg-neutral-100"
-          >
-            {item.type === "video" ? (
-              <LazyVideo
-                src={item.src}
-                poster={item.poster}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <Image
-                src={item.src}
-                alt={item.alt ?? ""}
-                fill
-                sizes="(min-width: 768px) 400px, 45vw"
-                className="object-cover"
-              />
-            )}
-          </div>
-        ))}
+        {project.media.map((item, i) => {
+          const focalPointClass =
+            item.focalPoint === "top"
+              ? "object-top"
+              : item.focalPoint === "bottom"
+                ? "object-bottom"
+                : "object-center";
+
+          return (
+            <div
+              key={i}
+              className="relative aspect-[4/3] w-full max-w-[400px] overflow-hidden bg-neutral-100"
+            >
+              {item.type === "video" ? (
+                <LazyVideo
+                  src={item.src}
+                  poster={item.poster}
+                  className={`h-full w-full object-cover ${focalPointClass}`}
+                />
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={item.alt ?? ""}
+                  fill
+                  sizes="(min-width: 768px) 400px, 45vw"
+                  className={`object-cover ${focalPointClass}`}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="min-w-0">

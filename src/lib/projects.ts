@@ -6,6 +6,8 @@ export type ProjectMedia = {
   alt?: string;
   /** Wrap the media in a soft neutral backdrop, useful for UI screens with transparent/white edges. */
   matte?: boolean;
+  /** Which part of the media stays visible when it's cropped to fit the 4:3 frame. Defaults to center. */
+  focalPoint?: "top" | "center" | "bottom";
 };
 
 export type CaseStudyMediaPlacement = "hero" | "side";
@@ -258,6 +260,7 @@ export const projects: Project[] = [
       {
         type: "video",
         src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785776580/quick_lookup_zimbmq.mp4",
+        focalPoint: "top",
       },
     ],
     role: "Senior Product Designer",
