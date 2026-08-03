@@ -126,7 +126,12 @@ export const projects: Project[] = [
     intro: [
       "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts **1.3x higher** than average traffic.",
     ],
-    introMedia: { label: "Hero banner", placement: "hero" },
+    introMedia: {
+      label: "Hero banner",
+      placement: "hero",
+      type: "image",
+      src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785783529/telco_hero_ypklfa.png",
+    },
     caseStudy: [
       {
         kind: "stats",
