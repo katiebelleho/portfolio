@@ -312,7 +312,9 @@ export const projects: Project[] = [
           {
             type: "media",
             label: "Online vs in-store redesign diagram",
-            caption: "Some caption",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785784951/online_to_in_store_visual_a5ekat.png",
+            caption: "Reframing the app from customer self-serve to rep-assisted checkout",
           },
         ],
       },
