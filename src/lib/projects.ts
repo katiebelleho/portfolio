@@ -274,6 +274,12 @@ export const projects: Project[] = [
     intro: [
       "Back Market was opening a 3-month popup in NYC - our first foray into physical retail. We had two sprints, no budget for a custom POS system, and a finance setup that ruled out traditional retail checkout. I transformed our customer-facing app to be usable for the sales rep while keeping as little changes as possible to minimize dev effort.",
     ],
+    introMedia: {
+      label: "Hero banner",
+      placement: "hero",
+      type: "image",
+      src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785786025/popup_hero_cinbnz.png",
+    },
     caseStudy: [
       {
         kind: "stats",
