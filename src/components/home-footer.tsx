@@ -6,7 +6,7 @@ export default function HomeFooter() {
   return (
     <footer className="min-h-[300px] bg-[#0A2978] px-6 py-10 sm:py-12">
       <div className="mx-auto flex max-w-[1300px] flex-col items-start justify-between gap-8 sm:flex-row">
-        <div className="font-display text-[28px] tracking-[-0.01em] text-white sm:text-[32px]">
+        <div className="font-display text-[28px] leading-none tracking-[-0.01em] text-white sm:text-[32px]">
           {site.name}
         </div>
         <div className="flex flex-col items-start gap-3.5 sm:items-end">
