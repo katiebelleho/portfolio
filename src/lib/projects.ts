@@ -113,12 +113,12 @@ export const projects: Project[] = [
     media: [
       {
         type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1784934031/visible_infoblock_c4wtfc.mp4",
-        matte: true,
+        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
       },
       {
-        type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1784934273/telco_lp_mocked_vfdutv.mp4",
+        type: "image",
+        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785781173/telco_lp_gydsmy.png",
+        alt: "Back Market telco partner landing page",
       },
     ],
     role: "Senior Product Designer",
