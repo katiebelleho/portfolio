@@ -322,7 +322,12 @@ export const projects: Project[] = [
                 text: 'Our popup showcased devices that weren\'t all available to purchase. Sales reps needed to answer "do you have the iPhone 13 in blue?" in seconds. I added search and quick filters to solve this - a simple change with outsized impact on rep confidence in the floor.',
               },
             ],
-            media: { label: "Instant inventory lookup screenshot", placement: "side" },
+            media: {
+              label: "Instant inventory lookup screenshot",
+              placement: "side",
+              type: "video",
+              src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785776580/quick_lookup_zimbmq.mp4",
+            },
           },
           {
             type: "row",
@@ -333,7 +338,12 @@ export const projects: Project[] = [
                 text: "In-store, customers are holding the device. They don't need a wall of specs. I stripped product pages to image, model, and price - with warranty, condition, and spec details tucked into expandable sections reps could surface on demand. We validated this was the right call post-launch, because those sections were rarely opened.",
               },
             ],
-            media: { label: "Simplified product pages screenshot", placement: "side" },
+            media: {
+              label: "Simplified product pages screenshot",
+              placement: "side",
+              type: "image",
+              src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785776544/store_ipad_item_view_nl4wnb.png",
+            },
           },
           {
             type: "row",
@@ -344,7 +354,12 @@ export const projects: Project[] = [
                 text: "I got checkout to ~2 minutes by enabling auto account creation, removing shipping address requirements, and adding scan-to-pay via QR code. 71% of customers ended up using the scan-to-pay option. This was still much slower than the standard tap-to-pay, but workable given our constraints.",
               },
             ],
-            media: { label: "Streamlined checkout screenshot", placement: "side" },
+            media: {
+              label: "Streamlined checkout screenshot",
+              placement: "side",
+              type: "video",
+              src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785776557/scan_to_pay_wuzfxo.mov",
+            },
           },
         ],
       },
@@ -375,6 +390,8 @@ export const projects: Project[] = [
             media: {
               label: "Photo from the popup",
               placement: "side",
+              type: "image",
+              src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785776917/working_in_store_fdqgdy.png",
               caption: "Me working at the popup",
             },
           },
