@@ -16,7 +16,8 @@ export type CaseStudyMedia = {
   /** Label shown inside the placeholder until real media is supplied. */
   label: string;
   placement: CaseStudyMediaPlacement;
-  type?: "image" | "video";
+  /** "vimeo" embeds a Vimeo player iframe; src is the numeric video ID. */
+  type?: "image" | "video" | "vimeo";
   src?: string;
   poster?: string;
   alt?: string;
@@ -42,7 +43,7 @@ export type CaseStudyContentBlock =
   | {
       type: "media";
       label: string;
-      mediaType?: "image" | "video";
+      mediaType?: "image" | "video" | "vimeo";
       src?: string;
       poster?: string;
       alt?: string;
@@ -76,7 +77,7 @@ export type CaseStudySection =
       /** Standalone full-width banner between sections. */
       kind: "media";
       label: string;
-      mediaType?: "image" | "video";
+      mediaType?: "image" | "video" | "vimeo";
       src?: string;
       poster?: string;
       alt?: string;
@@ -511,6 +512,8 @@ export const projects: Project[] = [
           {
             type: "media",
             label: "Online trade-in flow, before vs after",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785779806/diti_before_after_nocxd1.png",
             caption: "online trade-in flow, before vs after",
           },
           {
@@ -533,7 +536,12 @@ export const projects: Project[] = [
                 ],
               },
             ],
-            media: { label: "Style number entry screen", placement: "side" },
+            media: {
+              label: "Style number entry screen",
+              placement: "side",
+              type: "vimeo",
+              src: "1041996513",
+            },
           },
           {
             type: "row",
@@ -548,7 +556,12 @@ export const projects: Project[] = [
                 text: "I gave this information more emphasis by moving it earlier in the flow and into its own screen. This would allow the user to confirm that their item is eligible for trade-in credit before spending time filling out the entire form.",
               },
             ],
-            media: { label: "Confirm eligibility screen", placement: "side" },
+            media: {
+              label: "Confirm eligibility screen",
+              placement: "side",
+              type: "vimeo",
+              src: "1037975753",
+            },
           },
           {
             type: "row",
@@ -599,6 +612,8 @@ export const projects: Project[] = [
           {
             type: "media",
             label: "Condition grading flow screens",
+            mediaType: "vimeo",
+            src: "1037980127",
           },
         ],
       },

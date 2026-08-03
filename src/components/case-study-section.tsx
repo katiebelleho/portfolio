@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import LazyVideo from "@/components/lazy-video";
 import MediaPlaceholder from "@/components/media-placeholder";
 import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
@@ -9,7 +10,7 @@ const statLabelClass =
 
 type MediaSlotSource = {
   label: string;
-  type?: "image" | "video";
+  type?: "image" | "video" | "vimeo";
   src?: string;
   poster?: string;
   alt?: string;
@@ -29,23 +30,42 @@ export function MediaSlot({
   media: MediaSlotSource;
   className?: string;
 }) {
-  const mediaEl = !media.src ? (
-    <MediaPlaceholder label={media.label} className={className} />
-  ) : media.type === "video" ? (
-    <LazyVideo
-      src={media.src}
-      poster={media.poster}
-      className={`w-full rounded-[6px] ${stripAspect(className)}`}
-    />
-  ) : (
-    // eslint-disable-next-line @next/next/no-img-element -- native aspect ratio, unknown intrinsic size
-    <img
-      src={media.src}
-      alt={media.alt ?? media.label}
-      loading="lazy"
-      className={`w-full rounded-[6px] ${stripAspect(className)}`}
-    />
-  );
+  let mediaEl: ReactNode;
+
+  if (!media.src) {
+    mediaEl = <MediaPlaceholder label={media.label} className={className} />;
+  } else if (media.type === "vimeo") {
+    // Vimeo has no intrinsic size to read from, so it keeps the placeholder's aspect box.
+    mediaEl = (
+      <div className={`relative overflow-hidden rounded-[6px] bg-neutral-100 ${className ?? ""}`}>
+        <iframe
+          src={`https://player.vimeo.com/video/${media.src}`}
+          title={media.label}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
+    );
+  } else if (media.type === "video") {
+    mediaEl = (
+      <LazyVideo
+        src={media.src}
+        poster={media.poster}
+        className={`w-full rounded-[6px] ${stripAspect(className)}`}
+      />
+    );
+  } else {
+    mediaEl = (
+      // eslint-disable-next-line @next/next/no-img-element -- native aspect ratio, unknown intrinsic size
+      <img
+        src={media.src}
+        alt={media.alt ?? media.label}
+        loading="lazy"
+        className={`w-full rounded-[6px] ${stripAspect(className)}`}
+      />
+    );
+  }
 
   if (!media.caption) return mediaEl;
 
