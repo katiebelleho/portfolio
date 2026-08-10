@@ -699,6 +699,7 @@ export const projects: Project[] = [
         kind: "text",
         level: 2,
         heading: "Context: what is branded recommerce?",
+        tocLabel: "Context",
         blocks: [
           {
             type: "paragraph",
@@ -755,7 +756,7 @@ export const projects: Project[] = [
         kind: "text",
         level: 2,
         heading: 'The core challenge: "branded-ness" without a thousand knobs',
-        tocLabel: "The core challenge",
+        tocLabel: "The challenge",
         blocks: [
           {
             type: "paragraph",
