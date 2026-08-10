@@ -193,12 +193,18 @@ export default function CaseStudySectionBlock({
   }
 
   if (section.kind === "stats") {
+    // With exactly 3 items, the first one runs tall along the left with the
+    // other two stacked beside it; any other count falls back to a plain grid.
+    const useTallFirstItem = section.items.length === 3;
+
     return (
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-rows-2">
         {section.items.map((item, index) => (
           <div
             key={index}
-            className={`rounded-md bg-neutral-50 p-5 ${index === 0 ? "sm:row-span-2" : ""}`}
+            className={`rounded-md bg-neutral-50 p-5 ${
+              useTallFirstItem && index === 0 ? "sm:row-span-2" : ""
+            }`}
           >
             <p className={statLabelClass}>{item.label}</p>
             {item.list ? (
@@ -217,20 +223,35 @@ export default function CaseStudySectionBlock({
   }
 
   if (section.kind === "columns") {
+    const gridColsClass =
+      section.columns.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3";
+
     return (
       <div>
         <h2 className={h2Class}>{section.heading}</h2>
-        <div className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
+        <div className={`mt-8 grid grid-cols-1 gap-10 sm:gap-8 ${gridColsClass}`}>
           {section.columns.map((column, index) => (
             <div key={index}>
-              <MediaPlaceholder
-                label={column.mediaLabel}
-                className="aspect-[4/3] w-full"
-              />
-              <h3 className={`mt-4 ${h3Class}`}>{column.heading}</h3>
-              <p className="mt-2 text-base leading-[1.6] text-[#161616]">
-                {column.body}
-              </p>
+              {column.mediaLabel && (
+                <MediaPlaceholder
+                  label={column.mediaLabel}
+                  className="aspect-[4/3] w-full"
+                />
+              )}
+              <h3 className={`${h3Class} ${column.mediaLabel ? "mt-4" : ""}`}>
+                {column.heading}
+              </h3>
+              {column.list ? (
+                <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
+                  {column.list.map((entry, entryIndex) => (
+                    <li key={entryIndex}>{entry}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-2 text-base leading-[1.6] text-[#161616]">
+                  {column.body}
+                </p>
+              )}
             </div>
           ))}
         </div>

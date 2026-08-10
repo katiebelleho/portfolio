@@ -26,8 +26,10 @@ export type CaseStudyMedia = {
 
 export type CaseStudyColumn = {
   heading: string;
-  body: string;
-  mediaLabel: string;
+  body?: string;
+  list?: string[];
+  /** Placeholder shown above the column's text when the column has a visual. */
+  mediaLabel?: string;
 };
 
 export type CaseStudyStatItem = {
@@ -642,6 +644,156 @@ export const projects: Project[] = [
           {
             type: "paragraph",
             text: "However, we saw no change in the item rejection rate due to condition. When we looked into the site data, we saw that most people were skipping through the condition grading page - they were selecting that their item has no visible flaws but we ended up rejecting these items. We had plans on our future roadmap to optimize the condition grading step of the flow.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "resale-shopify-theme",
+    eyebrow: "Trove Recommerce / Fall 2022",
+    title: "Resale Shopify Theme",
+    summary:
+      "I designed a scalable Shopify theme and visual configuration system that let non-engineers apply full brand styling to a resale storefront - cutting new program launch timelines by 43% and engineering costs by 66%.",
+    media: [
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366540/hp_shopify_theme_cover_wwxyrf.png",
+        alt: "Resale Shopify theme storefront",
+      },
+      {
+        type: "image",
+        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366540/hp_config_settings_fuogpf.png",
+        alt: "Shopify theme visual configuration settings",
+      },
+    ],
+    role: "Senior Product Designer",
+    timeline: "Fall 2022",
+    intro: [],
+    caseStudy: [
+      {
+        kind: "stats",
+        items: [
+          {
+            label: "Challenge",
+            body: "Design a resale site theme flexible enough to serve as the base template for every partner brand and translate that flexibility into a visual editor that a non-engineer/designer user could operate.",
+          },
+          {
+            label: "Role",
+            body: "Lead designer, collaborating with 1 PM and a team of 7 engineers.",
+          },
+          {
+            label: "Impact",
+            list: [
+              "Shortened program launch timeline by 43%",
+              "Reduced engineering capital cost per launch by 66%",
+            ],
+          },
+          {
+            label: "Timeline",
+            body: "1.5 months of design time, Fall 2022",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "Context: what is branded recommerce?",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Trove provides white-label technology that powers the secondhand resale program for brands like Patagonia, REI, Lululemon, and Arc'teryx. We manage the resale site but it has to feel entirely native to the brand's mainline site. To build trust of the resale program, shoppers need to feel like they're still buying from the brand, not from us.",
+          },
+          {
+            type: "media",
+            label: "Branded recommerce examples",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366541/recom_branding_oxitse.png",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "The problem",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Hitting that level of branding meant building a fully custom resale site for every partner, which required roughly 34 engineer-weeks and 4 design-weeks per launch. That was expensive to maintain and slow to scale.",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "The solution",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "In 2022, we replatformed to Shopify, which gave us the opportunity to modernize the code stack, but also made it possible to build a single base theme that could power many branded storefronts through configurations.",
+          },
+          {
+            type: "media",
+            label: "Shopify theme base template",
+            mediaType: "image",
+            src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366541/shopify_theme_aoepnk.png",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: "My role",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I designed the base resale site theme itself, and the full set of UI configuration options that would let a non-engineer apply a brand's styling through Shopify's visual editor — minimal design or engineering effort required per launch.",
+          },
+        ],
+      },
+      {
+        kind: "text",
+        level: 2,
+        heading: 'The core challenge: "branded-ness" without a thousand knobs',
+        tocLabel: "The core challenge",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The hardest part of this project was to balance giving the theme enough flexibility to feel authentically on-brand for every partner, without creating so many configuration options that the tool became unusable for the non-technical merchandising managers actually operating it.",
+          },
+          {
+            type: "paragraph",
+            text: 'I worked backward from the brands themselves — using the range of partners we\'d already launched to understand which UI elements actually carried a brand\'s identity (typography, color, imagery treatment, button style) versus which ones didn\'t meaningfully register as "branded" to a shopper. That allowed me to apply an 80/20 rule: make the highest-impact elements deeply configurable, and deliberately leave the rest fixed.',
+          },
+          {
+            type: "paragraph",
+            text: "Even after that prioritization, the configuration set still ran to 100+ settings — which introduced a second problem: organizing that many controls into a visual editor that stayed comprehensible to someone without a design background.",
+          },
+          {
+            type: "paragraph",
+            text: 'I structured the configurations around the components themselves (buttons, product tiles, banners) rather than as a flat settings list, so a user could reason about "how does my product tile look" as one unit instead of hunting across dozens of unrelated toggles.',
+          },
+        ],
+      },
+      {
+        kind: "columns",
+        heading: "Impact",
+        columns: [
+          {
+            heading: "For the business",
+            list: [
+              "Shortened program launch timeline by 43%",
+              "Reduced engineering capital cost per launch by 66%",
+              "Removed a structural bottleneck on how fast the business could scale to new brand partners",
+            ],
+          },
+          {
+            heading: "For the design team",
+            list: [
+              "No more full-site Figma files per brand partner",
+              "Significant time saved on onboarding-related design and post-launch styling updates",
+              "Freed up design capacity to focus on core resale UX initiatives instead of repetitive brand builds",
+            ],
           },
         ],
       },
