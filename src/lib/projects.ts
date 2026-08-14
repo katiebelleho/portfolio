@@ -91,6 +91,11 @@ export type CaseStudySection =
       items: CaseStudyStatItem[];
     };
 
+export type SkillsHighlight = {
+  label: string;
+  items: string[];
+};
+
 export type Project = {
   slug: string;
   eyebrow: string;
@@ -99,6 +104,8 @@ export type Project = {
   media: ProjectMedia[];
   role: string;
   timeline: string;
+  /** Skimmable skills callout shown right below the title, above the intro. */
+  skillsHighlight?: SkillsHighlight;
   /** Opening paragraph(s) on the case study page, shown below the title/meta. */
   intro: string[];
   introMedia?: CaseStudyMedia;
@@ -125,6 +132,15 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Mar 2026",
+    skillsHighlight: {
+      label: "The one where I:",
+      items: [
+        "Co-developed a new multi-partner strategy with PM in the US, used storytelling to secure stakeholder buy-in to deviate from the other major markets.",
+        "Broke an ambitious vision into prioritized efforts and shipped the highest-value piece as an MVP in one quarter",
+        "Created a scalable, configurable redirect framework that enabled us to onboard new partners without a redesign",
+        "Used qualitative and quantitative data to identify and design for what users needed at key decision points",
+      ],
+    },
     intro: [
       "Our US growth had stalled on the single exclusive telecom partner model from our French playbook. I helped pivot the strategy to a flexible multi-partner model and designed the end-to-end flow that shipped it. The new redirect funnel converts **1.3x higher** than average traffic.",
     ],
@@ -138,14 +154,6 @@ export const projects: Project[] = [
       {
         kind: "stats",
         items: [
-          {
-            label: "My role",
-            list: [
-              "co-built the case for the strategic pivot",
-              "partnered with UXR and a Content Designer on research that shaped the content",
-              "designed the partner offer template and full redirect flow, and shipped the MVP live with three partners",
-            ],
-          },
           {
             label: "Timeline",
             body: "Back Market / 1 quarter to launch MVP, year-long initiative to reshape the US telco strategy",

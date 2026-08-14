@@ -94,6 +94,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 {project.title}
               </h1>
 
+              {project.skillsHighlight && (
+                <Reveal>
+                  <div className="mt-4 rounded-md border-l-4 border-[#0A2978] bg-neutral-50 p-5">
+                    <p className="text-base font-semibold text-[#161616]">
+                      {project.skillsHighlight.label}
+                    </p>
+                    <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
+                      {project.skillsHighlight.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              )}
+
               <Reveal>
                 <div>
                   {project.intro.map((paragraph, index) => (
