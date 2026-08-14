@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <CustomCursor />
       <article className="mx-auto max-w-[1300px] px-6 pb-[140px]">
         <div className="flex flex-col gap-10 pt-10 sm:pt-12 md:flex-row md:justify-center md:gap-16">
-          <CaseStudyToc items={tocItems} />
+          <CaseStudyToc items={tocItems} skillsHighlight={project.skillsHighlight} />
 
           <div className="max-w-[700px]">
             <Link
@@ -95,8 +95,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </h1>
 
               {project.skillsHighlight && (
-                <Reveal>
-                  <div className="mt-4 rounded-md border-l-4 border-[#0A2978] bg-neutral-50 p-5">
+                <Reveal className="md:hidden">
+                  <div className="mt-4 rounded-md border border-neutral-200 bg-transparent p-5">
                     <p className="text-base font-semibold text-[#161616]">
                       {project.skillsHighlight.label}
                     </p>
