@@ -282,6 +282,14 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "May 2025",
+    skillsHighlight: {
+      label: "The one where I —",
+      items: [
+        "Redirected the team to move from a self-serve checkout tool to a rep-guided tool, weighing multiple approaches under a 2-sprint deadline",
+        "Streamlined the tool to help the primary user work faster in a high-pressure, time-constrained environment",
+        "Worked retail shifts myself to validate the design in the field, surfacing gaps no remote testing would've caught",
+      ],
+    },
     intro: [
       "Back Market was opening a 3-month popup in NYC - our first foray into physical retail. We had two sprints, no budget for a custom POS system, and a finance setup that ruled out traditional retail checkout. I transformed our customer-facing app to be usable for the sales rep while keeping as little changes as possible to minimize dev effort.",
     ],
@@ -462,6 +470,14 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Jul 2023",
+    skillsHighlight: {
+      label: "The one where I —",
+      items: [
+        "Re-scoped the project after data showed the given goal wasn't the real problem",
+        "Reduced perceived risk by moving confidence-building steps earlier in the flow",
+        "Used quantitative and qualitative signal to diagnose the issue and prioritize the fix",
+      ],
+    },
     intro: [
       "I was a designer at Trove, a company that provides white-label technology to power the secondhand program for brands such as Patagonia, REI, lululemon and Arc'teryx. We support the buyback, reprocessing, and resale of used items.",
       "At the start of this project, we were rejecting over 20% of the trade-in items sent to us. This was poor user experience because users get upset for not getting any credit after sending their trade-in items. It was also bad for our business because we incur labor costs for processing these unsellable items.",
@@ -678,6 +694,14 @@ export const projects: Project[] = [
     ],
     role: "Senior Product Designer",
     timeline: "Fall 2022",
+    skillsHighlight: {
+      label: "The one where I —",
+      items: [
+        "Designed a flexible architecture that scaled across every new instance, replacing bespoke builds",
+        "Built reusable component patterns, not one-off screens, across 100+ configuration points",
+        "Traded off flexibility vs. usability using real usage data",
+      ],
+    },
     intro: [],
     caseStudy: [
       {
