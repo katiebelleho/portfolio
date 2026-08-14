@@ -2,20 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { SkillsHighlight } from "@/lib/projects";
 
 export type TocItem = {
   id: string;
   label: string;
 };
 
-export default function CaseStudyToc({
-  items,
-  skillsHighlight,
-}: {
-  items: TocItem[];
-  skillsHighlight?: SkillsHighlight;
-}) {
+export default function CaseStudyToc({ items }: { items: TocItem[] }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
 
   useEffect(() => {
@@ -74,19 +67,6 @@ export default function CaseStudyToc({
               </li>
             ))}
           </ul>
-        )}
-
-        {skillsHighlight && (
-          <div className="rounded-md border border-neutral-200 bg-transparent p-4">
-            <p className="text-sm font-semibold text-[#161616]">
-              {skillsHighlight.label}
-            </p>
-            <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-[1.5] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
-              {skillsHighlight.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
         )}
       </div>
     </nav>
