@@ -67,7 +67,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
           href={`/projects/${project.slug}`}
           data-cursor-hover
           data-cursor-label="View"
-          className="mt-[18px] inline-block text-base font-semibold uppercase text-[#161616]"
+          className="mt-[18px] inline-block text-sm font-semibold uppercase text-[#0A2978]"
         >
           Read more
           <span className="sr-only"> about {project.title}</span>
