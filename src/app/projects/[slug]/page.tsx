@@ -7,6 +7,7 @@ import CaseStudySectionBlock, {
 } from "@/components/case-study-section";
 import CaseStudyToc, { type TocItem } from "@/components/case-study-toc";
 import CustomCursor from "@/components/custom-cursor";
+import Divider from "@/components/divider";
 import HomeFooter from "@/components/home-footer";
 import Reveal from "@/components/reveal";
 import { getProject, projects } from "@/lib/projects";
@@ -96,15 +97,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {project.skillsHighlight && (
                 <Reveal>
-                  <div className="mt-4 rounded-md border border-neutral-200 bg-transparent p-5">
-                    <p className="text-base font-semibold text-[#161616]">
-                      {project.skillsHighlight.label}
+                  <div className="mt-4">
+                    <p className="font-mono text-sm leading-[1.8] text-neutral-600">
+                      {project.skillsHighlight.label}{" "}
+                      {project.skillsHighlight.items.join(" / ")}
                     </p>
-                    <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978] sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-1.5 sm:space-y-0">
-                      {project.skillsHighlight.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
+                    <Divider className="mt-4" />
                   </div>
                 </Reveal>
               )}

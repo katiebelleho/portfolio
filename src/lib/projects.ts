@@ -133,12 +133,13 @@ export const projects: Project[] = [
     role: "Senior Product Designer",
     timeline: "Mar 2026",
     skillsHighlight: {
-      label: "The one where I:",
+      label: "The one where I —",
       items: [
-        "Co-developed a new multi-partner strategy with PM in the US, used storytelling to secure stakeholder buy-in to deviate from the other major markets.",
+        "Co-developed a multi-partner strategy",
+        "Used storytelling to secure stakeholder buy-in",
         "Broke an ambitious vision into prioritized efforts and shipped the highest-value piece as an MVP in one quarter",
-        "Created a scalable, configurable redirect framework that enabled us to onboard new partners without a redesign",
-        "Used qualitative and quantitative data to identify and design for what users needed at key decision points",
+        "Built a scalable redirect framework",
+        "Designed from qual + quant data",
       ],
     },
     intro: [
