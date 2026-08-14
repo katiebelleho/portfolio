@@ -14,7 +14,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://katieho.com"),
+  metadataBase: new URL("https://katiebho.com"),
   title: {
     default: "Katie Ho, Product Designer",
     template: "%s — Katie Ho",
