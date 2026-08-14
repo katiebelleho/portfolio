@@ -198,7 +198,11 @@ export default function CaseStudySectionBlock({
     const useTallFirstItem = section.items.length === 3;
 
     return (
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-rows-2">
+      <div
+        className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${
+          useTallFirstItem ? "sm:grid-rows-2" : ""
+        }`}
+      >
         {section.items.map((item, index) => (
           <div
             key={index}
