@@ -111,7 +111,7 @@ export const projects: Project[] = [
     eyebrow: "Back Market / Mar 2026",
     title: "Scaled US acquisition through telecom partnerships",
     summary:
-      "I designed a flexible telecom partnership strategy in the US with bidirectional redirect flows that adapt to each partnership's business model, driving 1.3x higher conversion than average traffic.",
+      "Pivoted from a stalled single-partner model and spent a year reshaping our telecom acquisition strategy through a multi-partner offer architecture — driving 1.3x higher conversion than average traffic.",
     media: [
       {
         type: "video",
@@ -258,7 +258,7 @@ export const projects: Project[] = [
     title:
       "Transformed an e-commerce app as a checkout tool for Back Market's first physical store",
     summary:
-      "I defined the checkout UX for Back Market's 3-month NYC popup under tight constraints. I collaborated with Marketing to align it with the overall store experience, and validated it in real conditions by working retail shifts.",
+      "Launched Back Market's first in-store checkout experience in 2 sprints, adapting the consumer app into a rep-facing sales tool; achieved 71% scan-to-pay adoption, personally worked retail shifts to validate design decisions, and fed key insights back to the online product.",
     media: [
       {
         type: "image",
@@ -439,7 +439,7 @@ export const projects: Project[] = [
     title:
       "Redesigned the online trade-in experience to reduce the amount of unsellable items we receive from customers",
     summary:
-      "As Trove's trade-in program grew, we were getting a lot of ineligible items. I redesigned the trade-in flow to achieve a 72% decrease in item rejection rate due to eligibility.",
+      "Redesigned the trade-in flow to reduce perceived risk in the transaction, achieving a 98% eligibility rate and reduction in processing costs.",
     media: [
       {
         type: "video",
@@ -654,7 +654,7 @@ export const projects: Project[] = [
     eyebrow: "Trove Recommerce / Fall 2022",
     title: "Resale Shopify Theme",
     summary:
-      "I designed a scalable Shopify theme and visual configuration system that let non-engineers apply full brand styling to a resale storefront - cutting new program launch timelines by 43% and engineering costs by 66%.",
+      "Designed a flexible resale platform that scaled across every new partner, replacing bespoke builds and cutting launch timelines by 43% and engineering costs by 66%.",
     media: [
       {
         type: "image",
