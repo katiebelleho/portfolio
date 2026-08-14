@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <p className="text-base font-semibold text-[#161616]">
                       {project.skillsHighlight.label}
                     </p>
-                    <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
+                    <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978] sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-1.5 sm:space-y-0">
                       {project.skillsHighlight.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
