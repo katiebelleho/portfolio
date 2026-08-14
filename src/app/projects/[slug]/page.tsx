@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.skillsHighlight && (
                 <Reveal>
                   <div className="mt-4">
-                    <p className="font-mono text-sm leading-[1.8] text-neutral-600">
+                    <p className="font-mono text-sm leading-[1.8] text-slate-600">
                       {project.skillsHighlight.label}{" "}
                       {project.skillsHighlight.items.join(" / ")}
                     </p>
