@@ -304,10 +304,6 @@ export const projects: Project[] = [
         kind: "stats",
         items: [
           {
-            label: "My role",
-            body: "I defined the checkout UX, collaborated with the Marketing team to ensure it fit with the overall store experience; shipped the retail tool and worked retail shifts in the store to validate in real conditions.",
-          },
-          {
             label: "Timeline",
             body: "Back Market / 2 sprints",
           },
@@ -486,10 +482,6 @@ export const projects: Project[] = [
       {
         kind: "stats",
         items: [
-          {
-            label: "My role",
-            body: "Sole designer, worked with PM to prioritize problems to solve, ran user test to validate approach, shipped final designs.",
-          },
           {
             label: "Timeline",
             body: "Trove Recommerce / 2 months",
@@ -710,10 +702,6 @@ export const projects: Project[] = [
           {
             label: "Challenge",
             body: "Design a resale site theme flexible enough to serve as the base template for every partner brand and translate that flexibility into a visual editor that a non-engineer/designer user could operate.",
-          },
-          {
-            label: "Role",
-            body: "Lead designer, collaborating with 1 PM and a team of 7 engineers.",
           },
           {
             label: "Impact",
