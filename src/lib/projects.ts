@@ -121,10 +121,6 @@ export const projects: Project[] = [
       "Pivoted from a stalled single-partner model and spent a year reshaping our telecom acquisition strategy through a multi-partner offer architecture — driving 1.3x higher conversion than average traffic.",
     media: [
       {
-        type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
-      },
-      {
         type: "image",
         src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785781173/telco_lp_gydsmy.png",
         alt: "Back Market telco partner landing page",
@@ -273,11 +269,6 @@ export const projects: Project[] = [
         type: "image",
         src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785776917/working_in_store_fdqgdy.png",
         alt: "Back Market pop-up store checkout experience",
-      },
-      {
-        type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785776580/quick_lookup_zimbmq.mp4",
-        focalPoint: "top",
       },
     ],
     role: "Senior Product Designer",
@@ -454,10 +445,6 @@ export const projects: Project[] = [
     summary:
       "Redesigned the trade-in flow to reduce perceived risk in the transaction, achieving a 98% eligibility rate and reduction in processing costs.",
     media: [
-      {
-        type: "video",
-        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1783191285/condition_grading_v1_1080p_bs38xz.mp4",
-      },
       {
         type: "image",
         src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1783191874/style_lookup_qzc8qc.png",
@@ -677,11 +664,6 @@ export const projects: Project[] = [
         type: "image",
         src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366540/hp_shopify_theme_cover_wwxyrf.png",
         alt: "Resale Shopify theme storefront",
-      },
-      {
-        type: "image",
-        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1786366540/hp_config_settings_fuogpf.png",
-        alt: "Shopify theme visual configuration settings",
       },
     ],
     role: "Senior Product Designer",

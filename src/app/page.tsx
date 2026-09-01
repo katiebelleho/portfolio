@@ -1,8 +1,7 @@
 import CustomCursor from "@/components/custom-cursor";
-import Divider from "@/components/divider";
 import HomeFooter from "@/components/home-footer";
 import HomeHero from "@/components/home-hero";
-import ProjectSection from "@/components/project-section";
+import ProjectCarousel from "@/components/project-carousel";
 import { projects } from "@/lib/projects";
 
 export default function Home() {
@@ -11,16 +10,7 @@ export default function Home() {
       <CustomCursor />
       <HomeHero />
       <div className="mx-auto max-w-[1300px] px-6 pb-[140px]">
-        {projects.map((project, index) => (
-          <div key={project.slug}>
-            <ProjectSection project={project} index={index} />
-            {index < projects.length - 1 && (
-              <div className="py-16 sm:py-20">
-                <Divider />
-              </div>
-            )}
-          </div>
-        ))}
+        <ProjectCarousel projects={projects} />
       </div>
       <HomeFooter />
     </div>

@@ -96,6 +96,15 @@ body {
   color: #0a2978;
 }
 
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .custom-cursor,
   .custom-cursor-tag {
