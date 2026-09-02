@@ -25,9 +25,12 @@ function BioPanel() {
   );
 }
 
+const MAX_PREVIEW_BULLETS = 3;
+
 function ProjectPreview({ project }: { project: Project }) {
   const { company, date } = metaParts(project.eyebrow);
   const label = project.skillsHighlight?.label.replace(/\s*[—-]\s*$/, "");
+  const items = project.skillsHighlight?.items.slice(0, MAX_PREVIEW_BULLETS);
 
   return (
     <div>
@@ -37,11 +40,11 @@ function ProjectPreview({ project }: { project: Project }) {
       <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-[#9a98a0]">
         {company} <span aria-hidden="true">·</span> {date}
       </p>
-      {project.skillsHighlight && (
+      {items && (
         <div className="mt-8">
           <p className="text-base text-[#9a98a0]">{label}</p>
           <ol className="mt-5 flex max-w-[700px] flex-col gap-5">
-            {project.skillsHighlight.items.map((item, index) => (
+            {items.map((item, index) => (
               <li key={index} className="flex gap-4">
                 <span className="pt-0.5 font-mono text-xs font-bold text-[#0A2978]">
                   {String(index + 1).padStart(2, "0")}
@@ -137,7 +140,7 @@ export default function HomeLanding() {
       </div>
 
       <div
-        className={`mt-10 transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
+        className={`mt-10 h-[420px] overflow-hidden transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
       >
         {displayedProject ? (
           <ProjectPreview project={displayedProject} />
