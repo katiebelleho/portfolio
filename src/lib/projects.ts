@@ -100,6 +100,8 @@ export type Project = {
   slug: string;
   eyebrow: string;
   title: string;
+  /** Short name shown on the homepage card/preview, where the full title is too long. */
+  cardTitle: string;
   summary: string;
   media: ProjectMedia[];
   role: string;
@@ -117,6 +119,7 @@ export const projects: Project[] = [
     slug: "telecom-partnerships",
     eyebrow: "Back Market / Mar 2026",
     title: "Scaled US acquisition through telecom partnerships",
+    cardTitle: "US telco strategy pivot",
     summary:
       "Pivoted from a stalled single-partner model and spent a year reshaping our telecom acquisition strategy through a multi-partner offer architecture — driving 1.3x higher conversion than average traffic.",
     media: [
@@ -262,6 +265,7 @@ export const projects: Project[] = [
     eyebrow: "Back Market / May 2025",
     title:
       "Transformed an e-commerce app as a checkout tool for Back Market's first physical store",
+    cardTitle: "Retail popup checkout tool",
     summary:
       "Launched Back Market's first in-store checkout experience in 2 sprints, adapting the consumer app into a rep-facing sales tool; achieved 71% scan-to-pay adoption, personally worked retail shifts to validate design decisions, and fed key insights back to the online product.",
     media: [
@@ -442,6 +446,7 @@ export const projects: Project[] = [
     eyebrow: "Trove / Jul 2023",
     title:
       "Redesigned the online trade-in experience to reduce the amount of unsellable items we receive from customers",
+    cardTitle: "Trade-in flow redesign",
     summary:
       "Redesigned the trade-in flow to reduce perceived risk in the transaction, achieving a 98% eligibility rate and reduction in processing costs.",
     media: [
@@ -657,6 +662,7 @@ export const projects: Project[] = [
     slug: "resale-shopify-theme",
     eyebrow: "Trove Recommerce / Fall 2022",
     title: "Resale Shopify Theme",
+    cardTitle: "Resale Shopify theme",
     summary:
       "Designed a flexible resale platform that scaled across every new partner, replacing bespoke builds and cutting launch timelines by 43% and engineering costs by 66%.",
     media: [
