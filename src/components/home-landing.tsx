@@ -41,7 +41,7 @@ function ProjectPreview({ project }: { project: Project }) {
       <h2 className="max-w-[850px] font-display text-[40px] leading-[1.25] text-[#141414]">
         {project.cardTitle}
       </h2>
-      <p className="mt-3 font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#9a98a0]">
+      <p className="mt-3 text-xs font-semibold text-[#9a98a0]">
         {company} <span aria-hidden="true">·</span> {date}
       </p>
       {items && (

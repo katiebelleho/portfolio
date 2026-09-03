@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Link>
 
             <div id="at-a-glance" className="scroll-mt-24">
-              <p className="font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#0A2978]">
+              <p className="text-xs font-semibold text-[#0A2978]">
                 {project.eyebrow}
               </p>
               <h1 className="mt-4 font-display text-[32px] leading-[1.25] text-[#141414]">

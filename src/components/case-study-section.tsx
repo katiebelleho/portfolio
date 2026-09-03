@@ -5,8 +5,7 @@ import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
 
 const h2Class = "font-display text-2xl text-[#161616] sm:text-[28px]";
 const h3Class = "font-display text-xl text-[#161616]";
-const statLabelClass =
-  "font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#0A2978]";
+const statLabelClass = "text-xs font-semibold text-[#0A2978]";
 
 type MediaSlotSource = {
   label: string;
