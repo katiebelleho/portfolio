@@ -88,13 +88,7 @@ function ProjectCard({
       onMouseEnter={onHoverStart}
       className="block w-[300px] shrink-0 snap-start sm:w-[360px]"
     >
-      <h3 className="font-display text-xl text-[#141414] sm:text-2xl">
-        {project.cardTitle}
-      </h3>
-      <p className="mt-1.5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-[#9a98a0]">
-        {company} <span aria-hidden="true">·</span> {date}
-      </p>
-      <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden bg-neutral-100">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
         <Image
           src={media.src}
           alt={media.alt ?? ""}
@@ -103,6 +97,12 @@ function ProjectCard({
           className={`object-cover ${focalPointClass}`}
         />
       </div>
+      <p className="mt-3 text-sm text-[#141414]">
+        <span className="font-semibold">{project.cardTitle}</span>{" "}
+        <span className="text-[#9a98a0]">
+          {company} {date}
+        </span>
+      </p>
     </Link>
   );
 }
