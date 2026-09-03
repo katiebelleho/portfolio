@@ -131,12 +131,12 @@ export default function HomeLanding() {
   return (
     <section
       id="top"
-      className="relative mx-auto flex min-h-[100dvh] max-w-[1300px] flex-col px-6 pt-10 pb-10 sm:pt-12"
+      className="relative mx-auto flex min-h-[1000px] max-w-[1300px] flex-col px-6 pt-10 pb-10 sm:pt-12"
     >
       <NavLinks className="absolute right-6 top-10 flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 pt-2 sm:top-12 sm:gap-x-8" />
 
       <div
-        className={`h-[460px] overflow-hidden transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
+        className={`h-[460px] overflow-hidden pt-[15px] transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
       >
         {displayedProject ? (
           <ProjectPreview project={displayedProject} />
