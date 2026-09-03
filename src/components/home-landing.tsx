@@ -146,7 +146,7 @@ export default function HomeLanding() {
       </div>
 
       <div className="pt-16" onMouseLeave={() => showProject(null)}>
-        <div className="hide-scrollbar -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-4 sm:gap-10">
+        <div className="hide-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 sm:gap-10">
           {projects.map((project) => (
             <ProjectCard
               key={project.slug}
