@@ -10,7 +10,7 @@ const inter = Inter({
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
