@@ -133,11 +133,9 @@ export const projects: Project[] = [
     skillsHighlight: {
       label: "The one where I —",
       items: [
-        "Co-developed a multi-partner strategy",
-        "Used storytelling to secure stakeholder buy-in",
+        "Co-developed a multi-partner strategy & drove stakeholder alignment",
         "Broke an ambitious vision into prioritized efforts and shipped the highest-value piece as an MVP in one quarter",
-        "Built a scalable redirect framework",
-        "Designed from qual + quant data",
+        "Built a scalable, configurable referral traffic redirect framework that enabled us to onboard new partners without a redesign",
       ],
     },
     intro: [
