@@ -132,9 +132,11 @@ export default function HomeLanding() {
     >
       <div className="flex items-start justify-between gap-6">
         <div
-          className={`transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
+          className={`h-[100px] w-[100px] transition-opacity duration-150 ${
+            !displayedProject && visible ? "opacity-100" : "opacity-0"
+          }`}
         >
-          {!displayedProject && <PhotoBadge />}
+          <PhotoBadge />
         </div>
         <NavLinks className="flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 pt-2 sm:gap-x-8" />
       </div>
