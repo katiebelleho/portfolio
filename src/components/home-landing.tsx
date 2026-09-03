@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import LazyVideo from "@/components/lazy-video";
 import NavLinks from "@/components/nav-links";
 import PhotoBadge from "@/components/photo-badge";
 import { projects, type Project } from "@/lib/projects";
@@ -89,13 +90,21 @@ function ProjectCard({
       className="block w-[300px] shrink-0 snap-start sm:w-[360px]"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
-        <Image
-          src={media.src}
-          alt={media.alt ?? ""}
-          fill
-          sizes="(min-width: 640px) 360px, 300px"
-          className={`object-cover ${focalPointClass}`}
-        />
+        {media.type === "video" ? (
+          <LazyVideo
+            src={media.src}
+            poster={media.poster}
+            className={`h-full w-full object-cover ${focalPointClass}`}
+          />
+        ) : (
+          <Image
+            src={media.src}
+            alt={media.alt ?? ""}
+            fill
+            sizes="(min-width: 640px) 360px, 300px"
+            className={`object-cover ${focalPointClass}`}
+          />
+        )}
       </div>
       <p className="mt-3 text-sm text-[#141414]">
         <span className="font-semibold">{project.cardTitle}</span>{" "}

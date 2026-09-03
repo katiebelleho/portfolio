@@ -124,9 +124,8 @@ export const projects: Project[] = [
       "Pivoted from a stalled single-partner model and spent a year reshaping our telecom acquisition strategy through a multi-partner offer architecture — driving 1.3x higher conversion than average traffic.",
     media: [
       {
-        type: "image",
-        src: "https://res.cloudinary.com/pg5fl7pt/image/upload/v1785781173/telco_lp_gydsmy.png",
-        alt: "Back Market telco partner landing page",
+        type: "video",
+        src: "https://res.cloudinary.com/pg5fl7pt/video/upload/v1785522427/telco_block_flexible_branding_oujhzv.mov",
       },
     ],
     role: "Senior Product Designer",
