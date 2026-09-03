@@ -17,11 +17,14 @@ function metaParts(eyebrow: string) {
 
 function BioPanel() {
   return (
-    <h1 className="max-w-[850px] font-display text-[40px] leading-[1.25] text-[#141414]">
-      I&rsquo;m {site.name}, a Product Designer with 6+ years helping
-      mission-driven companies ship products that{" "}
-      <span className="text-[#0A2978]">move metrics and scale.</span>
-    </h1>
+    <div>
+      <PhotoBadge />
+      <h1 className="mt-10 max-w-[850px] font-display text-[40px] leading-[1.25] text-[#141414]">
+        I&rsquo;m {site.name}, a Product Designer with 6+ years helping
+        mission-driven companies ship products that{" "}
+        <span className="text-[#0A2978]">move metrics and scale.</span>
+      </h1>
+    </div>
   );
 }
 
@@ -128,21 +131,12 @@ export default function HomeLanding() {
   return (
     <section
       id="top"
-      className="mx-auto flex min-h-[100dvh] max-w-[1300px] flex-col px-6 pt-10 pb-10 sm:pt-12"
+      className="relative mx-auto flex min-h-[100dvh] max-w-[1300px] flex-col px-6 pt-10 pb-10 sm:pt-12"
     >
-      <div className="flex items-start justify-between gap-6">
-        <div
-          className={`h-[100px] w-[100px] transition-opacity duration-150 ${
-            !displayedProject && visible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <PhotoBadge />
-        </div>
-        <NavLinks className="flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 pt-2 sm:gap-x-8" />
-      </div>
+      <NavLinks className="absolute right-6 top-10 flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 pt-2 sm:top-12 sm:gap-x-8" />
 
       <div
-        className={`mt-10 h-[420px] overflow-hidden transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
+        className={`h-[460px] overflow-hidden transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
       >
         {displayedProject ? (
           <ProjectPreview project={displayedProject} />
