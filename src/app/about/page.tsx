@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AboutIntro from "@/components/about/about-intro";
+import PhotoCollage from "@/components/about/photo-collage";
 import AboutStage from "@/components/about/about-stage";
 import { ExternalLinks } from "@/components/home/anchors";
 import RotatingTagline from "@/components/rotating-tagline";
@@ -19,6 +20,7 @@ export default function AboutPage() {
           <RotatingTagline className="text-[28px] leading-[1.2] sm:text-[34px]" />
         </header>
         <AboutIntro className="mt-10" />
+        <PhotoCollage className="mx-auto mt-14" />
       </div>
     </main>
   );

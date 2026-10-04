@@ -1,6 +1,7 @@
 "use client";
 
 import AboutIntro from "@/components/about/about-intro";
+import PhotoCollage from "@/components/about/photo-collage";
 import { ExternalLinks } from "@/components/home/anchors";
 import {
   FRAME_H,
@@ -44,6 +45,9 @@ export default function AboutStage() {
           </header>
           <div className="absolute top-[64px] right-[80px] flex h-[54px] items-center">
             <ExternalLinks />
+          </div>
+          <div className="absolute top-[200px] right-[80px] w-[390px]">
+            <PhotoCollage />
           </div>
         </div>
       </div>
