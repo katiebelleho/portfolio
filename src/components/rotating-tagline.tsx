@@ -12,8 +12,10 @@ const ROLES = [
   "Overthinker",
 ];
 
-const HOLD_MS = 2200;
-const SLIDE_MS = 500;
+const HOLD_MS = 1100;
+const SLIDE_MS = 400;
+/** Pause before the first slide so the loop kicks off almost immediately. */
+const START_MS = 500;
 
 /**
  * Size and line-height come from `className`; each role occupies exactly one
@@ -39,13 +41,21 @@ export default function RotatingTagline({ className = "" }: { className?: string
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => {
+    function advance() {
       setAnimate(true);
       // If a transitionend was missed (e.g. background tab), recover by
       // advancing from the start instead of sliding past the copy.
       setIndex((i) => (i >= ROLES.length ? 1 : i + 1));
-    }, HOLD_MS + SLIDE_MS);
-    return () => clearInterval(id);
+    }
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    const startId = setTimeout(() => {
+      advance();
+      intervalId = setInterval(advance, HOLD_MS + SLIDE_MS);
+    }, START_MS);
+    return () => {
+      clearTimeout(startId);
+      clearInterval(intervalId);
+    };
   }, []);
 
   function handleTransitionEnd(event: React.TransitionEvent) {
