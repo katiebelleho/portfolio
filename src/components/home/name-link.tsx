@@ -89,14 +89,16 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
         initial={false}
         animate={state}
         variants={highlight}
-        className="absolute inset-x-[-0.06em] bottom-[0.24em] -z-10 h-[0.56em] origin-left bg-(--highlight)"
+        className="absolute inset-x-[-0.06em] bottom-[0.24em] -z-20 h-[0.56em] origin-left bg-(--highlight)"
       />
+      {/* Layering inside the isolated link: highlight (-z-20), then the hand
+          (-z-10), then the letters, so the hand peeks out from behind "Ho". */}
       Katie H
       <span className="relative">
         o
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-[0.4em] left-[calc(50%+0.18em)] h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
+          className="pointer-events-none absolute bottom-[0.4em] left-[calc(50%+0.18em)] -z-10 h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
         >
           <motion.span
             initial={false}
