@@ -65,8 +65,8 @@ function WavingHand() {
 
 /**
  * "Katie Ho" in the headline: links to the About page. On hover/focus-visible a
- * highlighter sweeps in, a hand waves from behind the "o", and an "About me"
- * label fades in just above the hand.
+ * highlighter sweeps in (the name turns ink and drops its dotted underline), a
+ * hand waves from behind the "o", and an "About me" label fades in beside it.
  */
 export default function NameLink({ disabled = false }: { disabled?: boolean }) {
   const reduceMotion = useReducedMotion();
@@ -82,27 +82,27 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
       onMouseLeave={() => setHovered(false)}
       onFocus={(event) => setFocused(event.currentTarget.matches(":focus-visible"))}
       onBlur={() => setFocused(false)}
-      className={`relative isolate inline-block whitespace-nowrap rounded-sm text-(--accent) underline decoration-2 underline-offset-[7px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent) ${active ? "decoration-solid" : "decoration-dotted"}`}
+      className={`relative isolate inline-block whitespace-nowrap rounded-sm underline decoration-dotted decoration-2 underline-offset-[7px] transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent) ${active ? "text-(--ink) decoration-transparent" : "text-(--accent)"}`}
     >
       <motion.span
         aria-hidden="true"
         initial={false}
         animate={state}
         variants={highlight}
-        className="absolute inset-x-[-0.08em] bottom-[0.1em] -z-10 h-[0.54em] origin-left bg-(--highlight)"
+        className="absolute inset-x-[-0.06em] bottom-[0.24em] -z-10 h-[0.56em] origin-left bg-(--highlight)"
       />
       Katie H
       <span className="relative">
         o
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-[0.86em] left-1/2 h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
+          className="pointer-events-none absolute bottom-[0.4em] left-[calc(50%+0.18em)] h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
         >
           <motion.span
             initial={false}
             animate={state}
             variants={handRise}
-            className="absolute bottom-[-4px] left-1/2 -ml-[19px] block origin-bottom"
+            className="absolute bottom-0 left-1/2 -ml-[19px] block origin-bottom"
           >
             <motion.span
               initial={false}
@@ -114,13 +114,13 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
             </motion.span>
           </motion.span>
         </span>
-        {/* Sits just above the settled hand (hand reaches ≈ 46px above the clip box, incl. tilt). */}
+        {/* Up and to the right of the settled hand. */}
         <motion.span
           aria-hidden="true"
           initial={false}
           animate={state}
           variants={label}
-          className="pointer-events-none absolute bottom-[calc(0.86em+54px)] left-1/2 -translate-x-1/2 text-[15px] leading-[1.4] font-medium tracking-normal whitespace-nowrap text-(--ink)"
+          className="pointer-events-none absolute bottom-[calc(0.4em+50px)] left-[calc(50%+0.18em+22px)] text-[13px] leading-[1.4] font-medium tracking-normal whitespace-nowrap text-(--ink)"
         >
           About me
         </motion.span>
