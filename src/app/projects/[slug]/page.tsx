@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CaseStudySectionBlock, {
@@ -6,10 +5,9 @@ import CaseStudySectionBlock, {
   renderWithEmphasis,
 } from "@/components/case-study-section";
 import CaseStudyToc, { type TocItem } from "@/components/case-study-toc";
-import CustomCursor from "@/components/custom-cursor";
-import Divider from "@/components/divider";
 import HomeFooter from "@/components/home-footer";
 import Reveal from "@/components/reveal";
+import { Kicker, PillLink, SectionLabel } from "@/components/ui/brand";
 import { getProject, projects } from "@/lib/projects";
 import type { CaseStudySection } from "@/lib/projects";
 
@@ -24,8 +22,14 @@ function slugify(text: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+/** "Back Market / Mar 2026" → { company, date } */
+function metaParts(eyebrow: string) {
+  const [company, date = ""] = eyebrow.split("/").map((part) => part.trim());
+  return { company, date };
+}
+
 function hasHeading(
-  section: CaseStudySection
+  section: CaseStudySection,
 ): section is Extract<CaseStudySection, { heading: string }> {
   return "heading" in section;
 }
@@ -59,60 +63,62 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const [firstSection, ...restSections] = project.caseStudy;
+  const { company, date } = metaParts(project.eyebrow);
+  const skillsLabel = project.skillsHighlight?.label.replace(/\s*[—-]\s*$/, "");
 
   const tocItems: TocItem[] = [
     { id: "at-a-glance", label: "At a glance" },
-    ...restSections
-      .filter(hasHeading)
-      .map((section) => ({
-        id: slugify(section.heading),
-        label: section.tocLabel ?? section.heading,
-      })),
+    ...restSections.filter(hasHeading).map((section) => ({
+      id: slugify(section.heading),
+      label: section.tocLabel ?? section.heading,
+    })),
   ];
 
   return (
-    <div className="home-page bg-white">
-      <CustomCursor />
+    <div className="brand">
       <article className="mx-auto max-w-[1300px] px-6 pb-[140px]">
-        <div className="flex flex-col gap-10 pt-10 sm:pt-12 md:flex-row md:justify-center md:gap-16">
+        <div className="flex flex-col gap-10 pt-10 sm:pt-16 md:flex-row md:justify-center md:gap-16">
           <CaseStudyToc items={tocItems} />
 
           <div className="max-w-[700px]">
-            <Link
-              href="/"
-              data-cursor-hover
-              className="mb-8 inline-flex items-center gap-2 text-sm text-[#161616] md:hidden"
-            >
-              <span aria-hidden="true">←</span>
-              Back to all work
-            </Link>
+            <PillLink href="/" className="mb-10 md:hidden">
+              <span aria-hidden="true">&larr;</span>
+              All work
+            </PillLink>
 
             <div id="at-a-glance" className="scroll-mt-24">
-              <p className="text-xs font-semibold text-[#0A2978]">
-                {project.eyebrow}
-              </p>
-              <h1 className="mt-4 font-display text-[32px] leading-[1.25] text-[#141414]">
+              <h1 className="text-[32px] leading-[1.2] font-medium tracking-[-0.03em] text-(--ink) sm:text-[40px]">
                 {project.title}
               </h1>
+              <Kicker company={company} date={date} className="mt-3" />
 
               {project.skillsHighlight && (
                 <Reveal>
-                  <div className="mt-4 pb-4">
-                    <p className="font-mono text-sm leading-[1.8] text-slate-600">
-                      {project.skillsHighlight.label}{" "}
-                      {project.skillsHighlight.items.join(" / ")}
-                    </p>
-                    <Divider className="mt-8" />
+                  <div className="mt-10">
+                    <SectionLabel>{skillsLabel}</SectionLabel>
+                    <ol className="mt-5 flex flex-col gap-4">
+                      {project.skillsHighlight.items.map((item, index) => (
+                        <li key={index} className="flex gap-4">
+                          <span className="pt-[5px] font-mono text-xs font-bold text-(--accent)">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-lg leading-[1.5] text-(--ink)">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                    <hr className="mt-10 border-t border-(--ink)/10" />
                   </div>
                 </Reveal>
               )}
 
               <Reveal>
-                <div>
+                <div className="mt-6">
                   {project.intro.map((paragraph, index) => (
                     <p
                       key={index}
-                      className="mt-4 text-base leading-[1.6] text-[#161616]"
+                      className="mt-4 text-[17px] leading-[1.65] text-(--ink)"
                     >
                       {renderWithEmphasis(paragraph)}
                     </p>
@@ -122,23 +128,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {project.introMedia && (
                 <Reveal>
-                  <MediaSlot media={project.introMedia} className="mt-10 aspect-video w-full" />
+                  <MediaSlot
+                    media={project.introMedia}
+                    className="mt-10 aspect-video w-full"
+                  />
                 </Reveal>
               )}
 
               {firstSection && (
-                <Reveal className="mt-4">
+                <Reveal className="mt-10">
                   <CaseStudySectionBlock section={firstSection} />
                 </Reveal>
               )}
             </div>
 
             {restSections.length > 0 && (
-              <div className="mt-16 flex flex-col gap-16 sm:mt-20">
+              <div className="mt-20 flex flex-col gap-20 sm:mt-24">
                 {restSections.map((section, index) => {
-                  const id = hasHeading(section) ? slugify(section.heading) : undefined;
+                  const id = hasHeading(section)
+                    ? slugify(section.heading)
+                    : undefined;
                   return (
-                    <Reveal key={index} id={id} className={id ? "scroll-mt-24" : undefined}>
+                    <Reveal
+                      key={index}
+                      id={id}
+                      className={id ? "scroll-mt-24" : undefined}
+                    >
                       <CaseStudySectionBlock section={section} />
                     </Reveal>
                   );

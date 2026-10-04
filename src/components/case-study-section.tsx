@@ -2,10 +2,15 @@ import type { ReactNode } from "react";
 import LazyVideo from "@/components/lazy-video";
 import MediaPlaceholder from "@/components/media-placeholder";
 import type { CaseStudyContentBlock, CaseStudySection } from "@/lib/projects";
+import { SectionLabel } from "@/components/ui/brand";
 
-const h2Class = "font-display text-2xl text-[#161616] sm:text-[28px]";
-const h3Class = "font-display text-xl text-[#161616]";
-const statLabelClass = "text-xs font-semibold text-[#0A2978]";
+const h2Class =
+  "text-[26px] leading-[1.25] font-semibold tracking-[-0.02em] text-(--ink) sm:text-[30px]";
+const h3Class =
+  "text-xl leading-[1.3] font-semibold tracking-[-0.01em] text-(--ink)";
+const bodyClass = "text-[17px] leading-[1.65] text-(--ink)";
+/** Rounded media frame with a 1px hairline (no drop shadow, so long pages stay calm). */
+const mediaFrame = "rounded-2xl ring-1 ring-(--ink)/8";
 
 type MediaSlotSource = {
   label: string;
@@ -36,7 +41,9 @@ export function MediaSlot({
   } else if (media.type === "vimeo") {
     // Vimeo has no intrinsic size to read from, so it keeps the placeholder's aspect box.
     mediaEl = (
-      <div className={`relative overflow-hidden rounded-[6px] bg-neutral-100 ${className ?? ""}`}>
+      <div
+        className={`relative overflow-hidden bg-(--placeholder-a) ${mediaFrame} ${className ?? ""}`}
+      >
         <iframe
           src={`https://player.vimeo.com/video/${media.src}`}
           title={media.label}
@@ -51,7 +58,7 @@ export function MediaSlot({
       <LazyVideo
         src={media.src}
         poster={media.poster}
-        className={`w-full rounded-[6px] ${stripAspect(className)}`}
+        className={`w-full ${mediaFrame} ${stripAspect(className)}`}
       />
     );
   } else {
@@ -61,7 +68,7 @@ export function MediaSlot({
         src={media.src}
         alt={media.alt ?? media.label}
         loading="lazy"
-        className={`w-full rounded-[6px] ${stripAspect(className)}`}
+        className={`w-full ${mediaFrame} ${stripAspect(className)}`}
       />
     );
   }
@@ -71,7 +78,7 @@ export function MediaSlot({
   return (
     <figure className="m-0">
       {mediaEl}
-      <figcaption className="mt-3 text-center text-sm italic text-[#9a98a0]">
+      <figcaption className="mt-3 text-sm leading-[1.5] text-(--ink-muted)">
         {media.caption}
       </figcaption>
     </figure>
@@ -100,10 +107,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
       {blocks.map((block, index) => {
         if (block.type === "paragraph") {
           return (
-            <p
-              key={index}
-              className="mt-4 max-w-[700px] text-base leading-[1.6] text-[#161616] first:mt-4"
-            >
+            <p key={index} className={`mt-4 max-w-[700px] ${bodyClass}`}>
               {renderWithEmphasis(block.text)}
             </p>
           );
@@ -114,7 +118,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <ListTag
               key={index}
-              className={`mt-4 max-w-[700px] space-y-2 pl-5 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978] ${
+              className={`mt-4 max-w-[700px] space-y-2 pl-5 ${bodyClass} marker:font-mono marker:text-sm marker:font-bold marker:text-(--accent) ${
                 block.style === "bulleted" ? "list-disc" : "list-decimal"
               }`}
             >
@@ -129,7 +133,7 @@ function ContentBlocks({ blocks }: { blocks: CaseStudyContentBlock[] }) {
           return (
             <div
               key={index}
-              className="mt-4 max-w-[700px] rounded-md bg-neutral-50 px-5 py-4 text-base font-medium text-[#161616]"
+              className="mt-6 max-w-[700px] rounded-2xl border-l-4 border-(--accent) bg-(--placeholder-a) px-6 py-5 text-lg leading-[1.5] font-medium tracking-[-0.01em] text-(--ink)"
             >
               {renderWithEmphasis(block.text)}
             </div>
@@ -205,19 +209,21 @@ export default function CaseStudySectionBlock({
         {section.items.map((item, index) => (
           <div
             key={index}
-            className={`rounded-md bg-neutral-50 p-5 ${
+            className={`rounded-2xl bg-white p-6 ring-1 ring-(--ink)/8 ${
               useTallFirstItem && index === 0 ? "sm:row-span-2" : ""
             }`}
           >
-            <p className={statLabelClass}>{item.label}</p>
+            <SectionLabel>{item.label}</SectionLabel>
             {item.list ? (
-              <ul className="mt-3 list-disc space-y-1.5 pl-4 text-sm leading-[1.5] text-[#161616]">
+              <ul className="mt-3 list-disc space-y-1.5 pl-4 text-[15px] leading-[1.55] text-(--ink) marker:text-(--accent)">
                 {item.list.map((entry, entryIndex) => (
                   <li key={entryIndex}>{entry}</li>
                 ))}
               </ul>
             ) : (
-              <p className="mt-3 text-sm leading-[1.5] text-[#161616]">{item.body}</p>
+              <p className="mt-3 text-[15px] leading-[1.55] text-(--ink)">
+                {item.body}
+              </p>
             )}
           </div>
         ))}
@@ -232,7 +238,9 @@ export default function CaseStudySectionBlock({
     return (
       <div>
         <h2 className={h2Class}>{section.heading}</h2>
-        <div className={`mt-8 grid grid-cols-1 gap-10 sm:gap-8 ${gridColsClass}`}>
+        <div
+          className={`mt-8 grid grid-cols-1 gap-10 sm:gap-8 ${gridColsClass}`}
+        >
           {section.columns.map((column, index) => (
             <div key={index}>
               {column.mediaLabel && (
@@ -245,15 +253,15 @@ export default function CaseStudySectionBlock({
                 {column.heading}
               </h3>
               {column.list ? (
-                <ul className="mt-2 list-disc space-y-1.5 pl-4 text-base leading-[1.6] text-[#161616] marker:font-semibold marker:text-[#0A2978]">
+                <ul
+                  className={`mt-2 list-disc space-y-1.5 pl-4 ${bodyClass} marker:text-(--accent)`}
+                >
                   {column.list.map((entry, entryIndex) => (
                     <li key={entryIndex}>{entry}</li>
                   ))}
                 </ul>
               ) : (
-                <p className="mt-2 text-base leading-[1.6] text-[#161616]">
-                  {column.body}
-                </p>
+                <p className={`mt-2 ${bodyClass}`}>{column.body}</p>
               )}
             </div>
           ))}
@@ -276,10 +284,7 @@ export default function CaseStudySectionBlock({
     return (
       <div>
         {content}
-        <MediaSlot
-          media={section.media}
-          className="mt-8 aspect-[4/3] w-full"
-        />
+        <MediaSlot media={section.media} className="mt-8 aspect-[4/3] w-full" />
       </div>
     );
   }
