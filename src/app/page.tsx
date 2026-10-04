@@ -3,7 +3,7 @@ import WorkStage from "@/components/home/work-stage";
 
 export default function Home() {
   return (
-    <main className="home">
+    <main className="brand">
       <WorkStage />
       <WorkList />
     </main>

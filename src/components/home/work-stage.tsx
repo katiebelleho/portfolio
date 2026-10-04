@@ -19,6 +19,7 @@ import {
   STACK_RETURN_DISSOLVE,
 } from "@/components/home/motion-tokens";
 import { homeWork, type HomeWorkItem } from "@/lib/home-work";
+import { cardSurface, Kicker, pillClass } from "@/components/ui/brand";
 
 /*
  * Geometry is in stage px, designed on a 1440 × 900 frame. The stage is always
@@ -138,7 +139,7 @@ function useStage() {
 }
 
 function Thumbnail({ item, width }: { item: HomeWorkItem; width: number }) {
-  if (!item.image) return <div className="home-placeholder h-full w-full" />;
+  if (!item.image) return <div className="placeholder-stripes h-full w-full" />;
   return (
     <Image
       src={item.image}
@@ -148,14 +149,6 @@ function Thumbnail({ item, width }: { item: HomeWorkItem; width: number }) {
       sizes={`${Math.round(width * MAX_SCALE)}px`}
       className="object-cover"
     />
-  );
-}
-
-function Kicker({ item }: { item: HomeWorkItem }) {
-  return (
-    <p className="font-mono text-[11px] leading-[1.4] uppercase text-(--ink-muted)">
-      {item.company} <span aria-hidden="true">·</span> {item.date}
-    </p>
   );
 }
 
@@ -262,7 +255,7 @@ export default function WorkStage() {
                 {items.map((item, index) => {
                   const box = grid[index];
                   const href = item.slug ? `/projects/${item.slug}` : undefined;
-                  const cardClass = `block h-full w-full overflow-hidden rounded-2xl bg-(--placeholder-a) shadow-[0_10px_22px_rgba(27,29,46,.10),0_0_0_1px_rgba(27,29,46,.08)] ${expanded && !href ? "" : "cursor-pointer"}`;
+                  const cardClass = `block h-full w-full overflow-hidden bg-(--placeholder-a) ${cardSurface} ${expanded && !href ? "" : "cursor-pointer"}`;
 
                   return (
                     <motion.div
@@ -337,14 +330,14 @@ export default function WorkStage() {
                           href={href}
                           className="group block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
                         >
-                          <Kicker item={item} />
+                          <Kicker company={item.company} date={item.date} />
                           <span className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
                             {title}
                           </span>
                         </Link>
                       ) : (
                         <div>
-                          <Kicker item={item} />
+                          <Kicker company={item.company} date={item.date} />
                           {title}
                         </div>
                       )}
@@ -360,7 +353,7 @@ export default function WorkStage() {
                 onClick={() => toggle()}
                 onMouseEnter={() => setHover(setHoverButton, true)}
                 onMouseLeave={() => setHover(setHoverButton, false)}
-                className="absolute top-[770px] left-[80px] z-10 flex cursor-pointer items-center gap-2.5 rounded-full bg-(--accent) px-[22px] py-[11px] font-mono text-base leading-[1.25] text-white transition-colors hover:bg-(--accent-hover) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
+                className={`${pillClass} absolute top-[770px] left-[80px] z-10 cursor-pointer px-[22px] py-[11px] text-base leading-[1.25]`}
               >
                 {expanded ? "Collapse" : "Selected work"}
                 <motion.svg
