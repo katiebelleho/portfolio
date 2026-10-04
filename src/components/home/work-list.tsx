@@ -8,7 +8,7 @@ export default function WorkList() {
   return (
     <div className="px-6 pt-12 pb-16 min-[900px]:hidden">
       <header>
-        <Headline interactive={false} className="text-[28px] sm:text-[34px]" />
+        <Headline interactive={false} className="text-[28px] leading-[1.2] sm:text-[34px]" />
       </header>
 
       <section aria-labelledby="work-list-label" className="mt-14">

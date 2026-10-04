@@ -15,7 +15,7 @@ export default function Headline({
 }) {
   return (
     <h1
-      className={`max-w-[912px] text-[40px] leading-[1.2] font-medium tracking-[-0.03em] text-(--ink) ${className}`}
+      className={`max-w-[912px] text-[40px] font-medium tracking-[-0.03em] text-(--ink) ${className}`}
     >
       I&rsquo;m{" "}
       {interactive ? (

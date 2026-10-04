@@ -202,9 +202,9 @@ export default function WorkStage() {
             }
             inert={expanded}
             aria-hidden={expanded || undefined}
-            className="absolute top-[64px] left-[80px]"
+            className="absolute top-[150px] left-[80px]"
           >
-            <Headline interactive={!expanded} />
+            <Headline interactive={!expanded} className="leading-[1.35]" />
           </motion.header>
 
           <section id="work" aria-label="Selected work">
