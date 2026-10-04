@@ -262,7 +262,7 @@ export default function WorkStage() {
                 animate={expanded ? "shown" : "hidden"}
                 variants={reveal(0)}
                 aria-hidden={!expanded || undefined}
-                className="absolute top-[64px] left-[80px] font-mono text-xs font-bold uppercase text-(--accent)"
+                className="absolute top-[64px] left-[80px] text-sm leading-[1.4] font-semibold tracking-[-0.01em] text-(--accent)"
               >
                 Design problems I&rsquo;ve solved
               </motion.h2>

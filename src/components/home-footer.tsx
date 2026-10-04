@@ -2,7 +2,7 @@ import { site } from "@/lib/site";
 
 export default function HomeFooter() {
   const linkClass =
-    "font-mono text-sm uppercase text-white underline decoration-dotted decoration-1 underline-offset-[6px] hover:decoration-solid";
+    "font-mono text-base text-white underline decoration-dotted decoration-1 underline-offset-[6px] hover:decoration-solid";
 
   return (
     <footer className="min-h-[300px] bg-[#0A2978] px-6 py-10 sm:py-12">
@@ -17,7 +17,7 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             className={linkClass}
           >
-            Linkedin
+            LinkedIn
           </a>
           <a
             href={site.resumeUrl}

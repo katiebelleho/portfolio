@@ -11,7 +11,7 @@ export const cardSurface =
 export const pillClass =
   "inline-flex items-center gap-2.5 rounded-full bg-(--accent) font-mono text-white transition-colors hover:bg-(--accent-hover) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)";
 
-/** Space Mono meta line, e.g. "BACK MARKET · MAR 2026". */
+/** Muted meta line, e.g. "Back Market · Mar 2026". */
 export function Kicker({
   company,
   date,
@@ -23,14 +23,14 @@ export function Kicker({
 }) {
   return (
     <p
-      className={`font-mono text-[11px] leading-[1.4] uppercase text-(--ink-muted) ${className}`}
+      className={`text-[13px] leading-[1.4] font-medium text-(--ink-muted) ${className}`}
     >
       {company} <span aria-hidden="true">·</span> {date}
     </p>
   );
 }
 
-/** Space Mono, bold, navy, uppercase label above a group of content. */
+/** Navy semibold label above a group of content. */
 export function SectionLabel({
   as: Tag = "p",
   id,
@@ -45,7 +45,7 @@ export function SectionLabel({
   return (
     <Tag
       id={id}
-      className={`font-mono text-xs font-bold uppercase text-(--accent) ${className}`}
+      className={`text-sm leading-[1.4] font-semibold tracking-[-0.01em] text-(--accent) ${className}`}
     >
       {children}
     </Tag>
