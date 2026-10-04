@@ -87,10 +87,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </PillLink>
 
             <div id="at-a-glance" className="scroll-mt-24">
-              <Kicker company={company} date={date} />
-              <h1 className="mt-3 text-[32px] leading-[1.2] font-medium tracking-[-0.03em] text-(--ink) sm:text-[40px]">
+              <h1 className="text-[32px] leading-[1.2] font-medium tracking-[-0.03em] text-(--ink) sm:text-[40px]">
                 {project.title}
               </h1>
+              <Kicker company={company} date={date} className="mt-3" />
 
               {project.skillsHighlight && (
                 <Reveal>
