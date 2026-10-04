@@ -98,13 +98,13 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
         o
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-[0.4em] left-[calc(50%+0.18em)] -z-10 h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
+          className="pointer-events-none absolute bottom-[0.4em] left-[calc(50%+0.34em)] -z-10 h-[64px] w-[64px] -translate-x-1/2 overflow-hidden"
         >
           <motion.span
             initial={false}
             animate={state}
             variants={handRise}
-            className="absolute bottom-0 left-1/2 -ml-[19px] block origin-bottom"
+            className="absolute bottom-[0.24em] left-1/2 -ml-[19px] block origin-bottom"
           >
             <motion.span
               initial={false}
@@ -122,7 +122,7 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
           initial={false}
           animate={state}
           variants={label}
-          className="pointer-events-none absolute bottom-[calc(0.4em+50px)] left-[calc(50%+0.18em+22px)] text-[13px] leading-[1.4] font-medium tracking-normal whitespace-nowrap text-(--ink)"
+          className="pointer-events-none absolute bottom-[calc(0.64em+56px)] left-[calc(50%+0.34em+22px)] text-[13px] leading-[1.4] font-medium tracking-normal whitespace-nowrap text-(--ink)"
         >
           About me
         </motion.span>
