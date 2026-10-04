@@ -1,5 +1,6 @@
 "use client";
 
+import AboutIntro from "@/components/about/about-intro";
 import { ExternalLinks } from "@/components/home/anchors";
 import {
   FRAME_H,
@@ -39,6 +40,7 @@ export default function AboutStage() {
           {/* Same offsets as the homepage headline and links (see WorkStage). */}
           <header className="absolute top-[73px] left-[80px]">
             <RotatingTagline className="leading-[1.35]" />
+            <AboutIntro className="mt-8" />
           </header>
           <div className="absolute top-[64px] right-[80px] flex h-[54px] items-center">
             <ExternalLinks />
