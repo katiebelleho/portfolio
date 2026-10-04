@@ -23,7 +23,8 @@ import { homeWork, type HomeWorkItem } from "@/lib/home-work";
 /* All geometry is in the 1440 × 900 design frame; the stage is scaled to fit. */
 const FRAME_W = 1440;
 const FRAME_H = 900;
-const MAX_SCALE = 1.25;
+const MIN_SCALE = 0.75;
+const MAX_SCALE = 1.35;
 
 /** Expanded boxes: featured + 2×2 grid. */
 const GRID = [
@@ -79,24 +80,26 @@ const reveal = (index: number): Variants => ({
   },
 });
 
+/** Scale for the fixed design frame: fit the viewport, clamped to [MIN_SCALE, MAX_SCALE]. */
 function useStageScale() {
-  const [scale, setScale] = useState<number | null>(null);
+  const [stage, setStage] = useState<{ scale: number; viewportHeight: number } | null>(null);
 
   useEffect(() => {
-    const update = () =>
-      setScale(
-        Math.min(
-          window.innerWidth / FRAME_W,
-          window.innerHeight / FRAME_H,
-          MAX_SCALE
-        )
-      );
+    const update = () => {
+      // clientWidth/Height exclude scrollbars, so the stage never forces a horizontal one.
+      const { clientWidth, clientHeight } = document.documentElement;
+      const fit = Math.min(clientWidth / FRAME_W, clientHeight / FRAME_H);
+      setStage({
+        scale: Math.min(Math.max(fit, MIN_SCALE), MAX_SCALE),
+        viewportHeight: clientHeight,
+      });
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  return scale;
+  return stage;
 }
 
 function Thumbnail({ item, width }: { item: HomeWorkItem; width: number }) {
@@ -122,7 +125,9 @@ function Kicker({ item }: { item: HomeWorkItem }) {
 }
 
 export default function WorkStage() {
-  const scale = useStageScale();
+  const stage = useStageScale();
+  const scale = stage?.scale ?? 1;
+  const scaledHeight = FRAME_H * scale;
   const reduceMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
   const [hoverStack, setHoverStack] = useState(false);
@@ -169,14 +174,22 @@ export default function WorkStage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="relative hidden h-dvh min-h-[560px] overflow-hidden min-[900px]:block">
+      {/* Viewport-sized box that holds the scaled 1440×900 stage. `overflow-x: clip`
+          hides any sideways overhang (at MIN_SCALE on narrow windows) without making
+          a scroll container, and the box grows if the scaled stage is taller than
+          the viewport so nothing is cut off vertically. */}
+      <div
+        className="relative hidden h-dvh overflow-x-clip min-[900px]:block"
+        style={{ height: stage ? Math.max(stage.viewportHeight, scaledHeight) : undefined }}
+      >
         <div
-          className="absolute top-0 left-1/2 origin-top transition-opacity duration-200"
+          className="absolute left-1/2 origin-top transition-opacity duration-200"
           style={{
             width: FRAME_W,
             height: FRAME_H,
-            opacity: scale === null ? 0 : 1,
-            transform: `translateX(-50%) scale(${scale ?? 1})`,
+            top: stage ? Math.max(0, (stage.viewportHeight - scaledHeight) / 2) : 0,
+            opacity: stage ? 1 : 0,
+            transform: `translateX(-50%) scale(${scale})`,
           }}
         >
           <motion.header
