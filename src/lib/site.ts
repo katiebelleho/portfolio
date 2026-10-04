@@ -11,7 +11,5 @@ export const site = {
   resumeUrl:
     "https://drive.google.com/file/d/1rC9nMOeMKSoH0L3YtqBG9tYw64HU9M4J/view?usp=sharing",
   aboutUrl: "/about",
-  /** Shown bottom-right on the homepage. */
-  currently: "Sr Product Designer @ Back Market",
   email: "",
 };

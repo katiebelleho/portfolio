@@ -10,7 +10,7 @@ import {
   type Variants,
 } from "motion/react";
 import { useEffect, useState, type MouseEvent } from "react";
-import { CurrentlyStatus, ExternalLinks } from "@/components/home/anchors";
+import { ExternalLinks } from "@/components/home/anchors";
 import Headline from "@/components/home/headline";
 import {
   LAYOUT,
@@ -238,18 +238,23 @@ export default function WorkStage() {
               <Headline interactive={!expanded} className="leading-[1.35]" />
             </motion.header>
 
-            {/* Collapsed: cap height lines up with the headline's first line (the
-                headline sits at 73 so its cap tops match these links). Expanded:
-                lifts to center on the 16px section label. */}
+            {/* Cap height lines up with the headline's first line (the headline
+                sits at 73 so its cap tops match these links). Hidden with the
+                header while the grid is expanded. */}
             <motion.div
               initial={false}
-              animate={{ y: expanded ? -19 : 0 }}
-              transition={expanded ? LAYOUT : STACK_RETURN}
+              animate={expanded ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
+              transition={
+                expanded
+                  ? { duration: 0.15, ease: "easeOut" }
+                  : STACK_RETURN_DISSOLVE
+              }
+              inert={expanded}
+              aria-hidden={expanded || undefined}
               className="absolute top-[64px] right-[80px] flex h-[54px] items-center"
             >
               <ExternalLinks />
             </motion.div>
-            <CurrentlyStatus className="absolute top-[770px] right-[80px] h-[42px]" />
 
             <section id="work" aria-label="Selected work">
               <motion.h2

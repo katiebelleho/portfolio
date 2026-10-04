@@ -68,25 +68,3 @@ body:has(.brand) {
     var(--placeholder-b) 12px 24px
   );
 }
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
-  border-radius: 9999px;
-  background: var(--highlight);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--highlight) 30%, transparent);
-  animation: status-glow 2.4s ease-in-out infinite;
-}
-
-@keyframes status-glow {
-  50% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--highlight) 18%, transparent);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .status-dot {
-    animation: none;
-  }
-}

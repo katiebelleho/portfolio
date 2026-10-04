@@ -42,17 +42,3 @@ export function ExternalLinks({ className = "" }: { className?: string }) {
     </nav>
   );
 }
-
-/** "Currently: …" status line with a softly glowing dot. */
-export function CurrentlyStatus({ className = "" }: { className?: string }) {
-  return (
-    <p
-      className={`flex items-center gap-2.5 text-[15px] leading-[1.4] text-(--ink-muted) ${className}`}
-    >
-      <span aria-hidden="true" className="status-dot" />
-      <span>
-        Currently: <span className="text-(--ink)">{site.currently}</span>
-      </span>
-    </p>
-  );
-}
