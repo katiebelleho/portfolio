@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CurrentlyStatus, ExternalLinks } from "@/components/home/anchors";
 import Headline from "@/components/home/headline";
 import { homeWork } from "@/lib/home-work";
 import { cardSurface, Kicker, SectionLabel } from "@/components/ui/brand";
@@ -9,7 +10,9 @@ export default function WorkList() {
   return (
     <div className="px-6 pt-12 pb-16 min-[900px]:hidden">
       <header>
+        <ExternalLinks className="mb-10" />
         <Headline interactive={false} className="text-[28px] leading-[1.2] sm:text-[34px]" />
+        <CurrentlyStatus className="mt-6" />
       </header>
 
       <section aria-labelledby="work-list-label" className="mt-14">

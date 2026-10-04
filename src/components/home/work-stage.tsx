@@ -10,6 +10,7 @@ import {
   type Variants,
 } from "motion/react";
 import { useEffect, useState, type MouseEvent } from "react";
+import { CurrentlyStatus, ExternalLinks } from "@/components/home/anchors";
 import Headline from "@/components/home/headline";
 import {
   LAYOUT,
@@ -236,6 +237,9 @@ export default function WorkStage() {
             >
               <Headline interactive={!expanded} className="leading-[1.35]" />
             </motion.header>
+
+            <ExternalLinks className="absolute top-[64px] right-[80px]" />
+            <CurrentlyStatus className="absolute top-[770px] right-[80px] h-[42px]" />
 
             <section id="work" aria-label="Selected work">
               <motion.h2
