@@ -18,7 +18,7 @@ export default function WorkList() {
         <SectionLabel as="h2" id="work-list-label">
           Design problems I&rsquo;ve solved
         </SectionLabel>
-        <ul className="mt-6 flex flex-col gap-10">
+        <ul className="mt-6 flex flex-col gap-14">
           {homeWork.map((item, index) => {
             const content = (
               <>

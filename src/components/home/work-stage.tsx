@@ -56,7 +56,7 @@ function layoutGrid(frameWidth: number): Box[] {
   const colW = 300 * unit;
   const colH = (colW * 2) / 3;
   // Room for two-to-three-line captions between rows; a little more when columns get narrow.
-  const rowGap = 96 + 16 * Math.min(Math.max((DESIGN_CONTENT_W - content) / 340, 0), 1);
+  const rowGap = 136 + 16 * Math.min(Math.max((DESIGN_CONTENT_W - content) / 340, 0), 1);
   const col1 = MARGIN + featuredW + gutter;
   const col2 = col1 + colW + gutter;
   const row2 = GRID_TOP + colH + rowGap;
