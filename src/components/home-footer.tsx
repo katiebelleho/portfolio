@@ -17,7 +17,7 @@ export default function HomeFooter() {
             rel="noreferrer noopener"
             className={linkClass}
           >
-            LinkedIn
+            Linkedin
           </a>
           <a
             href={site.resumeUrl}

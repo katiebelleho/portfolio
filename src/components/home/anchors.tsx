@@ -18,10 +18,10 @@ function ArrowUpRight() {
   );
 }
 
-/** LinkedIn / Resume links anchoring the top-right of the homepage. */
+/** Linkedin / Resume links anchoring the top-right of the homepage. */
 export function ExternalLinks({ className = "" }: { className?: string }) {
   const links = [
-    { label: "LinkedIn", href: site.linkedinUrl },
+    { label: "Linkedin", href: site.linkedinUrl },
     { label: "Resume", href: site.resumeUrl },
   ];
   return (

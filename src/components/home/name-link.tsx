@@ -26,11 +26,11 @@ const handWave: Variants = {
   },
 };
 
-const tag: Variants = {
-  rest: { opacity: 0, x: -6, transition: { duration: 0.15, ease: "easeOut" } },
+const label: Variants = {
+  rest: { opacity: 0, y: 6, transition: { duration: 0.15, ease: "easeOut" } },
   active: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: { duration: 0.2, delay: 0.22, ease: "easeOut" },
   },
 };
@@ -65,7 +65,8 @@ function WavingHand() {
 
 /**
  * "Katie Ho" in the headline: links to the About page. On hover/focus-visible a
- * highlighter sweeps in, a hand waves from behind the "o", and a tag slides in.
+ * highlighter sweeps in, a hand waves from behind the "o", and an "About me"
+ * label fades in just above the hand.
  */
 export default function NameLink({ disabled = false }: { disabled?: boolean }) {
   const reduceMotion = useReducedMotion();
@@ -101,7 +102,7 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
             initial={false}
             animate={state}
             variants={handRise}
-                className="absolute bottom-[-4px] left-1/2 -ml-[19px] block origin-bottom"
+            className="absolute bottom-[-4px] left-1/2 -ml-[19px] block origin-bottom"
           >
             <motion.span
               initial={false}
@@ -113,16 +114,17 @@ export default function NameLink({ disabled = false }: { disabled?: boolean }) {
             </motion.span>
           </motion.span>
         </span>
+        {/* Sits just above the settled hand (hand reaches ≈ 46px above the clip box, incl. tilt). */}
+        <motion.span
+          aria-hidden="true"
+          initial={false}
+          animate={state}
+          variants={label}
+          className="pointer-events-none absolute bottom-[calc(0.86em+54px)] left-1/2 -translate-x-1/2 text-[15px] leading-[1.4] font-medium tracking-normal whitespace-nowrap text-(--ink)"
+        >
+          About me
+        </motion.span>
       </span>
-      <motion.span
-        aria-hidden="true"
-        initial={false}
-        animate={state}
-        variants={tag}
-        className="pointer-events-none absolute top-1/2 left-[calc(100%+14px)] -mt-[14px] rounded-full bg-(--accent) px-3 py-[5px] font-mono text-xs leading-[18px] tracking-normal text-white"
-      >
-        Get to know me &rarr;
-      </motion.span>
     </Link>
   );
 }
