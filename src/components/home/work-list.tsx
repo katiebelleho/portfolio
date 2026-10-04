@@ -31,23 +31,23 @@ export default function WorkList() {
                       alt={item.alt ?? ""}
                       fill
                       sizes="(min-width: 640px) 600px, 100vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
                     />
                   ) : (
                     <div className="placeholder-stripes h-full w-full" />
                   )}
                 </div>
-                <Kicker company={item.company} date={item.date} className="mt-4" />
-                <p className="mt-1.5 text-lg leading-[1.3] font-semibold tracking-[-0.01em] text-(--ink)">
+                <p className="mt-4 text-lg leading-[1.3] font-semibold tracking-[-0.01em] text-(--ink)">
                   {item.title}
                 </p>
+                <Kicker company={item.company} date={item.date} className="mt-1.5" />
               </>
             );
 
             return (
               <li key={index}>
                 {item.slug ? (
-                  <Link href={`/projects/${item.slug}`} className="block">
+                  <Link href={`/projects/${item.slug}`} className="group block">
                     {content}
                   </Link>
                 ) : (

@@ -139,17 +139,33 @@ function useStage() {
   return stage;
 }
 
-function Thumbnail({ item, width }: { item: HomeWorkItem; width: number }) {
-  if (!item.image) return <div className="placeholder-stripes h-full w-full" />;
+function Thumbnail({
+  item,
+  width,
+  zoomed,
+}: {
+  item: HomeWorkItem;
+  width: number;
+  /** Hover "grow": the image scales up inside the card's clipped frame. */
+  zoomed: boolean;
+}) {
   return (
-    <Image
-      src={item.image}
-      alt={item.alt ?? ""}
-      fill
-      loading="eager"
-      sizes={`${Math.round(width * MAX_SCALE)}px`}
-      className="object-cover"
-    />
+    <div
+      className={`absolute inset-0 transition-transform duration-500 ease-out motion-reduce:transition-none ${zoomed ? "scale-[1.05]" : "scale-100"}`}
+    >
+      {item.image ? (
+        <Image
+          src={item.image}
+          alt={item.alt ?? ""}
+          fill
+          loading="eager"
+          sizes={`${Math.round(width * MAX_SCALE)}px`}
+          className="object-cover"
+        />
+      ) : (
+        <div className="placeholder-stripes h-full w-full" />
+      )}
+    </div>
   );
 }
 
@@ -164,6 +180,8 @@ export default function WorkStage() {
   const [expanded, setExpanded] = useState(false);
   const [hoverStack, setHoverStack] = useState(false);
   const [hoverButton, setHoverButton] = useState(false);
+  // Expanded grid: card or caption being hovered/focused, to grow its image.
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   // Which change the cards are animating for, so each gets its own spring.
   const [cardMotion, setCardMotion] = useState<"expand" | "collapse" | "fan">(
     "fan"
@@ -274,6 +292,7 @@ export default function WorkStage() {
                 {items.map((item, index) => {
                   const box = grid[index];
                   const href = item.slug ? `/projects/${item.slug}` : undefined;
+                  const zoomed = expanded && !!href && activeCard === index;
                   const cardClass = `block h-full w-full overflow-hidden bg-(--placeholder-a) ${cardSurface} ${expanded && !href ? "" : "cursor-pointer"}`;
 
                   return (
@@ -295,11 +314,13 @@ export default function WorkStage() {
                         <Link
                           href={href}
                           onClick={onCardClick}
+                          onMouseEnter={() => setActiveCard(index)}
+                          onMouseLeave={() => setActiveCard(null)}
                           tabIndex={-1}
                           aria-hidden="true"
                           className={`relative ${cardClass}`}
                         >
-                          <Thumbnail item={item} width={box.width} />
+                          <Thumbnail item={item} width={box.width} zoomed={zoomed} />
                         </Link>
                       ) : (
                         <div
@@ -307,7 +328,7 @@ export default function WorkStage() {
                           aria-hidden="true"
                           className={`relative ${cardClass}`}
                         >
-                          <Thumbnail item={item} width={box.width} />
+                          <Thumbnail item={item} width={box.width} zoomed={false} />
                         </div>
                       )}
                     </motion.div>
@@ -322,7 +343,7 @@ export default function WorkStage() {
                   const href = item.slug ? `/projects/${item.slug}` : undefined;
                   const title = (
                     <span
-                      className={`mt-1.5 block font-semibold leading-[1.3] tracking-[-0.01em] text-(--ink) ${featured ? "text-[22px]" : "text-lg"}`}
+                      className={`block font-semibold leading-[1.3] tracking-[-0.01em] text-(--ink) ${featured ? "text-[22px]" : "text-lg"}`}
                     >
                       {item.title}
                     </span>
@@ -347,17 +368,19 @@ export default function WorkStage() {
                       {href ? (
                         <Link
                           href={href}
-                          className="group block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
+                          onMouseEnter={() => setActiveCard(index)}
+                          onMouseLeave={() => setActiveCard(null)}
+                          onFocus={() => setActiveCard(index)}
+                          onBlur={() => setActiveCard(null)}
+                          className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
                         >
-                          <Kicker company={item.company} date={item.date} />
-                          <span className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
-                            {title}
-                          </span>
+                          {title}
+                          <Kicker company={item.company} date={item.date} className="mt-1.5" />
                         </Link>
                       ) : (
                         <div>
-                          <Kicker company={item.company} date={item.date} />
                           {title}
+                          <Kicker company={item.company} date={item.date} className="mt-1.5" />
                         </div>
                       )}
                     </motion.li>
