@@ -233,13 +233,14 @@ export default function WorkStage() {
               }
               inert={expanded}
               aria-hidden={expanded || undefined}
-              className="absolute top-[64px] left-[80px]"
+              className="absolute top-[73px] left-[80px]"
             >
               <Headline interactive={!expanded} className="leading-[1.35]" />
             </motion.header>
 
-            {/* Centered on the headline's first line (54px line box) when collapsed;
-                lifts to center on the 16px section label when expanded. */}
+            {/* Collapsed: cap height lines up with the headline's first line (the
+                headline sits at 73 so its cap tops match these links). Expanded:
+                lifts to center on the 16px section label. */}
             <motion.div
               initial={false}
               animate={{ y: expanded ? -19 : 0 }}
