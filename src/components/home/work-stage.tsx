@@ -20,20 +20,51 @@ import {
 } from "@/components/home/motion-tokens";
 import { homeWork, type HomeWorkItem } from "@/lib/home-work";
 
-/* All geometry is in the 1440 × 900 design frame; the stage is scaled to fit. */
-const FRAME_W = 1440;
+/*
+ * Geometry is in stage px, designed on a 1440 × 900 frame. The stage is always
+ * 900 tall and scaled to the viewport height; its width follows the viewport, so
+ * the expanded grid stretches or shrinks horizontally instead of leaving empty
+ * space. The collapsed stack, headline and button keep their fixed positions.
+ */
 const FRAME_H = 900;
 const MIN_SCALE = 0.75;
 const MAX_SCALE = 1.35;
+/** Narrowest stage width before the whole stage scales down instead (≈ the 900px mobile switch). */
+const MIN_STAGE_W = 1100;
 
-/** Expanded boxes: featured + 2×2 grid. */
-const GRID = [
-  { left: 80, top: 104, width: 560, height: 420 },
-  { left: 700, top: 104, width: 300, height: 200 },
-  { left: 1060, top: 104, width: 300, height: 200 },
-  { left: 700, top: 400, width: 300, height: 200 },
-  { left: 1060, top: 400, width: 300, height: 200 },
-];
+const MARGIN = 80;
+const GRID_TOP = 104;
+/** Grid content width the spec was drawn at (1440 − 2 × 80), and the most it may grow to. */
+const DESIGN_CONTENT_W = 1280;
+const MAX_CONTENT_W = 1680;
+
+type Box = { left: number; top: number; width: number; height: number };
+
+/**
+ * Expanded boxes: featured + 2×2 grid. Column widths and gutters keep the spec's
+ * 560 : 60 : 300 : 60 : 300 proportions across the available width; heights keep
+ * each card's aspect ratio. At a 1440-wide stage this is exactly the spec.
+ */
+function layoutGrid(stageWidth: number): Box[] {
+  const content = Math.min(stageWidth - MARGIN * 2, MAX_CONTENT_W);
+  const unit = content / DESIGN_CONTENT_W;
+  const featuredW = 560 * unit;
+  const gutter = 60 * unit;
+  const colW = 300 * unit;
+  const colH = (colW * 2) / 3;
+  // Room for two-to-three-line captions between rows; a little more when columns get narrow.
+  const rowGap = 96 + 16 * Math.min(Math.max((DESIGN_CONTENT_W - content) / 340, 0), 1);
+  const col1 = MARGIN + featuredW + gutter;
+  const col2 = col1 + colW + gutter;
+  const row2 = GRID_TOP + colH + rowGap;
+  return [
+    { left: MARGIN, top: GRID_TOP, width: featuredW, height: featuredW * 0.75 },
+    { left: col1, top: GRID_TOP, width: colW, height: colH },
+    { left: col2, top: GRID_TOP, width: colW, height: colH },
+    { left: col1, top: row2, width: colW, height: colH },
+    { left: col2, top: row2, width: colW, height: colH },
+  ];
+}
 
 /** Collapsed stack: card width shrinks, height follows the expanded aspect ratio. */
 const STACK = [
@@ -57,8 +88,7 @@ const CAPTION_GAP = 16;
 const GRID_CAPTION_GAP = 12;
 
 /** Transform that places an expanded box at its stack position (transform-only, no reflow). */
-function stackTransform(index: number, fanned: boolean) {
-  const box = GRID[index];
+function stackTransform(box: Box, index: number, fanned: boolean) {
   const stack = STACK[index];
   const scale = stack.width / box.width;
   const stackHeight = box.height * scale;
@@ -80,19 +110,23 @@ const reveal = (index: number): Variants => ({
   },
 });
 
-/** Scale for the fixed design frame: fit the viewport, clamped to [MIN_SCALE, MAX_SCALE]. */
-function useStageScale() {
-  const [stage, setStage] = useState<{ scale: number; viewportHeight: number } | null>(null);
+type Stage = { scale: number; width: number; viewportHeight: number };
+
+/**
+ * Scale follows viewport height (clamped to [MIN_SCALE, MAX_SCALE]); stage width
+ * is whatever fills the viewport at that scale. If that would be narrower than
+ * MIN_STAGE_W, the scale drops further so the grid never gets cramped.
+ */
+function useStage() {
+  const [stage, setStage] = useState<Stage | null>(null);
 
   useEffect(() => {
     const update = () => {
       // clientWidth/Height exclude scrollbars, so the stage never forces a horizontal one.
       const { clientWidth, clientHeight } = document.documentElement;
-      const fit = Math.min(clientWidth / FRAME_W, clientHeight / FRAME_H);
-      setStage({
-        scale: Math.min(Math.max(fit, MIN_SCALE), MAX_SCALE),
-        viewportHeight: clientHeight,
-      });
+      const byHeight = Math.min(Math.max(clientHeight / FRAME_H, MIN_SCALE), MAX_SCALE);
+      const scale = Math.min(byHeight, clientWidth / MIN_STAGE_W);
+      setStage({ scale, width: clientWidth / scale, viewportHeight: clientHeight });
     };
     update();
     window.addEventListener("resize", update);
@@ -125,8 +159,9 @@ function Kicker({ item }: { item: HomeWorkItem }) {
 }
 
 export default function WorkStage() {
-  const stage = useStageScale();
+  const stage = useStage();
   const scale = stage?.scale ?? 1;
+  const grid = layoutGrid(stage?.width ?? 1440);
   const scaledHeight = FRAME_H * scale;
   const reduceMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
@@ -138,7 +173,7 @@ export default function WorkStage() {
   );
 
   const fanned = !expanded && !reduceMotion && (hoverStack || hoverButton);
-  const items = homeWork.slice(0, GRID.length);
+  const items = homeWork.slice(0, grid.length);
 
   function toggle(next = !expanded) {
     setCardMotion(next ? "expand" : "collapse");
@@ -174,22 +209,20 @@ export default function WorkStage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      {/* Viewport-sized box that holds the scaled 1440×900 stage. `overflow-x: clip`
-          hides any sideways overhang (at MIN_SCALE on narrow windows) without making
-          a scroll container, and the box grows if the scaled stage is taller than
-          the viewport so nothing is cut off vertically. */}
+      {/* Viewport-sized box holding the scaled stage. It grows if the scaled stage is
+          taller than the viewport, so nothing is cut off vertically. */}
       <div
         className="relative hidden h-dvh overflow-x-clip min-[900px]:block"
         style={{ height: stage ? Math.max(stage.viewportHeight, scaledHeight) : undefined }}
       >
         <div
-          className="absolute left-1/2 origin-top transition-opacity duration-200"
+          className="absolute left-0 origin-top-left transition-opacity duration-200"
           style={{
-            width: FRAME_W,
+            width: stage?.width ?? "100%",
             height: FRAME_H,
             top: stage ? Math.max(0, (stage.viewportHeight - scaledHeight) / 2) : 0,
             opacity: stage ? 1 : 0,
-            transform: `translateX(-50%) scale(${scale})`,
+            transform: `scale(${scale})`,
           }}
         >
           <motion.header
@@ -202,7 +235,7 @@ export default function WorkStage() {
             }
             inert={expanded}
             aria-hidden={expanded || undefined}
-            className="absolute top-[150px] left-[80px]"
+            className="absolute top-[120px] left-[80px]"
           >
             <Headline interactive={!expanded} className="leading-[1.35]" />
           </motion.header>
@@ -223,7 +256,7 @@ export default function WorkStage() {
               onMouseLeave={() => setHover(setHoverStack, false)}
             >
               {items.map((item, index) => {
-                const box = GRID[index];
+                const box = grid[index];
                 const href = item.slug ? `/projects/${item.slug}` : undefined;
                 const cardClass = `block h-full w-full overflow-hidden rounded-2xl bg-(--placeholder-a) shadow-[0_10px_22px_rgba(27,29,46,.10),0_0_0_1px_rgba(27,29,46,.08)] ${expanded && !href ? "" : "cursor-pointer"}`;
 
@@ -231,7 +264,7 @@ export default function WorkStage() {
                   <motion.div
                     key={index}
                     initial={false}
-                    animate={expanded ? { x: 0, y: 0, scale: 1, rotate: 0 } : stackTransform(index, fanned)}
+                    animate={expanded ? { x: 0, y: 0, scale: 1, rotate: 0 } : stackTransform(box, index, fanned)}
                     transition={cardTransition}
                     className="absolute will-change-transform"
                     style={{
@@ -239,7 +272,7 @@ export default function WorkStage() {
                       top: box.top,
                       width: box.width,
                       height: box.height,
-                      zIndex: GRID.length - index,
+                      zIndex: grid.length - index,
                     }}
                   >
                     {href ? (
@@ -268,7 +301,7 @@ export default function WorkStage() {
 
             <ul inert={!expanded}>
               {items.map((item, index) => {
-                const box = GRID[index];
+                const box = grid[index];
                 const featured = index === 0;
                 const href = item.slug ? `/projects/${item.slug}` : undefined;
                 const title = (
