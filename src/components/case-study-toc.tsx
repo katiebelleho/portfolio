@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PillLink, SectionLabel } from "@/components/ui/brand";
 
 export type TocItem = {
   id: string;
@@ -27,7 +27,7 @@ export default function CaseStudyToc({ items }: { items: TocItem[] }) {
           setActiveId(visible[0].target.id);
         }
       },
-      { rootMargin: "-15% 0px -70% 0px", threshold: 0 }
+      { rootMargin: "-15% 0px -70% 0px", threshold: 0 },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -40,33 +40,31 @@ export default function CaseStudyToc({ items }: { items: TocItem[] }) {
       aria-label="Case study navigation"
     >
       <div className="sticky top-12 flex flex-col gap-8">
-        <Link
-          href="/"
-          data-cursor-hover
-          className="inline-flex items-center gap-2 text-sm text-[#161616]"
-        >
-          <span aria-hidden="true">←</span>
-          Back to all work
-        </Link>
+        <PillLink href="/" className="self-start">
+          <span aria-hidden="true">&larr;</span>
+          All work
+        </PillLink>
 
         {items.length > 1 && (
-          <ul className="flex flex-col gap-3 border-l border-neutral-200">
-            {items.map((item) => (
-              <li key={item.id} className="-ml-px">
-                <a
-                  href={`#${item.id}`}
-                  data-cursor-hover
-                  className={`block border-l-2 py-0.5 pl-4 text-sm transition-colors ${
-                    activeId === item.id
-                      ? "border-[#0A2978] font-semibold text-[#161616]"
-                      : "border-transparent text-[#9a98a0] hover:text-[#161616]"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <SectionLabel className="mb-4">Contents</SectionLabel>
+            <ul className="flex flex-col gap-3 border-l border-(--ink)/10">
+              {items.map((item) => (
+                <li key={item.id} className="-ml-px">
+                  <a
+                    href={`#${item.id}`}
+                    className={`block border-l-2 py-0.5 pl-4 text-sm transition-colors ${
+                      activeId === item.id
+                        ? "border-(--accent) font-semibold text-(--ink)"
+                        : "border-transparent text-(--ink-muted) hover:text-(--ink)"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </nav>

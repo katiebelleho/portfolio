@@ -9,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --font-display: Helvetica, Arial, sans-serif;
+  --font-display: var(--font-jakarta), Arial, sans-serif;
   --font-mono: var(--font-space-mono);
   /* The site's only stacked->side-by-side layout switch (project media/copy
      columns) uses `md:`, so this is effectively "the mobile breakpoint". */
@@ -32,70 +32,6 @@ body {
   }
 }
 
-/* Homepage custom-cursor design system */
-.home-page,
-.home-page * {
-  cursor: none;
-}
-
-@media (hover: none) {
-  .home-page,
-  .home-page * {
-    cursor: auto;
-  }
-  .custom-cursor,
-  .custom-cursor-tag {
-    display: none;
-  }
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  margin-left: -10px;
-  margin-top: -10px;
-  border-radius: 9999px;
-  background: #0a2978;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.custom-cursor-tag {
-  position: fixed;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  background: #0a2978;
-  color: #fff;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 15px;
-  font-weight: 400;
-  padding: 10px 18px;
-  border-radius: 10px;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.custom-cursor-tag.is-hovering {
-  opacity: 1;
-}
-
-.custom-cursor.is-inverted {
-  background: #fff;
-}
-
-.custom-cursor-tag.is-inverted {
-  background: #fff;
-  color: #0a2978;
-}
-
 .hide-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -105,13 +41,30 @@ body {
   display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .custom-cursor,
-  .custom-cursor-tag {
-    display: none;
-  }
-  .home-page,
-  .home-page * {
-    cursor: auto;
-  }
+/* Site design tokens (homepage + case studies) */
+.brand {
+  --bg: #faf8f4;
+  --ink: #1b1d2e;
+  --ink-muted: #1b1d2ea6;
+  --accent: #0a2978;
+  --accent-hover: #06205f;
+  --highlight: #f4d35e;
+  --placeholder-a: #f1ede4;
+  --placeholder-b: #e8e3d8;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-jakarta), var(--font-inter), Arial, sans-serif;
+}
+
+body:has(.brand) {
+  background: #faf8f4;
+}
+
+.placeholder-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--placeholder-a) 0 12px,
+    var(--placeholder-b) 12px 24px
+  );
 }
