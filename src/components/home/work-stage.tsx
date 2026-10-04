@@ -28,18 +28,18 @@ import { cardSurface, Kicker, pillClass } from "@/components/ui/brand";
  * the expanded grid stretches or shrinks horizontally instead of leaving empty
  * space. The collapsed stack, headline and button keep their fixed positions.
  */
-const FRAME_H = 900;
+export const FRAME_H = 900;
 const MIN_SCALE = 0.75;
 const MAX_SCALE = 1.35;
 /** Narrowest stage width before the whole stage scales down instead (≈ the 900px mobile switch). */
 const MIN_STAGE_W = 1100;
 
-const MARGIN = 80;
+export const MARGIN = 80;
 const GRID_TOP = 104;
 /** Grid content width the spec was drawn at (1440 − 2 × 80). */
 const DESIGN_CONTENT_W = 1280;
 /** Widest the content may get; beyond this the composition centers in the stage. */
-const MAX_CONTENT_W = 1400;
+export const MAX_CONTENT_W = 1400;
 
 type Box = { left: number; top: number; width: number; height: number };
 
@@ -120,7 +120,7 @@ type Stage = { scale: number; width: number; viewportHeight: number };
  * is whatever fills the viewport at that scale. If that would be narrower than
  * MIN_STAGE_W, the scale drops further so the grid never gets cramped.
  */
-function useStage() {
+export function useStage() {
   const [stage, setStage] = useState<Stage | null>(null);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AboutStage from "@/components/about/about-stage";
 import { ExternalLinks } from "@/components/home/anchors";
 import RotatingTagline from "@/components/rotating-tagline";
 
@@ -8,11 +9,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="brand flex-1">
-      <section className="relative mx-auto min-h-[100dvh] max-w-[1300px] px-6 pt-10 pb-10 sm:pt-12">
-        <ExternalLinks className="mb-8 justify-end pt-2 sm:absolute sm:right-6 sm:top-12 sm:mb-0" />
-        <RotatingTagline />
-      </section>
-    </div>
+    <main className="brand">
+      <AboutStage />
+      {/* Narrow screens mirror the homepage's WorkList header. */}
+      <div className="px-6 pt-12 pb-16 min-[900px]:hidden">
+        <header>
+          <ExternalLinks className="mb-10" />
+          <RotatingTagline className="text-[28px] leading-[1.2] sm:text-[34px]" />
+        </header>
+      </div>
+    </main>
   );
 }

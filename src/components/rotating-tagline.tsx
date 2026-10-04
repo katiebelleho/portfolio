@@ -14,10 +14,12 @@ const ROLES = [
 
 const HOLD_MS = 2200;
 const SLIDE_MS = 500;
-// Each role occupies exactly one line box, so the stack steps by line-height.
-const LINE_HEIGHT_EM = 1.25;
 
-export default function RotatingTagline() {
+/**
+ * Size and line-height come from `className`; each role occupies exactly one
+ * line box, so the stack steps by `1lh`.
+ */
+export default function RotatingTagline({ className = "" }: { className?: string }) {
   // `index` runs 0..ROLES.length; the last slot is a copy of the first role so
   // the wrap-around slides forward, then snaps back to 0 with no transition.
   const [index, setIndex] = useState(0);
@@ -62,14 +64,14 @@ export default function RotatingTagline() {
   return (
     <h1
       aria-label={`I’m ${site.name}, ${ROLES[0]}`}
-      className="font-display text-[32px] font-medium leading-[1.25] tracking-[-0.03em] text-(--ink) sm:text-[40px]"
+      className={`text-[40px] font-medium tracking-[-0.03em] text-(--ink) ${className}`}
     >
       <span aria-hidden="true">I&rsquo;m {site.name}, </span>
       <span
         aria-hidden="true"
         className="relative inline-block whitespace-nowrap align-top"
         style={{
-          height: `${LINE_HEIGHT_EM}em`,
+          height: "1lh",
           width: width ? `${width}px` : undefined,
           transition,
         }}
@@ -79,7 +81,7 @@ export default function RotatingTagline() {
           <span
             className="block"
             style={{
-              transform: `translateY(-${index * LINE_HEIGHT_EM}em)`,
+              transform: `translateY(calc(${-index} * 1lh))`,
               transition,
             }}
             onTransitionEnd={handleTransitionEnd}
@@ -88,7 +90,7 @@ export default function RotatingTagline() {
               <span
                 key={i}
                 className="block"
-                style={{ height: `${LINE_HEIGHT_EM}em` }}
+                style={{ height: "1lh" }}
               >
                 {role}
               </span>
