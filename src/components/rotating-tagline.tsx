@@ -62,7 +62,7 @@ export default function RotatingTagline() {
   return (
     <h1
       aria-label={`I’m ${site.name}, ${ROLES[0]}`}
-      className="font-sans text-[32px] font-medium leading-[1.25] tracking-[-0.01em] text-[#1C1B2E] sm:text-[40px]"
+      className="font-display text-[32px] font-medium leading-[1.25] tracking-[-0.03em] text-(--ink) sm:text-[40px]"
     >
       <span aria-hidden="true">I&rsquo;m {site.name}, </span>
       <span

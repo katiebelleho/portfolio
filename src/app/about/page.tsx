@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import NavLinks from "@/components/nav-links";
+import { ExternalLinks } from "@/components/home/anchors";
 import RotatingTagline from "@/components/rotating-tagline";
 
 export const metadata: Metadata = {
@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex-1 bg-[#FBFAF7]">
+    <div className="brand flex-1">
       <section className="relative mx-auto min-h-[100dvh] max-w-[1300px] px-6 pt-10 pb-10 sm:pt-12">
-        <NavLinks className="mb-8 flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 pt-2 sm:absolute sm:right-6 sm:top-12 sm:mb-0 sm:gap-x-8" />
+        <ExternalLinks className="mb-8 justify-end pt-2 sm:absolute sm:right-6 sm:top-12 sm:mb-0" />
         <RotatingTagline />
       </section>
     </div>
