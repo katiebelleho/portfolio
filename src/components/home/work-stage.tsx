@@ -233,12 +233,21 @@ export default function WorkStage() {
               }
               inert={expanded}
               aria-hidden={expanded || undefined}
-              className="absolute top-[120px] left-[80px]"
+              className="absolute top-[64px] left-[80px]"
             >
               <Headline interactive={!expanded} className="leading-[1.35]" />
             </motion.header>
 
-            <ExternalLinks className="absolute top-[64px] right-[80px]" />
+            {/* Centered on the headline's first line (54px line box) when collapsed;
+                lifts to center on the 16px section label when expanded. */}
+            <motion.div
+              initial={false}
+              animate={{ y: expanded ? -19 : 0 }}
+              transition={expanded ? LAYOUT : STACK_RETURN}
+              className="absolute top-[64px] right-[80px] flex h-[54px] items-center"
+            >
+              <ExternalLinks />
+            </motion.div>
             <CurrentlyStatus className="absolute top-[770px] right-[80px] h-[42px]" />
 
             <section id="work" aria-label="Selected work">
