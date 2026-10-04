@@ -115,3 +115,31 @@ body {
     cursor: auto;
   }
 }
+
+/* Homepage (/) design tokens */
+.home {
+  --bg: #faf8f4;
+  --ink: #1b1d2e;
+  --ink-muted: #1b1d2ea6;
+  --accent: #0a2978;
+  --accent-hover: #06205f;
+  --highlight: #f4d35e;
+  --placeholder-a: #f1ede4;
+  --placeholder-b: #e8e3d8;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-jakarta), var(--font-inter), Arial, sans-serif;
+}
+
+body:has(.home) {
+  background: #faf8f4;
+}
+
+.home-placeholder {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--placeholder-a) 0 12px,
+    var(--placeholder-b) 12px 24px
+  );
+}

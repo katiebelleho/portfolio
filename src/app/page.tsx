@@ -1,11 +1,11 @@
-import CustomCursor from "@/components/custom-cursor";
-import HomeLanding from "@/components/home-landing";
+import WorkList from "@/components/home/work-list";
+import WorkStage from "@/components/home/work-stage";
 
 export default function Home() {
   return (
-    <div className="home-page bg-white">
-      <CustomCursor />
-      <HomeLanding />
-    </div>
+    <main className="home">
+      <WorkStage />
+      <WorkList />
+    </main>
   );
 }

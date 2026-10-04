@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Space_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -51,7 +56,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-neutral-900">
         {children}
