@@ -34,9 +34,10 @@ const MIN_STAGE_W = 1100;
 
 const MARGIN = 80;
 const GRID_TOP = 104;
-/** Grid content width the spec was drawn at (1440 − 2 × 80), and the most it may grow to. */
+/** Grid content width the spec was drawn at (1440 − 2 × 80). */
 const DESIGN_CONTENT_W = 1280;
-const MAX_CONTENT_W = 1680;
+/** Widest the content may get; beyond this the composition centers in the stage. */
+const MAX_CONTENT_W = 1400;
 
 type Box = { left: number; top: number; width: number; height: number };
 
@@ -45,8 +46,8 @@ type Box = { left: number; top: number; width: number; height: number };
  * 560 : 60 : 300 : 60 : 300 proportions across the available width; heights keep
  * each card's aspect ratio. At a 1440-wide stage this is exactly the spec.
  */
-function layoutGrid(stageWidth: number): Box[] {
-  const content = Math.min(stageWidth - MARGIN * 2, MAX_CONTENT_W);
+function layoutGrid(frameWidth: number): Box[] {
+  const content = frameWidth - MARGIN * 2;
   const unit = content / DESIGN_CONTENT_W;
   const featuredW = 560 * unit;
   const gutter = 60 * unit;
@@ -161,7 +162,9 @@ function Kicker({ item }: { item: HomeWorkItem }) {
 export default function WorkStage() {
   const stage = useStage();
   const scale = stage?.scale ?? 1;
-  const grid = layoutGrid(stage?.width ?? 1440);
+  // Centered frame inside the stage that all positions are measured from.
+  const frameWidth = Math.min(stage?.width ?? 1440, MAX_CONTENT_W + MARGIN * 2);
+  const grid = layoutGrid(frameWidth);
   const scaledHeight = FRAME_H * scale;
   const reduceMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
@@ -225,157 +228,159 @@ export default function WorkStage() {
             transform: `scale(${scale})`,
           }}
         >
-          <motion.header
-            initial={false}
-            animate={expanded ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
-            transition={
-              expanded
-                ? { duration: 0.15, ease: "easeOut" }
-                : STACK_RETURN_DISSOLVE
-            }
-            inert={expanded}
-            aria-hidden={expanded || undefined}
-            className="absolute top-[120px] left-[80px]"
-          >
-            <Headline interactive={!expanded} className="leading-[1.35]" />
-          </motion.header>
-
-          <section id="work" aria-label="Selected work">
-            <motion.h2
+          <div className="relative mx-auto h-full" style={{ width: frameWidth }}>
+            <motion.header
               initial={false}
-              animate={expanded ? "shown" : "hidden"}
-              variants={reveal(0)}
-              aria-hidden={!expanded || undefined}
-              className="absolute top-[64px] left-[80px] font-mono text-xs font-bold uppercase text-(--accent)"
+              animate={expanded ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
+              transition={
+                expanded
+                  ? { duration: 0.15, ease: "easeOut" }
+                  : STACK_RETURN_DISSOLVE
+              }
+              inert={expanded}
+              aria-hidden={expanded || undefined}
+              className="absolute top-[120px] left-[80px]"
             >
-              Design problems I&rsquo;ve solved
-            </motion.h2>
+              <Headline interactive={!expanded} className="leading-[1.35]" />
+            </motion.header>
 
-            <div
-              onMouseEnter={() => setHover(setHoverStack, true)}
-              onMouseLeave={() => setHover(setHoverStack, false)}
-            >
-              {items.map((item, index) => {
-                const box = grid[index];
-                const href = item.slug ? `/projects/${item.slug}` : undefined;
-                const cardClass = `block h-full w-full overflow-hidden rounded-2xl bg-(--placeholder-a) shadow-[0_10px_22px_rgba(27,29,46,.10),0_0_0_1px_rgba(27,29,46,.08)] ${expanded && !href ? "" : "cursor-pointer"}`;
-
-                return (
-                  <motion.div
-                    key={index}
-                    initial={false}
-                    animate={expanded ? { x: 0, y: 0, scale: 1, rotate: 0 } : stackTransform(box, index, fanned)}
-                    transition={cardTransition}
-                    className="absolute will-change-transform"
-                    style={{
-                      left: box.left,
-                      top: box.top,
-                      width: box.width,
-                      height: box.height,
-                      zIndex: grid.length - index,
-                    }}
-                  >
-                    {href ? (
-                      <Link
-                        href={href}
-                        onClick={onCardClick}
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        className={`relative ${cardClass}`}
-                      >
-                        <Thumbnail item={item} width={box.width} />
-                      </Link>
-                    ) : (
-                      <div
-                        onClick={onCardClick}
-                        aria-hidden="true"
-                        className={`relative ${cardClass}`}
-                      >
-                        <Thumbnail item={item} width={box.width} />
-                      </div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            <ul inert={!expanded}>
-              {items.map((item, index) => {
-                const box = grid[index];
-                const featured = index === 0;
-                const href = item.slug ? `/projects/${item.slug}` : undefined;
-                const title = (
-                  <span
-                    className={`mt-1.5 block font-semibold leading-[1.3] tracking-[-0.01em] text-(--ink) ${featured ? "text-[22px]" : "text-lg"}`}
-                  >
-                    {item.title}
-                  </span>
-                );
-
-                return (
-                  <motion.li
-                    key={index}
-                    initial={false}
-                    animate={expanded ? "shown" : "hidden"}
-                    variants={reveal(index)}
-                    className={`absolute ${expanded ? "" : "pointer-events-none"}`}
-                    style={{
-                      left: box.left,
-                      top:
-                        box.top +
-                        box.height +
-                        (featured ? CAPTION_GAP : GRID_CAPTION_GAP),
-                      width: box.width,
-                    }}
-                  >
-                    {href ? (
-                      <Link
-                        href={href}
-                        className="group block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
-                      >
-                        <Kicker item={item} />
-                        <span className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
-                          {title}
-                        </span>
-                      </Link>
-                    ) : (
-                      <div>
-                        <Kicker item={item} />
-                        {title}
-                      </div>
-                    )}
-                  </motion.li>
-                );
-              })}
-            </ul>
-
-            <button
-              type="button"
-              aria-expanded={expanded}
-              aria-controls="work"
-              onClick={() => toggle()}
-              onMouseEnter={() => setHover(setHoverButton, true)}
-              onMouseLeave={() => setHover(setHoverButton, false)}
-              className="absolute top-[770px] left-[80px] z-10 flex cursor-pointer items-center gap-2.5 rounded-full bg-(--accent) px-[22px] py-[11px] font-mono text-base leading-[1.25] text-white transition-colors hover:bg-(--accent-hover) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
-            >
-              {expanded ? "Collapse" : "Selected work"}
-              <motion.svg
-                aria-hidden="true"
-                viewBox="0 0 14 14"
-                width="14"
-                height="14"
+            <section id="work" aria-label="Selected work">
+              <motion.h2
                 initial={false}
-                animate={{ rotate: expanded ? 45 : 0 }}
-                transition={MENU_MORPH}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
+                animate={expanded ? "shown" : "hidden"}
+                variants={reveal(0)}
+                aria-hidden={!expanded || undefined}
+                className="absolute top-[64px] left-[80px] font-mono text-xs font-bold uppercase text-(--accent)"
               >
-                <path d="M7 1v12M1 7h12" />
-              </motion.svg>
-            </button>
-          </section>
+                Design problems I&rsquo;ve solved
+              </motion.h2>
+
+              <div
+                onMouseEnter={() => setHover(setHoverStack, true)}
+                onMouseLeave={() => setHover(setHoverStack, false)}
+              >
+                {items.map((item, index) => {
+                  const box = grid[index];
+                  const href = item.slug ? `/projects/${item.slug}` : undefined;
+                  const cardClass = `block h-full w-full overflow-hidden rounded-2xl bg-(--placeholder-a) shadow-[0_10px_22px_rgba(27,29,46,.10),0_0_0_1px_rgba(27,29,46,.08)] ${expanded && !href ? "" : "cursor-pointer"}`;
+
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={false}
+                      animate={expanded ? { x: 0, y: 0, scale: 1, rotate: 0 } : stackTransform(box, index, fanned)}
+                      transition={cardTransition}
+                      className="absolute will-change-transform"
+                      style={{
+                        left: box.left,
+                        top: box.top,
+                        width: box.width,
+                        height: box.height,
+                        zIndex: grid.length - index,
+                      }}
+                    >
+                      {href ? (
+                        <Link
+                          href={href}
+                          onClick={onCardClick}
+                          tabIndex={-1}
+                          aria-hidden="true"
+                          className={`relative ${cardClass}`}
+                        >
+                          <Thumbnail item={item} width={box.width} />
+                        </Link>
+                      ) : (
+                        <div
+                          onClick={onCardClick}
+                          aria-hidden="true"
+                          className={`relative ${cardClass}`}
+                        >
+                          <Thumbnail item={item} width={box.width} />
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <ul inert={!expanded}>
+                {items.map((item, index) => {
+                  const box = grid[index];
+                  const featured = index === 0;
+                  const href = item.slug ? `/projects/${item.slug}` : undefined;
+                  const title = (
+                    <span
+                      className={`mt-1.5 block font-semibold leading-[1.3] tracking-[-0.01em] text-(--ink) ${featured ? "text-[22px]" : "text-lg"}`}
+                    >
+                      {item.title}
+                    </span>
+                  );
+
+                  return (
+                    <motion.li
+                      key={index}
+                      initial={false}
+                      animate={expanded ? "shown" : "hidden"}
+                      variants={reveal(index)}
+                      className={`absolute ${expanded ? "" : "pointer-events-none"}`}
+                      style={{
+                        left: box.left,
+                        top:
+                          box.top +
+                          box.height +
+                          (featured ? CAPTION_GAP : GRID_CAPTION_GAP),
+                        width: box.width,
+                      }}
+                    >
+                      {href ? (
+                        <Link
+                          href={href}
+                          className="group block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
+                        >
+                          <Kicker item={item} />
+                          <span className="group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
+                            {title}
+                          </span>
+                        </Link>
+                      ) : (
+                        <div>
+                          <Kicker item={item} />
+                          {title}
+                        </div>
+                      )}
+                    </motion.li>
+                  );
+                })}
+              </ul>
+
+              <button
+                type="button"
+                aria-expanded={expanded}
+                aria-controls="work"
+                onClick={() => toggle()}
+                onMouseEnter={() => setHover(setHoverButton, true)}
+                onMouseLeave={() => setHover(setHoverButton, false)}
+                className="absolute top-[770px] left-[80px] z-10 flex cursor-pointer items-center gap-2.5 rounded-full bg-(--accent) px-[22px] py-[11px] font-mono text-base leading-[1.25] text-white transition-colors hover:bg-(--accent-hover) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--accent)"
+              >
+                {expanded ? "Collapse" : "Selected work"}
+                <motion.svg
+                  aria-hidden="true"
+                  viewBox="0 0 14 14"
+                  width="14"
+                  height="14"
+                  initial={false}
+                  animate={{ rotate: expanded ? 45 : 0 }}
+                  transition={MENU_MORPH}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                >
+                  <path d="M7 1v12M1 7h12" />
+                </motion.svg>
+              </button>
+            </section>
+          </div>
         </div>
       </div>
     </MotionConfig>
