@@ -25,10 +25,10 @@ import {
 import RotatingTagline from "@/components/rotating-tagline";
 import { cardSurface, pillClass } from "@/components/ui/brand";
 
-/** Top of the collapsed collage box (stage px); its right edge sits on the margin. */
-const COLLAGE_TOP = 200;
-/** Top of the "Out of office" button, centered under the collapsed collage. */
-const BUTTON_TOP = 630;
+/** Top of the "Out of office" button: same as the homepage's "Selected work" button. */
+const BUTTON_TOP = 770;
+/** Top of the collapsed collage box, sitting just above the button; its right edge sits on the margin. */
+const COLLAGE_TOP = BUTTON_TOP - 430;
 
 /**
  * Expanded "scattered" layout, one entry per photo slot. `x` is the card's
